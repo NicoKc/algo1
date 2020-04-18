@@ -69,7 +69,7 @@
 > ∨L solo evalua el lado derecho si y solo si el lado izquierdo es false
 
 ## Ejercicio 15
-
+- 
 	| p| q|p → q)|
 	| -| -|      -|
 	| 0| 0|      1|
