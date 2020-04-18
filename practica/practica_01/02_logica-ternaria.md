@@ -21,7 +21,7 @@
 - i) tan(π/2) = tan(π) - tan(2) **=** false
 
 ## Ejercicio 13
-
+- 
 	| p| q|(p ∧ q)|
 	| -| -|       -|
 	| 0| 0|       0|
@@ -45,7 +45,7 @@
 > ∧L solo evalua el lado derecho si y solo si el lado izquierdo es true
 
 ## Ejercicio 14
-
+- 
 	| p| q|(p ∨ q)|
 	| -| -|       -|
 	| 0| 0|       0|
