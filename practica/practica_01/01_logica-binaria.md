@@ -56,25 +56,46 @@
 ## Ejercicio 4
 
 - a) (¬a ∨ b)
-	> (¬true ∨ false) = (false ∨ false) = false
+	~~~
+	(¬true ∨ false) = (false ∨ false) = false
+	~~~
 
 - b) (c ∨ (y ∧ x) ∨ b)
-	> (true ∨ (false ∧ false) ∨ true) = (true ∨ false ∨ true) = true
+	~~~
+	(true ∨ (false ∧ false) ∨ true) = (true ∨ false ∨ true) = true
+	~~~
 
 - c) ¬(c ∨ y)
-	> ¬(true ∨ false) = ¬true = false
+	~~~
+	¬(true ∨ false) = ¬true = false
+	~~~
 
 - d) (¬(c ∨ y) ↔ (¬c ∧ ¬y))
-	> (¬(true ∨ false) ↔ (¬true ∧ ¬false)) = (¬true ↔ (false ∧ true)) = (false ↔ false) = true
+	~~~
+	(¬(true ∨ false) ↔ (¬true ∧ ¬false)) ≡ 
+	(¬true ↔ (false ∧ true)) ≡ 
+	(false ↔ false) ≡ true
+	~~~
 
 - e) ((c ∨ y) ∧ (x ∨ b))
-	> ((true ∨ false) ∧ (false ∨ true)) = (true ∧ true) = true
+	~~~
+	((true ∨ false) ∧ (false ∨ true)) 
+		≡ (true ∧ true) ≡ true
+	~~~
 
 - f) (((c ∨ y) ∧ (x ∨ b)) ↔ (c ∨ (y ∧ x) ∨ b))
-	>(((true ∨ false) ∧ (true ∨ false)) ↔ (true ∨ (false ∧ false) ∨ true)) = ((true ∧ true) ↔ (true ∨ false ∨ true)) = (true ↔ true) = true
+	~~~
+	(
+		((true ∨ false) ∧ (true ∨ false)) 
+			↔ (true ∨ (false ∧ false) ∨ true)
+	)
+		≡ ((true ∧ true) ↔ (true ∨ false ∨ true)) ≡ (true ↔ true) ≡ true
+	~~~
 
 - g) (¬c ∧ ¬y)
-	>(¬true ∧ ¬false) = (false ∧ true) = false
+	~~~
+	(¬true ∧ ¬false) ≡ (false ∧ true) ≡ false
+	~~~
 
 ## Ejercicio 5
 
@@ -281,106 +302,122 @@
 > La proposición mas fuertes es false y la mas debil true
 
 ## Ejercicio 7
-- a) ((¬p ∨ ¬q) ∨ (p ∧ q)) → (p ∧ q) ≡ (p ∧ q)?
+- a) ((¬p ∨ ¬q) ∨ (p ∧ q)) → (p ∧ q) ≡ (p ∧ q) ?
 
 	- (**(¬p ∨ ¬q)** ∨ (p ∧ q)) → (p ∧ q)
-		- Por De morgan, **(¬p ∨ ¬q)** ≡ ¬(p ∧ q)
+		- **(¬p ∨ ¬q)** ≡ ¬(p ∧ q)				(Por Ley de De Morgan)
 	- (¬(p ∧ q) ∨ (p ∧ q)) → (p ∧ q)
-		- (x → y) ≡ (¬x ∨ y)
+		- (x → y) ≡ (¬x ∨ y)					(Implicación material)
 	- ¬(¬(p ∧ q) ∨ (p ∧ q)) ∨ (p ∧ q)
-		- (¬x ∨ x) ≡ x
+		- (¬x ∨ x) ≡ x							(Principio del tercero excluido)
 	- ¬(p ∧ q) ∨ (p ∧ q)
-		- (¬x ∨ x) ≡ x
+		- (¬x ∨ x) ≡ x							(Principio del tercero excluido)
 	- (p ∧ q)
 	>Es una equivalencia
 
-- b) (p ∨ q) ∧ (p ∨ r) ≡ ¬p → (q ∧ r)
+- b) (p ∨ q) ∧ (p ∨ r) ≡ ¬p → (q ∧ r) ?
 
 	- ¬p → (q ∧ r)
-		- ¬p → (q ∧ r) ≡ ¬(¬p) ∨ (q ∧ r) ≡ p ∨ (q ∧ r)
+		- ¬p → (q ∧ r) ≡  ¬(¬p) ∨ (q ∧ r)	(Implicación material)
+		- ¬(¬p) ∨ (q ∧ r) ≡ p ∨ (q ∧ r)		(Doble negación)
 	- p ∨ (q ∧ r)
-		- Distributiva, p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)
+		- p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)	(Ley distributiva)
 	- (p ∨ q) ∧ (p ∨ r)
 	>Es una equivalencia
 
-- c) ¬(¬p) → (¬(¬p ∧ ¬q)) ≡ q
+- c) ¬(¬p) → (¬(¬p ∧ ¬q)) ≡ q ?
 
 	- **¬(¬p)** → (¬(¬p ∧ ¬q))
-		- Por ¬, **¬(¬p)** ≡ p
+		- **¬(¬p)** ≡ p							(Doble negación)
 	- p → (**¬(¬p ∧ ¬q)**)
-		- Por ley De Morgan **¬(¬p ∧ ¬q)** ≡ (¬(¬p) ∨ ¬(¬q)) ≡ (p ∨ q)
+		- **¬(¬p ∧ ¬q)** ≡ (¬(¬p) ∨ ¬(¬q))		(Ley de De Morgan)
+		- (¬(¬p) ∨ ¬(¬q)) ≡ (p ∨ q)				(Doble negación)
 	- p **→** (p ∨ q)
-		- p → (p ∨ q) ≡ ¬p ∨ (p ∨ q) ≡ ¬p ∨ p ∨ q
-	- **¬p ∨ p** ∨ q
-		- ¬p ∨ p ≡ true
-	- true ∨ q ≡ true
+		- p → (p ∨ q) ≡ ¬p ∨ (p ∨ q)			(Implicación material)
+		- ¬p ∨ (p ∨ q) ≡ (¬p ∨ p) ∨ q			(Ley asociativa)
+	- **(¬p ∨ p)** ∨ q
+		- (¬p ∨ p) ≡ true						(Principio del tercero excluido)
+	- true ∨ q ≡ true							(Simplificación O)
 	> No es una equivalencia
 
 	
-- d) ((true ∧ p) ∧ (¬p ∨ false)) → ¬(¬p ∨ q) ≡ p ∧ ¬q
+- d) ((true ∧ p) ∧ (¬p ∨ false)) → ¬(¬p ∨ q) ≡ p ∧ ¬q ?
 
 	- (**(true ∧ p)** ∧ (¬p ∨ false)) → ¬(¬p ∨ q)
-		- **(true ∧ p)** ≡ p
+		- **(true ∧ p)** ≡ p					(Simplificación Y)
 	- (p ∧ **(¬p ∨ false)**) → ¬(¬p ∨ q)
-		- **(¬p ∨ false )** ≡ ¬p
+		- **(¬p ∨ false )** ≡ ¬p				(Simplificación O)
 	- **(p ∧ ¬p)** → ¬(¬p ∨ q)
-		- **(p ∧ ¬p)** ≡ false
+		- **(p ∧ ¬p)** ≡ false					(Contradicción)
 	- false → **¬(¬p ∨ q)**
-		- **¬(¬p ∨ q)** ≡ (¬(¬p) ∨ ¬q) = (p ∨ ¬q)
-	- false **→** (p ∨ ¬q)
-		false **→** x ≡ true
-	- false **→** (p ∨ ¬q) ≡ true
-	>No es una equivalencia
+		- **¬(¬p ∨ q)** ≡ (¬(¬p) ∧ ¬q)			(Ley de De Morgan)
+		- (¬(¬p) ∧ ¬q) ≡ (p c ¬q)				(Doble negación)
+	- false **→** (p ∧ ¬q)
+		- false **→** x ≡ ¬false ∨ (p ∧ ¬q)		(Implicación material)
+		- ¬false ∨ (p ∧ ¬q) ≡ true ∨ (p ∧ ¬q)	(Negación)
+	- **true ∨ (p ∧ ¬q)**
+		- **true ∨ (p ∧ ¬q)** ≡ (p ∧ ¬q)		(Principio del tercero excluido)
+	- (p ∧ ¬q) ≡ p ∧ ¬q
+	>Es una equivalencia
 
 - e) (p ∨ (¬p ∧ q)) ≡ ¬p → q ?
 
 	- **(p ∨ (¬p ∧ q))**
-		- Ley distributida **(p ∨ (¬p ∧ q))** ≡ ((p ∨ ¬p) ∧ (p ∨ q))
+		- **(p ∨ (¬p ∧ q))** ≡ ((p ∨ ¬p) ∧ (p ∨ q)) (Ley distributida)
 	- (**(p ∨ ¬p)** ∧ (p ∨ q))
-		- **(p ∨ ¬p)** ≡ true
+		- **(p ∨ ¬p)** ≡ true				(Principio del tercero excluido)
 	- **(true ∧ (p ∨ q))**
-		- **(true ∧ (p ∨ q))** ≡ (p ∨ q)
-	- (p ∨ q)
+		- **(true ∧ (p ∨ q))** ≡ (p ∨ q)		(Simplificación Y)
+	- (p ∨ q) 									*(1)*
 
 	- **¬p → q**
-		- ¬p → q ≡ ¬(¬p) ∨ q ≡ (p ∨ q)
-	- (p ∨ q)
+		- ¬p → q ≡ ¬(¬p) ∨ q					(Implicación material)
+		- (**(¬(¬p))** ∨ q) ≡ (**p** ∨ q)		(Doble negación)
+	- (p ∨ q) 									*(2)*
+
+	- *(1)* ≡ *(2)*
 	>Es una equivalencia
 
 - f) ¬(p ∧ (q ∧ s)) ≡ s → (¬p ∨ ¬q)
 
 	- **¬(p ∧ (q ∧ s))**
-		- Ley De Morgan, **¬(p ∧ (q ∧ s))** ≡ (¬p ∨ ¬(q ∧ s))
+		- **¬(p ∧ (q ∧ s))** ≡ (¬p ∨ ¬(q ∧ s))	(Ley de De Morgan)
 	- (¬p ∨ **¬(q ∧ s)**)
-		- Ley De Morgan, **¬(q ∧ s)** ≡ (¬q ∨ ¬s)
-	- (¬p ∨ (¬q ∨ ¬s))
+		- **¬(q ∧ s)** ≡ (¬q ∨ ¬s)				(Ley de De Morgan)
+	- (¬p ∨ (¬q ∨ ¬s))							*(1)*
 
 	- s **→** (¬p ∨ ¬q)
-		- x → y ≡ (¬x ∨ y)
-	- (¬s ∨ (¬p ∨ ¬q))
+		- x → y ≡ (¬x ∨ y)						(Implicación material)
+	- **(¬s ∨ (¬p ∨ ¬q))**
+		- **(¬s ∨ (¬p ∨ ¬q))** ≡ ((¬s ∨ ¬p) ∨ ¬q) (Ley asociativa)
+		- ((¬s ∨ ¬p) ∨ ¬q) ≡ ((¬p ∨ ¬s) ∨ ¬q)	(Ley conmutativa)
+		- ((¬p ∨ ¬s) ∨ ¬q) ≡ (¬p ∨ (¬s ∨ ¬q))	(Ley asociativa)
+		- (¬p ∨ (¬s ∨ ¬q)) ≡ (¬p ∨ (¬q ∨ ¬s))	(Ley conmutativa)
+	- (¬p ∨ (¬q ∨ ¬s)) ≡ *(1)*
 	>Es una equivalencia
 
 - g) p → (q ∧ ¬(q → r)) ≡ (¬p ∨ q) ∧ (¬p ∨ (q ∧ ¬r))
 
 	- p **→** (q ∧ ¬(q **→** r))
-		- x **→** y ≡ ¬x ∨ y
+		- x **→** y ≡ ¬x ∨ y					(Implicación material)
 	- ¬p ∨ (q ∧ **¬(¬q ∨ r)**)
-		- Ley De Morgan, **¬(¬q ∨ r)** ≡ (¬(¬q) ∧ ¬r) ≡ (q ∧ ¬r))
+		- **¬(¬q ∨ r)** ≡ (¬(¬q) ∧ ¬r)			(Ley de De Morgan)
+		- (¬(¬q) ∧ ¬r) ≡ (q ∧ ¬r)				(Doble negación)
 	- ¬p ∨ **(q ∧ (q ∧ ¬r))**
-		- Asociatividad, **(q ∧ (q ∧ ¬r))** ≡ ((q ∧ q) ∧ ¬r)
+		- **(q ∧ (q ∧ ¬r))** ≡ ((q ∧ q) ∧ ¬r)	(Ley asociativa)
 	- ¬p ∨ (**(q ∧ q)** ∧ ¬r)
-		- **(q ∧ q)** ≡ q
+		- **(q ∧ q)** ≡ q						(Simplificación Y)
 	- **¬p ∨ (q ∧ ¬r)**
-		- Distributiva, **¬p ∨ (q ∧ ¬r)** ≡ (¬p ∨ q) ∧ (¬p ∨ ¬r)
-	- (¬p ∨ q) ∧ (¬p ∨ ¬r)
+		- **¬p ∨ (q ∧ ¬r)** ≡ (¬p ∨ q) ∧ (¬p ∨ ¬r) (Ley distributiva)
+	- (¬p ∨ q) ∧ (¬p ∨ ¬r)						*(1)*
 
 	- (¬p ∨ q) ∧ **(¬p ∨ (q ∧ ¬r))**
-		- Distributiva, **(¬p ∨ (q ∧ ¬r))** ≡ ((¬p ∨ q) ∧ (¬p ∨ ¬r))
+		- **(¬p ∨ (q ∧ ¬r))** ≡ ((¬p ∨ q) ∧ (¬p ∨ ¬r)) (Ley distributiva)
 	- **(¬p ∨ q) ∧ ((¬p ∨ q) ∧ (¬p ∨ ¬r))**
-		- Asociativa, **(¬p ∨ q) ∧ ((¬p ∨ q) ∧ (¬p ∨ ¬r))** ≡ ((¬p ∨ q) ∧ (¬p ∨ q)) ∧ (¬p ∨ ¬r)
+		- **(¬p ∨ q) ∧ ((¬p ∨ q) ∧ (¬p ∨ ¬r))** ≡ ((¬p ∨ q) ∧ (¬p ∨ q)) ∧ (¬p ∨ ¬r) (Ley asociativa)
 	- **((¬p ∨ q) ∧ (¬p ∨ q))** ∧ (¬p ∨ ¬r)
-		- **((¬p ∨ q) ∧ (¬p ∨ q))** ≡ (¬p ∨ q)
-	- (¬p ∨ q) ∧ (¬p ∨ ¬r)
+		- **((¬p ∨ q) ∧ (¬p ∨ q))** ≡ (¬p ∨ q)	(Simplificación Y)
+	- (¬p ∨ q) ∧ (¬p ∨ ¬r) ≡ *(1)*
 	>Es una equivalencia
 
 ## Ejercicio 8
@@ -395,7 +432,7 @@
 
 - ∧ (Conjunción)
 
-	- (p ∧ q) ≡ ¬(¬p ∨ ¬q), Por Ley De De Morgan
+	- (p ∧ q) ≡ ¬(¬p ∨ ¬q)						(Ley de De Morgan)
 
 	| p| q|(p ∧ q)|¬(¬p ∨ ¬q)|
 	| -| -|       -|         -|
@@ -406,7 +443,7 @@
 
 - → (Implicación)
 
-	- (p → q) = (¬p ∨ q)
+	- (p → q) = (¬p ∨ q)						(Implicación material)
 
 	| p| q|(p → q)|(¬p ∨ q)|
 	| -| -|       -|        -|
