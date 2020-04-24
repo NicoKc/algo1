@@ -13,5 +13,13 @@
 	> aux mcd(x,y: Z): Z = IfThenElseFi(y = 0, x, mcd(x mod y))
 - f) pred divisoresGrandes (x , y : Z) { (x > 1) ∧ (menorDivisorDe(x, 2) > y) }
 	> aux menorDivisor(x, y: Z): Z = IfThenElseFi(esDivisorDe(x, y)==1, y, esDivisorDe(x, y+1))
-- h) pred mayorPrimoQueDivide (x: Z, y : Z) { (∀j : Z) ((j mod x = 0 ∧ esPrimo(j)) → y <= j ) }
-- i) pred sonPrimosHermanos (x : Z, y : Z) { (esPrimo(x) ∧L esPrimo(y)) ∧L ((∀j : Z) ((x < j < y) → ¬esPrimo(j))) }
+- h) pred mayorPrimoQueDivide (x: Z, y : Z) { 
+		esPrimo(y) ∧L (x mod y = 0) ∧L (
+			¬(Ej : Z) (
+				((x < j < y) ∧L esPrimo(j) ∧L (x mod j = 0))
+			)
+		)
+	}
+- i) pred sonPrimosHermanos (x : Z, y : Z) { 
+		(esPrimo(x) ∧L esPrimo(y)) ∧L ((∀j : Z) ((x < j < y) → ¬esPrimo(j))) 
+	}
