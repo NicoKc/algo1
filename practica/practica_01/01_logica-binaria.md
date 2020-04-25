@@ -408,7 +408,7 @@
 	- ¬p ∨ (**(q ∧ q)** ∧ ¬r)
 		- **(q ∧ q)** ≡ q						`Simplificación Y`
 	- **¬p ∨ (q ∧ ¬r)**
-		` **¬p ∨ (q ∧ ¬r)** ≡ (¬p ∨ q) ∧ (¬p ∨ ¬r) `Ley distributiva`
+		-  **¬p ∨ (q ∧ ¬r)** ≡ (¬p ∨ q) ∧ (¬p ∨ ¬r) `Ley distributiva`
 	- (¬p ∨ q) ∧ (¬p ∨ ¬r)						*(1)*
 
 	- (¬p ∨ q) ∧ **(¬p ∨ (q ∧ ¬r))**
