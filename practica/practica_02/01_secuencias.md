@@ -376,54 +376,43 @@ de la secuencia.
 
 - b) “Todos los enteros de s que cumplen P, no cumplen Q”
     ~~~
-        (∀i: Z)(
-            (0 <= i) ∧ (i < |s|)
-        ) →L (
-            P(s[i]) → ¬Q(s[i])
+        (∀ i: Z)(
+            (
+                (0 <= i) ∧ (i < |s|)
+            ) →L (
+                P(s[i]) ∧L ¬Q(s[i])
+            )
         )
     ~~~
 
 - c) “Todos los enteros de s que están en posiciones pares y cumplen P, no cumplen Q”
     ~~~
         (∀i: Z)(
-                ((0 <= i) ∧ (i < |s|))
-        ) →L (
-            (i mod 2 = 0) ∧
-                (P(s[i])) ∧
-                (¬Q(s[i]))
+            (
+                (0 <= i) ∧ (i < |s|)
+            ) →L (
+                (i mod 2 = 0) ∧L
+                    (P(s[i])) ∧L
+                    (¬Q(s[i]))
+            )
         )
-    ~~~
+    ~~~ 
 
 - d) “Todos los enteros de s que cumplen P y están en posiciones que cumplen Q, son pares”
     ~~~
         (∀i: Z)(
+            (
                 ((0 <= i) ∧ (i < |s|))
-        ) →L (
-            (i mod 2 = 0) ∧L (Q(i) ∧L P(s[i]))
+            ) →L (
+                (i mod 2 = 0) ∧L (Q(i) ∧L P(s[i]))
+            )
         )
     ~~~
 
 - e)  “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q”
     ~~~
-        (Ei: Z)(
-                ((0 <= i) ∧ (i < |s|))
-        ) ∧L (
-            ¬(P(s[i])) →L (
-                (∀j: Z)(
-                    ((0 <= j) ∧ (j < |s|))
-                ) →L (
-                    ¬(Q(s[j]))
-                )
-            )
-        )
-    ~~~
-
-- f) “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q, y 
-si todos los enteros de s cumplen P entonces hay al menos dos elementos 
-de s que cumplen Q”
-    ~~~
-        (
-            (Ei: Z)(
+        (∃i: Z)(
+            (
                 ((0 <= i) ∧ (i < |s|))
             ) ∧L (
                 ¬(P(s[i])) →L (
@@ -434,7 +423,185 @@ de s que cumplen Q”
                     )
                 )
             )
-        ) ∧L (
-
         )
     ~~~
+
+- f) “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q, y 
+si todos los enteros de s cumplen P entonces hay al menos dos elementos 
+de s que cumplen Q”
+    ~~~
+        (
+            (∃i: Z)
+            (
+                (
+                    (0 <= i) ∧ (i < |s|)
+                ) ∧L (
+                    ¬(P(s[i])) →L (
+                        (∀j: Z)(
+                            ((0 <= j) ∧ (j < |s|))
+                        ) →L (
+                            ¬(Q(s[j]))
+                        )
+                    )
+                )
+            )
+        ) ∨L (
+            (
+                (#{ i ∈ s: P(i) }) = |s|
+            ) →L (
+                (#{ j ∈ s: Q(j) }) >= 2
+            )
+        )
+    ~~~
+
+## Ejercicio 7
+
+- a) “Todo elemento en una posición válida de la secuencia cumple P”: 
+        (∀i : Z)((0 ≤ i < |s|) ∧L P(s[i]))
+    ~~~
+    (∀i : Z)(
+        (0 ≤ i < |s|) **∧L** P(s[i])
+    )
+    ~~~
+    ~~~
+    (∀i : Z)(
+        (0 ≤ i < |s|) **→L** P(s[i])
+    )
+    ~~~
+
+    >El error es el conector lógico, al poner un y-luego, si un elmento de Z 
+      no pertenece a la secuencia s el predicado siempre es falso
+
+- b) “Algún elemento en una posici´on v´alida de la secuencia cumple P”: 
+        (∃i : Z)((0 ≤ i < |s|) →L P(s[i]))
+    ~~~
+    (∃i : Z)(
+        (0 ≤ i < |s|) **→L** P(s[i])
+    )
+    ~~~
+    ~~~
+    (∃i : Z)(
+        (0 ≤ i < |s|) **∧L** P(s[i])
+    )
+    ~~~
+    >El error es el conector lógico, al poner un entonces-luego, si un elmento de Z 
+      no pertenece a la secuencia s el predicado siempre es verdadero
+
+## Ejercicio 8
+
+    A es mas fuerte que B o, B es mas debil que A, cuando (A → B) es tautologia
+
+- a) P(3) y (∀k : Z)((0 ≤ k < 10) → P(k))
+    > (∀k : Z)((0 ≤ k < 10) → P(k)) es mas fuerte que P(3)
+- b) P(3) y ((k > 5) ∧ (∀i : Z)((0 ≤ i < k) → P(i)))
+    ~~~
+        (
+            (k > 5) ∧ 
+                (∀i : Z)(
+                    (0 ≤ i < k) → P(i)
+                )
+        )
+    ~~~
+    > ((k > 5) ∧ (∀i : Z)((0 ≤ i < k) → P(i))) es mas fuerte que P(3)
+- c) (∀n : Z)((n ∈ s ∧ P(n)) → Q(n)) y (∀n : Z)((n ∈ s) → Q(n))
+    ~~~
+        (∀n : Z)(
+            (n ∈ s ∧ P(n)) → Q(n)
+        )
+    ~~~
+    ~~~
+        (∀n : Z)(
+            (n ∈ s) → Q(n)
+        )
+    ~~~
+    (∀n : Z)((n ∈ s ∧ P(n)) → Q(n)) es mas fuerte que (∀n : Z)((n ∈ s) → Q(n))
+
+- d) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y (∀n : Z)((n ∈ s) → Q(n))
+    ~~~
+        (∃n : Z)(
+            (n ∈ s) ∧ P(n) ∧ Q(n)
+        )
+    ~~~
+    ~~~
+        (∀n : Z)(
+            (n ∈ s) → Q(n)
+        )
+    ~~~
+    > Son incomparables
+
+- e) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y |s| > 0 ∧ ((∀n : Z)((n ∈ s) → Q(n)))
+    ~~~
+        (∃n : Z)(
+            (n ∈ s) ∧ P(n) ∧ Q(n)
+        )
+    ~~~
+    ~~~
+        (|s| > 0) ∧ (
+            (∀n : Z)(
+                (n ∈ s) → Q(n)
+            )
+        )
+    ~~~
+    > Son incomparables
+
+- f) (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n)) y (∀n : Z)(n ∈ s → (P(n) ∧ Q(n)))
+    ~~~
+        (∃n : Z)(
+            (n ∈ s) ∧ P(n) ∧ Q(n)
+        )
+    ~~~
+    ~~~
+        (∀n : Z)(
+            (n ∈ s) → (P(n) ∧ Q(n))
+        )
+    ~~~
+    > (∀n : Z)(n ∈ s → (P(n) ∧ Q(n))) es más fuerte que (∃n : Z)(n ∈ s ∧ P(n) ∧ Q(n))
+
+## Ejercicio 9
+
+- a) 
+    - I) (∀i : Z)((0 ≤ i < |s|) →L ((∀j : Z)(0 ≤ j < |s|) ∧ i < j) →L s[i] < s[j])
+    - II) (∀j : Z)((0 ≤ j < |s|) →L ((∀i : Z)(0 ≤ i < |s|) ∧ i < j) →L s[i] < s[j])
+
+    I)~~~
+    (∀i : Z)(
+        (0 ≤ i < |s|) →L (
+            (∀j : Z)(0 ≤ j < |s|) ∧ (i < j)
+        ) →L (s[i] < s[j])
+    )
+    ~~~
+    II)~~~
+    (∀j : Z)(
+        (0 ≤ j < |s|) →L (
+            (∀i : Z)(0 ≤ i < |s|) ∧ i < j
+        ) →L s[i] < s[j]
+    )
+    ~~~
+    > Son equivalentes
+
+- b) 
+    - I) (∃i : Z)(0 ≤ i < |s| ∧L ((∃j : Z)((0 ≤ j < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
+    - II) (∃j : Z)(0 ≤ j < |s| ∧L ((∃i : Z)((0 ≤ i < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
+    I)~~~
+    (∃i : Z)(
+        (0 ≤ i < |s|) ∧L (
+            (∃j : Z)(
+                (0 ≤ j < |s| ∧ i < j − 1) ∧L 
+                    TodosIguales(subseq(s, i, j))
+            )
+        )
+    )
+    ~~~
+    II)~~~
+    (∃j : Z)(
+        (0 ≤ j < |s|) ∧L (
+            (∃i : Z)(
+                (0 ≤ i < |s| ∧ i < j − 1) ∧L
+                    TodosIguales(subseq(s, i, j))
+            )
+        )
+    )
+    ~~~
+    > Son equivalentes
+
+

@@ -182,6 +182,7 @@
 	| 1| 1| 1|       1|       1|      1|             1|                    1|                                        1|
 	>Es una tautología
 
+`Relación de fuerza`
 ## Ejercicio 6
 
 - a) true, false
