@@ -563,14 +563,16 @@ de s que cumplen Q”
     - I) (∀i : Z)((0 ≤ i < |s|) →L ((∀j : Z)(0 ≤ j < |s|) ∧ i < j) →L s[i] < s[j])
     - II) (∀j : Z)((0 ≤ j < |s|) →L ((∀i : Z)(0 ≤ i < |s|) ∧ i < j) →L s[i] < s[j])
 
-    I)~~~
+    I)
+    ~~~
     (∀i : Z)(
         (0 ≤ i < |s|) →L (
             (∀j : Z)(0 ≤ j < |s|) ∧ (i < j)
         ) →L (s[i] < s[j])
     )
     ~~~
-    II)~~~
+    II)
+    ~~~
     (∀j : Z)(
         (0 ≤ j < |s|) →L (
             (∀i : Z)(0 ≤ i < |s|) ∧ i < j
@@ -582,7 +584,8 @@ de s que cumplen Q”
 - b) 
     - I) (∃i : Z)(0 ≤ i < |s| ∧L ((∃j : Z)((0 ≤ j < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
     - II) (∃j : Z)(0 ≤ j < |s| ∧L ((∃i : Z)((0 ≤ i < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
-    I)~~~
+    I)
+    ~~~
     (∃i : Z)(
         (0 ≤ i < |s|) ∧L (
             (∃j : Z)(
@@ -592,7 +595,8 @@ de s que cumplen Q”
         )
     )
     ~~~
-    II)~~~
+    II)
+    ~~~
     (∃j : Z)(
         (0 ≤ j < |s|) ∧L (
             (∃i : Z)(
