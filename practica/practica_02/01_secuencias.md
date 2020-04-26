@@ -25,7 +25,8 @@
 - e) x = addFirst(head(x), tail(x))             `Es valida`
 - f) x[0] = head(x)                             `Es valida`
 - g) i ∈ x = head(subseq(x, i, i + 1))         `No es valida`
-    > ∈ es un predicado que devuelve un valor Bool y head de seq<Z> devuelve un entero, no tipa
+    > ∈ es un predicado que devuelve un valor Bool
+      y head de seq<Z> devuelve un entero, no tipa
 - h) tail(x) = subseq(x, 1, |x|)                `Es valida`
 
 ## Ejercicio 3
@@ -364,7 +365,7 @@ de la secuencia.
 
 ## Ejercicio 6
 
-a) “Si un entero en s cumple P, también cumple Q”
+- a) “Si un entero en s cumple P, también cumple Q”
     ~~~
         (∀i: Z)(
             (0 <= i) ∧ (i < |s|)
@@ -373,7 +374,7 @@ a) “Si un entero en s cumple P, también cumple Q”
         )
     ~~~
 
-b) “Todos los enteros de s que cumplen P, no cumplen Q”
+- b) “Todos los enteros de s que cumplen P, no cumplen Q”
     ~~~
         (∀i: Z)(
             (0 <= i) ∧ (i < |s|)
@@ -382,7 +383,7 @@ b) “Todos los enteros de s que cumplen P, no cumplen Q”
         )
     ~~~
 
-c) “Todos los enteros de s que están en posiciones pares y cumplen P, no cumplen Q”
+- c) “Todos los enteros de s que están en posiciones pares y cumplen P, no cumplen Q”
     ~~~
         (∀i: Z)(
                 ((0 <= i) ∧ (i < |s|))
@@ -393,13 +394,47 @@ c) “Todos los enteros de s que están en posiciones pares y cumplen P, no cump
         )
     ~~~
 
-d) “Todos los enteros de s que cumplen P y están en posiciones que cumplen Q, son pares”
+- d) “Todos los enteros de s que cumplen P y están en posiciones que cumplen Q, son pares”
     ~~~
         (∀i: Z)(
-            (i mod 2 = 0) ∧
-                ((0 <= i) ∧ (i < |s|)) ∧
-                (P(s[i]))
+                ((0 <= i) ∧ (i < |s|))
         ) →L (
-            ¬Q(s[i])
+            (i mod 2 = 0) ∧L (Q(i) ∧L P(s[i]))
+        )
+    ~~~
+
+- e)  “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q”
+    ~~~
+        (Ei: Z)(
+                ((0 <= i) ∧ (i < |s|))
+        ) ∧L (
+            ¬(P(s[i])) →L (
+                (∀j: Z)(
+                    ((0 <= j) ∧ (j < |s|))
+                ) →L (
+                    ¬(Q(s[j]))
+                )
+            )
+        )
+    ~~~
+
+- f) “Si hay un entero en s que no cumple P entonces ninguno en s cumple Q, y 
+si todos los enteros de s cumplen P entonces hay al menos dos elementos 
+de s que cumplen Q”
+    ~~~
+        (
+            (Ei: Z)(
+                ((0 <= i) ∧ (i < |s|))
+            ) ∧L (
+                ¬(P(s[i])) →L (
+                    (∀j: Z)(
+                        ((0 <= j) ∧ (j < |s|))
+                    ) →L (
+                        ¬(Q(s[j]))
+                    )
+                )
+            )
+        ) ∧L (
+
         )
     ~~~
