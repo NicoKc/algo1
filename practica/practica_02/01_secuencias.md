@@ -583,7 +583,7 @@ de s que cumplen Q”
 
 - b) 
     - I) (∃i : Z)(0 ≤ i < |s| ∧L ((∃j : Z)((0 ≤ j < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
-    - II) (∃j : Z)(0 ≤ j < |s| ∧L ((∃i : Z)((0 ≤ i < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))
+    - II) (∃j : Z)(0 ≤ j < |s| ∧L ((∃i : Z)((0 ≤ i < |s| ∧ i < j − 1) ∧L TodosIguales(subseq(s, i, j)))))  
     I)
     ~~~
     (∃i : Z)(
