@@ -9,3 +9,4 @@
 ↔ sii
 ≡ equivalente
 ∃ existe
+Σ sumatoria
