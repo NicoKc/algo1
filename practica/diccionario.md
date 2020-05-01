@@ -10,3 +10,4 @@
 ≡ equivalente
 ∃ existe
 Σ sumatoria
+π productoria
