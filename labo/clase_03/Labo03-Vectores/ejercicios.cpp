@@ -47,13 +47,65 @@ bool pertenece(int elem, vector<int> v)
     return false;
 }
 
+void mostrarVector(vector<string> v)
+{
+    cout << "[";
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (i != 0)
+        {
+            cout << ", ";
+        }
+        cout << v[i];
+    }
+
+    cout << "]" << endl;
+}
+
 void mostrarVector(vector<int> v)
 {
     cout << "[";
 
     for (int i = 0; i < v.size(); i++)
     {
-        cout << ", " << v[i];
+        if (i != 0)
+        {
+            cout << ", ";
+        }
+        cout << v[i];
+    }
+
+    cout << "]" << endl;
+}
+
+void mostrarVector(vector<bool> v)
+{
+    cout << "[";
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (i != 0)
+        {
+            cout << ", ";
+        }
+        cout << v[i];
+    }
+
+    cout << "]" << endl;
+}
+
+void mostrarVector(vector<pair<int, int>> v)
+{
+    cout << "[";
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (i != 0)
+        {
+            cout << ", ";
+        }
+        cout << "(" << v[i].first << ", " << v[i].second << ")";
     }
 
     cout << "]" << endl;
@@ -104,9 +156,9 @@ string reverso(string v)
 {
     string res;
 
-    for (size_t i = 0; i < v.size(); i++)
+    for (int i = 0; i < v.size(); i++)
     {
-        res[i] = v[(v.size() - 1) - i];
+        res = res + v[(v.size() - 1) - i];
     }
 
     return res;
@@ -116,9 +168,9 @@ vector<int> reverso(vector<int> v)
 {
     vector<int> res;
 
-    for (size_t i = 0; i < v.size(); i++)
+    for (int i = 0; i < v.size(); i++)
     {
-        res[i] = v[(v.size() - 1) - i];
+        res.push_back(v[(v.size() - 1) - i]);
     }
 
     return res;
@@ -172,7 +224,7 @@ bool estaOrdenado(vector<int> v)
         }
     }
 
-    return false;
+    return true;
 }
 
 void negar(vector<bool> &booleanos)
@@ -217,17 +269,30 @@ bool esPalindromo(string palabra)
 
 void palindromos(string rutaArchivoIn, string rutaArchivoOut)
 {
-    std::ifstream fin;
-    std::ofstream fout;
+    ifstream fin;
+    ofstream fout;
 
     fin.open(rutaArchivoIn);
     fout.open(rutaArchivoOut);
+    bool isFirst = true;
 
     while (!fin.eof())
     {
         string palabra = "";
+        fin >> palabra;
         if (esPalindromo(palabra))
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+            }
+            else
+            {
+                fout << " ";
+            }
+
             fout << palabra;
+        }
     }
 
     fin.close();
@@ -236,21 +301,33 @@ void palindromos(string rutaArchivoIn, string rutaArchivoOut)
 
 void promedios(string rutaArchivoIn1, string rutaArchivoIn2, string rutaArchivoOut)
 {
-    std::ifstream fin1;
-    std::ifstream fin2;
-    std::ofstream fout;
+    ifstream fin1;
+    ifstream fin2;
+    ofstream fout;
 
     fin1.open(rutaArchivoIn1);
     fin2.open(rutaArchivoIn2);
     fout.open(rutaArchivoOut);
+    bool isFirst = true;
 
     while (!fin1.eof())
     {
-        int nota1 = 0;
-        int nota2 = 0;
+        if (isFirst)
+        {
+            isFirst = false;
+        }
+        else
+        {
+            fout << " ";
+        }
+
+        string nota1 = "";
+        string nota2 = "";
         fin1 >> nota1;
         fin2 >> nota2;
-        fout << (nota1 + nota2) / 2;
+        int x = stoi(nota1);
+        int y = stoi(nota2);
+        fout << ((x + y) / 2);
     }
 
     fin1.close();
@@ -260,8 +337,8 @@ void promedios(string rutaArchivoIn1, string rutaArchivoIn2, string rutaArchivoO
 
 void cantidadApariciones(string rutaArchivoIn, string rutaArchivoOut)
 {
-    std::ifstream fin;
-    std::ofstream fout;
+    ifstream fin;
+    ofstream fout;
     vector<pair<int, int>> infoDeRepetidos;
 
     fin.open(rutaArchivoIn);
@@ -277,7 +354,12 @@ void cantidadApariciones(string rutaArchivoIn, string rutaArchivoOut)
     for (int i = 0; i < infoDeRepetidos.size(); i++)
     {
         pair<int, int> pair = infoDeRepetidos[i];
-        fout << pair.first << " " << pair.second << std::endl;
+        fout << pair.first << " " << pair.second;
+
+        if (i != infoDeRepetidos.size() - 1)
+        {
+            fout << endl;
+        }
     }
 
     fin.close();
@@ -286,7 +368,7 @@ void cantidadApariciones(string rutaArchivoIn, string rutaArchivoOut)
 
 void estadisticas(string rutaArchivo)
 {
-    std::ifstream fin;
+    ifstream fin;
     vector<pair<int, int>> infoDeRepetidos;
 
     fin.open(rutaArchivo);
@@ -299,11 +381,13 @@ void estadisticas(string rutaArchivo)
     }
 
     string title = "Palabras de longitud";
-    string conector = ": ";
+    string dosPuntosTab = ": \t";
+    string espaciosTab = "\t";
     for (int i = 0; i < infoDeRepetidos.size(); i++)
     {
         pair<int, int> pair = infoDeRepetidos[i];
-        std::cout << title << pair.first << conector << pair.second << std::endl;
+        cout << title << espaciosTab << pair.first << dosPuntosTab
+             << pair.second << endl;
     }
 
     fin.close();
@@ -311,7 +395,7 @@ void estadisticas(string rutaArchivo)
 
 vector<int> obtenerEnterosDeArchivo(string rutaArchivoIn)
 {
-    std::ifstream fin;
+    ifstream fin;
     fin.open(rutaArchivoIn);
     vector<int> res;
 
@@ -370,6 +454,11 @@ void interseccion()
 
     for (int i = 0; i < interseccion.size(); i++)
     {
-        cout << " " << interseccion[i];
+        if (i != 0)
+        {
+            cout << " ";
+        }
+        cout << interseccion[i];
     }
+    cout << endl;
 }

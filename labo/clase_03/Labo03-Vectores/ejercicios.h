@@ -15,7 +15,7 @@ bool pertenece(int elem, vector<int> v);
 
 void mostrarVector(vector<int> v);
 
-void sinImpares(vector<int>& v);
+void sinImpares(vector<int> &v);
 
 vector<int> limpiarDuplicados(vector<int> v);
 
@@ -28,9 +28,9 @@ vector<int> factoresPrimos(int n);
 
 bool estaOrdenado(vector<int> v);
 
-void negar(vector<bool>& booleanos);
+void negar(vector<bool> &booleanos);
 
-vector<pair<int, int> > cantidadApariciones(vector<int> v);
+vector<pair<int, int>> cantidadApariciones(vector<int> v);
 
 void palindromos(string rutaArchivoIn, string rutaArchivoOut);
 
@@ -41,3 +41,8 @@ void cantidadApariciones(string rutaArchivoIn, string rutaArchivoOut);
 void estadisticas(string rutaArchivo);
 
 void interseccion();
+
+/* Propios */
+void mostrarVector(vector<string> v);
+void mostrarVector(vector<bool> v);
+void mostrarVector(vector<pair<int, int>> v);
