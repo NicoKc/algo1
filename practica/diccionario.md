@@ -9,5 +9,6 @@
 ↔ sii
 ≡ equivalente
 ∃ existe
+∀ para todo
 Σ sumatoria
 π productoria
