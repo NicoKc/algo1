@@ -1,0 +1,12 @@
+### .gitignore para CLion (simplificado) ###
+# Referencias:
+## https://www.gitignore.io/api/clion
+## https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# CMake
+cmake-build-debug/

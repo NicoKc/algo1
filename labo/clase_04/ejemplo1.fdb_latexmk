@@ -1,0 +1,15 @@
+# Fdb version 3
+["pdflatex"] 1589233638 "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.tex" "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.pdf" "ejemplo1" 1589233638
+  "/home/nico/Proyectos/algo1/labo/clase_04/Algo1Macros.tex" 0 -1 0 ""
+  "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.aux" 1589233638 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.tex" 1589233636 188 b6723c74fb1a1d29221136e5470e5bb5 ""
+  "/usr/share/texmf-dist/tex/latex/base/article.cls" 1572595918 19931 9ab70b303cca263e0120c205e98dee99 ""
+  "/usr/share/texmf-dist/tex/latex/base/size10.clo" 1572595918 8405 41d2bb848d0640ceaee96d90b89378b7 ""
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1572595918 33301 a3134070eacafb10b1f371612ce2650d ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1589136032 8044939 c1b51c1c6fe93c9fb41babcd2f9be418 ""
+  "Algo1Macros.tex" 0 -1 0 ""
+  "ejemplo1.tex" 1589233636 188 b6723c74fb1a1d29221136e5470e5bb5 ""
+  (generated)
+  "ejemplo1.log"
+  "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.log"
+  "/home/nico/Proyectos/algo1/labo/clase_04/ejemplo1.pdf"

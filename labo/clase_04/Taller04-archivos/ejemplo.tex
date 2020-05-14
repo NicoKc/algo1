@@ -1,0 +1,39 @@
+\documentclass{article}
+\input{Algo1Macros}
+
+\begin{document}
+
+\section{Factorial}
+
+
+\begin{proc}{foo}{\In a: \ent, \Out b: \TLista{\ent}}{}
+\pre{a > 0}
+\post{|b| > 0}
+\end{proc}
+%parrafo 1
+
+%ejemplo en modo matemático (entre $)
+
+%parrafo 2
+
+
+\subsection{Definición}
+
+%completar
+
+
+\subsection{Especificación}
+
+%agregar la Especificación de factorial (ver guía)
+
+\subsection{Implementación recursiva}
+
+Aquí podemos ver una implementación recursiva:
+
+\begin{verbatim}
+   factorial n | n == 0 = 1
+               | n >  0 = n * factorial (n-1)
+\end{verbatim}
+
+
+\end{document}
