@@ -1,0 +1,34 @@
+\documentclass{article}
+\input{Algo1Macros}
+
+\begin{document}
+
+% proc esSeñal(in s: seq<Z>, in prof : Z, in freq: Z, out result : Bool) {
+%     Pre { True }
+%     Post {
+%         result = frecuenciaEnRango(freq) ∧L
+%                     (profundidadCorrecta(s) ∧L
+%                     ningunaMuestraSuperaLaProfundidad(s, prof)
+%                     duraMasDeUnSegundo(s, freq))
+%     }
+% }
+
+
+\begin{proc}{esSeñal}{\In s: \TLista{\ent}, \In prof: \ent, \In freq: \ent, out result: \bool}{}
+\pre{\True}
+\post{ \\
+\begin{verbatim}
+    result = frecuenciaEnRango(freq)$\yLuego$\\
+        (profundidadCorrecta(s)$\yLuego$\\
+        ningunaMuestraSuperaLaProfundidad(s, prof)$\yLuego$\\
+        duraMasDeUnSegundo(s, freq))\\
+    \end{verbatim}
+}
+\end{proc}
+
+
+%    factorial n | n == 0 = 1
+%                | n >  0 = n * factorial (n-1)
+
+
+\end{document}
