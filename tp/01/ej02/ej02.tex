@@ -3,42 +3,30 @@
 
 \begin{document}
 
-\begin{proc}{esSeñal}{\In s: \TLista{\ent}, \In prof: \ent, \In freq: \ent, out result: \bool}{}
-\pre{\longitud{s} \wedge prof > 0 \wedge freq > 0}
+\begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
+\pre{ umbral \geq 0 \yLuego esSeñalAux(s, prof, freq) }
 \post{ \\
-    result = frecuenciaEnRango(freq) \yLuego \\
-        profundidadCorrecta(s) \yLuego \\
-        ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego \\
-        duraMasDeUnSegundo(s, freq)
+    result = umbralEnRango(umbral, prof) \yLuego \\
+        existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)
 }
 \end{proc}
 
-\pred{profundidadCorrecta}{prof: \ent}{ freq \in [8,16,32] }
+\pred{umbralEnRango}{umbral: \ent, p: \ent}{ umbral \geq 2^{p-1}-1 }
 
-\pred{frecuenciaEnRango}{freq: \ent}{ freq \in [8,32] }
-
-\pred{ningunaMuestraSuperaLaProfundidad}{s: \TLista{\ent}, p: \ent}{
+\pred{existeUnaSubsecuenciaQueSuperaUmbral}{s: señal, freq: \ent, u: \ent}{
 
     \begin{addmargin}
-        \paraTodo{0}{i}{|s|}
-        \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1
+        \existe{d,h}{0}{\longitud{s}}
+        \wedge
+        (d < h) \wedge
+        (d + freq * 1000 * 5 < h) \yLuego
+        
+        (
+            \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
+            \implicaLuego
+            \longitud{subseq(s,d,h)[i]} > umbral
+        )
     \end{addmargin}
-}
-
-\pred{duraMasDeUnSegundo}{s: \TLista{\ent}, freq: \ent}{
-    \frac{\longitud{s}}{(freq\cdot 1000)}\geq 1
-}
-
-\pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
-
-    \begin{addmargin}
-        \longitud{s} \yLuego prof > 0 \yLuego freq > 0 \yLuego
-            frecuenciaEnRango(freq) \yLuego
-            profundidadCorrecta(s) \yLuego \\
-            ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego
-            duraMasDeUnSegundo(s, freq)
-    \end{addmargin}
-
 }
 
 \end{document}
