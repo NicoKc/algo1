@@ -4,7 +4,7 @@
 \begin{document}
 
 \begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
-\pre{ umbral \geq 0 \yLuego esSeñalAux(s, prof, freq) }
+\pre{ umbral > 0 \yLuego esSeñalAux(s, prof, freq) }
 \post{ \\
     result = umbralEnRango(umbral, prof) \yLuego \\
         existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)
