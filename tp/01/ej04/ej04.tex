@@ -1,0 +1,51 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{acelerar?}{\Inout r: reunion,
+    \In prof: \ent,
+    \In freq: \ent}{}
+\pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
+    r_{0} = r }
+\post{ \\
+    esReuniónVálidaAux(r, prof, freq) \yLuego \\
+        \longitud{r} = \longitud{r_{0}} \yLuego \\
+        mitadSeñal(r, r_{0}) \yLuego \\
+        losImpares(r, r_{0})
+}
+\end{proc}
+
+\pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
+    r_{0}: reunion}
+{
+    \paraTodo{i}{0}{\longitud{r}}
+    \implicaLuego
+
+    \IfThenElse{esPar(\longitud{r[0]_{0}})}
+    {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}}{2}}
+    {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}-1}{2}}
+
+}
+
+\pred{losImpares}{r: reunion,
+    r_{0}: reunion}
+{
+    \paraTodo{i}{0}{\longitud{r}}
+    \implicaLuego (
+
+        \existe{j}{0}{\longitud{r}} \yLuego (
+            r[i]_{1} = r[j]_{1}
+        ) \yLuego
+
+        (
+            \paraTodo{q}{0}{\longitud{r_{0}[i]_{0}} \wedge
+            (\neg esPar(q))}
+            \implicaLuego (
+                r_{0}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
+            )
+        )
+    )
+}
+
+\end{document}
