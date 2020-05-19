@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\begin{proc}{acelerar?}{\Inout r: reunion,
+\begin{proc}{acelerar}{\Inout r: reunion,
     \In prof: \ent,
     \In freq: \ent}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
@@ -11,7 +11,7 @@
 \post{ \\
     esReuniónVálidaAux(r, prof, freq) \yLuego \\
         \longitud{r} = \longitud{r_{0}} \yLuego \\
-        mitadSeñal(r, r_{0}) \yLuego \\
+        lasSeñalesTieneLaMitadDeMuestras(r, r_{0}) \yLuego \\
         losImpares(r, r_{0})
 }
 \end{proc}
