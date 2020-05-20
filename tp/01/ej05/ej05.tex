@@ -10,7 +10,6 @@
     r_{0} = r }
 \post{ \\
     esReuniónVálidaAux(r, prof, freq) \yLuego \\
-        \longitud{r} = \longitud{r_{0}} \yLuego \\
         lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego \\
         promedioEntrePares(r, r_{0})
 }
@@ -25,7 +24,7 @@
         (2 \cdot \longitud{r_{0}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)
 }
 
-\pred{losImpares}{r: reunion,
+\pred{promedioEntrePares}{r: reunion,
     r_{0}: reunion}
 {
     \paraTodo{i}{0}{\longitud{r}}
