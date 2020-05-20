@@ -1,0 +1,51 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{ordenar}{\Inout r: reunion,
+    \In freq: \ent,
+    \In prof: \ent}{}
+\pre{ esReuniónVálidaAux(r, prof, freq) \wedge r_{0} = r }
+\post{ \\
+    esReuniónVálidaAux(r, prof, freq) \yLuego \\
+        ordenadaDeMayorAMenorPorTonoDeVoz(r) \yLuego \\
+        esUnaPermutación(r_{0}, r)
+}
+\end{proc}
+
+\pred{ordenadaDeMayorAMenorPorTonoDeVoz}{r: reunion}
+{
+
+    \paraTodo{i}{1}{\longitud{r}}
+    \implicaLuego
+    tonoDeVoz(r[i-1]_{0}) \geq tonoDeVoz(r[i]_{0})
+
+}
+
+\pred{esUnaPermutación}{x: reunion,
+    y: reunion}
+{
+
+    \longitud{x} = \longitud{y} \yLuego
+
+    \paraTodo{i}{0}{\longitud{x}}
+    \implicaLuego (
+
+        \existe{j}{0}{\longitud{y}} \yLuego (
+            x[i]_{1} = y[j]_{1}
+        ) \yLuego (
+            x[i]_{0} = y[j]_{0}
+        )
+    )
+}
+
+\aux{tonoDeVoz}{s: señal}{\ent}{
+    sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
+}
+
+\aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
+    \sum_{i=0}^{\longitud{s}} abs(s[i])
+}
+
+\end{document}
