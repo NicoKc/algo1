@@ -24,9 +24,11 @@
         (
             \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
             \implicaLuego
-            \longitud{subseq(s,d,h)[i]} > umbral
+            abs(subseq(s,d,h)[i]) > umbral
         )
     \end{addmargin}
 }
+
+\aux{abs}{x: \ent}{\ent}{\IfThenElse{x > 0}{x}{-x}}
 
 \end{document}
