@@ -19,8 +19,8 @@
 \pred{lasSeñalesTienenElDobleDeMuestras}{r: reunion,
     r_{0}: reunion}
 {
-    \paraTodo{i}{0}{\longitud{r_{0}}}
 
+    \paraTodo{i}{0}{\longitud{r_{0}}}
     \implicaLuego
         (2 \cdot \longitud{r_{0}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)
 }
@@ -28,19 +28,22 @@
 \pred{promedioEntrePares}{r: reunion,
     r_{0}: reunion}
 {
+
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego (
 
-        \existe{j}{0}{\longitud{r}} \yLuego (
-            r[i]_{1} = r[j]_{1}
-        ) \yLuego
+        \existe{j}{0}{\longitud{r_{0}}} \yLuego (
+            r[i]_{1} = r_{0}[j]_{1}
+        ) \yLuego (
+            
+            \paraTodo{q}{0}{\longitud{r[i]_{0}}}
+            \implicaLuego
 
-        (
-            \paraTodo{q}{0}{\longitud{r_{0}[i]_{0}} \wedge
-            (\neg esPar(q))}
-            \implicaLuego (
-                r_{0}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
-            )
+            \IfThenElse{esPar(q)}{
+                r[j]_{0}[q] = r_{0}[i]_{0}[\frac{q}{2}]
+            }{
+                r[j]_{0}[q] = \frac{r_{0}[i]_{0}[\frac{q-1}{2}] + r_{0}[i]_{0}[\frac{q+1}{2}]}{2}
+            }
         )
     )
 }

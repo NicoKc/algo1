@@ -1,0 +1,77 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{ralentizar}{\Inout r: reunion,
+    \In freq: \ent,
+    \In prof: \ent,
+    \Out hablantes: \TLista{hablante}}{}
+\pre{ esReuniónVálidaAux(r, prof, freq) }
+\post{ \\
+    siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \yLuego \\
+        losHablantesPertenecenALaReunión(r, hablantes) \yLuego \\
+        losHablantesNoSeRepiten(hablantes)
+}
+\end{proc}
+
+\pred{siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
+    hs: \TLista{hablante}}
+{
+
+    \paraTodo{i}{0}{\longitud{hs}}
+    \implicaLuego
+
+        (r[i]_{1} \in hs 
+        \wedge
+        elPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, r[i]_{0}))
+
+        \vee
+
+        (r[i]_{1} \notin hs 
+        \wedge
+        \neg elPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, r[i]_{0}))
+
+}
+
+\pred{losHablantesPertenecenALaReunión}{r: reunion,
+    hs: \TLista{hablante}}
+{
+
+    \paraTodo{i}{0}{\longitud{hs}}
+    \implicaLuego (
+        \existe{j}{0}{\longitud{r}} \yLuego (
+            hs[i] = r[j]_{1}
+        )
+    )
+}
+
+\pred{losHablantesNoSeRepiten}{r: reunion,
+    hs: \TLista{hablante}}
+{
+
+    \paraTodo{i}{0}{\longitud{hs}}
+    \implicaLuego (
+        \#apariciones(hs, hs[i]) = 1
+    )
+}
+
+\pred{elPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
+    s: señal}
+{
+
+    \paraTodo{i}{0}{\longitud{r}}
+    \implicaLuego (
+        tonoDeVoz(s) \geq tonoDeVoz(r[i]_{0})
+    )
+}
+
+\aux{tonoDeVoz}{s: señal}{\ent}{
+    sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
+}
+
+\aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
+    \sum_{i=0}^{\longitud{s}} abs(s[i])
+}
+
+\end{document}
