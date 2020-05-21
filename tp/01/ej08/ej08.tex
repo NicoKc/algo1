@@ -1,0 +1,107 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{silencios}{\In s: señal,
+    \In freq: \ent,
+    \In prof: \ent,
+    \Out intervalos: \TLista{intervalo}}{}
+\pre{ esSeñalAux(s, prof, freq) \wedge (umbral > 0) }
+\post{
+
+    noHayIntervalosRepetidos(intervalos) \yLuego \\
+    \paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (\\
+    haySilencio(s, umbral, freq, intervalos[i])
+    % finEsMayorQueInicio(intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+    % estaDentroDeLaSeñal(s, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+    % esAlMenosUnDecimoDeSegundo(freq, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+    % entreIndicesNoPasaCiertoUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+    % losAdyacentesSuperanElUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1})
+    )
+}
+\end{proc}
+
+\pred{noHayIntervalosRepetidos}{ins: \TLista{intervalo}}
+{
+    \paraTodo{i}{0}{\longitud{ins}}
+    \implicaLuego (
+        \#apariciones(ins, e) = 1
+    )
+}
+
+\pred{finEsMayorQueInicio}{inicio: \ent,
+    fin: \ent}
+{
+    fin > inicio
+}
+
+\pred{estaDentroDeLaSeñal}{s: señal,
+    inicio: \ent,
+    fin: \ent,}
+{
+    (inicio \geq 0) \wedge (fin < |s|)
+}
+
+\pred{esAlMenosUnDecimoDeSegundo}{freq: \ent,
+    inicio: \ent,
+    fin: \ent,}
+{
+    (fin - inicio + 1) \geq (frecuencia * 100)
+}
+
+\pred{losAdyacentesSuperanElUmbral}{s: señal,
+    umbral: \ent,
+    inicio: \ent,
+    fin: \ent}
+{
+
+    (
+        (inicio = 0) \oLuego (
+            (
+                inicio-1 \geq 0 
+            ) \yLuego (
+                s[inicio-1] \geq umbral
+            )
+        )
+    ) \wedge (
+
+        (fin = \longitud{s} - 1) \oLuego (
+            (
+                fin+1 < \longitud{s}
+            ) \yLuego (
+                s[fin+1] \geq umbral
+            )
+        )
+    )
+}
+
+\pred{entreIndicesNoPasaCiertoUmbral}{s: señal,
+    umbral: \ent,
+    inicio: \ent,
+    fin: \ent}
+{
+
+    \paraTodo{i}{inicio}{fin+1}
+    \implicaLuego
+    (abs(s[i]) \leq umbral)
+}
+
+\pred{esSilencio}{s: senal,
+    umbral: \ent,
+    freq: \ent,
+    in: intervalo}
+{
+
+    finEsMayorQueInicio(in_{0}, in_{1}) \yLuego
+
+    estaDentroDeLaSeñal(s, in_{0}, in_{1}) \yLuego
+
+    esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \yLuego
+
+    entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \yLuego
+
+    losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+}
+
+\end{document}

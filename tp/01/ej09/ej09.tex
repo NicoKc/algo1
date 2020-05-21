@@ -1,0 +1,32 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{hablantesSuperpuestos}{\In r: reunion,
+    \In prof: \ent,
+    \In freq: \ent,
+    \In umbral: \ent,
+    \Out result: \bool}{}
+\pre{ esReuniónVálidaAux(r, prof, freq) }
+\post{
+    result = \neg noHayHablantesSuperpuestos(r, freq, umbral)
+}
+\end{proc}
+
+\pred{noHayHablantesSuperpuestos}{r: reunion,
+    freq: \ent,
+    umbral: \ent}
+{
+
+    \paraTodo{i,j}{0}{\longitud{r} \wedge (i \neq j)}
+    \implicaLuego
+
+        \paraTodo{k,l}{0}{\longitud{r[i]_{0}}} \wedge k < l \implicaLuego
+
+        \neg esSilencio(r[i]_{0},  umbral, freq, (k, l)) \wedge
+        esSilencio(r[j]_{0}, umbral, freq, (k, l))
+}
+
+
+\end{document}
