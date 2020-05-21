@@ -1,0 +1,574 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{esSeñal}{\In s: \TLista{\ent}, \In prof: \ent, \In freq: \ent, out result: \bool}{}
+\pre{\longitud{s} \geq 0 \wedge prof > 0 \wedge freq > 0}
+\post{ \\
+    result = frecuenciaEnRango(freq) \yLuego \\
+        profundidadCorrecta(s) \yLuego \\
+        ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego \\
+        duraMasDeUnSegundo(s, freq)
+}
+\end{proc}
+
+\pred{profundidadCorrecta}{prof: \ent}{ freq \in [8,16,32] }
+
+\pred{frecuenciaEnRango}{freq: \ent}{ freq \in [8,32] }
+
+\pred{ningunaMuestraSuperaLaProfundidad}{s: \TLista{\ent}, p: \ent}{
+
+    \paraTodo{0}{i}{|s|}
+
+    \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1
+
+}
+
+\pred{duraMasDeUnSegundo}{s: \TLista{\ent}, freq: \ent}{
+    \frac{\longitud{s}}{(freq\cdot 1000)}\geq 1
+}
+
+\pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
+
+    \longitud{s} \geq 0 \yLuego
+
+    frecuenciaEnRango(freq) \yLuego
+
+    profundidadCorrecta(s) \yLuego
+
+    ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego
+
+    duraMasDeUnSegundo(s, freq)
+
+}
+
+\begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
+    \pre{ umbral > 0 \yLuego esSeñalAux(s, prof, freq) }
+    \post{ \\
+        result = umbralEnRango(umbral, prof) \yLuego \\
+            existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)
+    }
+    \end{proc}
+
+    \pred{umbralEnRango}{umbral: \ent, p: \ent}{ umbral \geq 2^{p-1}-1 }
+
+    \pred{existeUnaSubsecuenciaQueSuperaUmbral}{s: señal, freq: \ent, u: \ent}{
+
+        \existe{d,h}{0}{\longitud{s}}
+        \wedge
+        (d < h) \wedge
+        ((d + freq * 1000 * 5) < h) \yLuego (
+
+            \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
+            \implicaLuego
+            abs(subseq(s,d,h)[i]) > umbral
+        )
+    }
+
+    \aux{abs}{x: \ent}{\ent}{\IfThenElse{x > 0}{x}{-x}}
+
+    \begin{proc}{esReuniónVálida?}{\In r: reunion,
+        \In prof: \ent,
+        \In freq: \ent,
+        out result: \bool}{}
+    \pre{ \longitud{r} > 0 \wedge prof > 0 \wedge freq > 0 }
+    \post{ \\
+        result = contieneSeñalesValidas(r, prof, freq) \yLuego \\
+            lasLongitudesDeSeñalSonIguales(r) \yLuego \\
+            todosHablantesDistintos(r) \yLuego \\
+            losHablantesEstanEnRangosDe0ANMenos1(r)
+    }
+    \end{proc}
+    
+    \pred{contieneSeñalesValidas}{r: reunion,
+        prof: \ent,
+        freq: \ent}
+    {
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego esSeñalAux(r[i]_{0}, prof, freq)
+    }
+    
+    \pred{lasLongitudesDeSeñalSonIguales}{r: reunion}
+    {
+        \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
+        \implicaLuego (\longitud{r[i]_{0}} = \longitud{r[j]_{0}})
+    }
+    
+    \pred {todosHablantesDistintos}{r: reunion}{
+        \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
+        \implicaLuego (r[i]_{1} \neq r[j]_{1})
+    }
+    
+    \pred {losHablantesEstanEnRangosDe0ANMenos1}{r: reunion}{
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego 0 \leq r[i]_{1} < \longitud{r}
+    }
+    
+    \pred {esReuniónVálidaAux}{r: reunion,
+        prof: \ent,
+        freq: \ent}{
+    
+        contieneSeñalesValidas(r, prof, freq) \yLuego
+    
+        lasLongitudesDeSeñalSonIguales(r) \yLuego
+    
+        todosHablantesDistintos(r) \yLuego
+    
+        losHablantesEstanEnRangosDe0ANMenos1(r)
+    }
+
+    \begin{proc}{acelerar}{\Inout r: reunion,
+        \In prof: \ent,
+        \In freq: \ent}{}
+    \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
+        r_{0} = r }
+    \post{ \\
+        esReuniónVálidaAux(r, prof, freq) \yLuego \\
+            \longitud{r} = \longitud{r_{0}} \yLuego \\
+            lasSeñalesTieneLaMitadDeMuestras(r, r_{0}) \yLuego \\
+            losImpares(r, r_{0})
+    }
+    \end{proc}
+    
+    \pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
+        r_{0}: reunion}
+    {
+    
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego
+        \IfThenElse{esPar(\longitud{r[0]_{0}})}
+        {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}}{2}}
+        {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}-1}{2}}
+    
+    }
+    
+    \pred{losImpares}{r: reunion,
+        r_{0}: reunion}
+    {
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego (
+    
+            \existe{j}{0}{\longitud{r}} \yLuego (
+                r[i]_{1} = r[j]_{1}
+            ) \yLuego (
+    
+                \paraTodo{q}{0}{\longitud{r_{0}[i]_{0}} \wedge
+                (\neg esPar(q))}
+                \implicaLuego (
+                    r_{0}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
+                )
+            )
+        )
+    }
+
+    \begin{proc}{ralentizar}{\Inout r: reunion,
+        \In prof: \ent,
+        \In freq: \ent}{}
+    \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
+        r_{0} = r }
+    \post{ \\
+        esReuniónVálidaAux(r, prof, freq) \yLuego \\
+            \longitud{r} = \longitud{r_{0}} \yLuego \\
+            lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego \\
+            promedioEntrePares(r, r_{0})
+    }
+    \end{proc}
+    
+    \pred{lasSeñalesTienenElDobleDeMuestras}{r: reunion,
+        r_{v}: reunion}
+    {
+    
+        \paraTodo{i}{0}{\longitud{r_{v}}}
+        \implicaLuego
+            (2 \cdot \longitud{r_{v}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)
+    }
+    
+    \pred{promedioEntrePares}{r: reunion,
+        r_{v}: reunion}
+    {
+    
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego (
+    
+            \existe{j}{0}{\longitud{r_{0}}} \yLuego (
+                r[i]_{1} = r_{v}[j]_{1}
+            ) \yLuego (
+                
+                \paraTodo{q}{0}{\longitud{r[i]_{0}}}
+                \implicaLuego
+    
+                \IfThenElse{esPar(q)}{
+                    r[j]_{0}[q] = r_{v}[i]_{0}[\frac{q}{2}]
+                }{
+                    r[j]_{0}[q] = \frac{r_{v}[i]_{0}[\frac{q-1}{2}] + r_{v}[i]_{0}[\frac{q+1}{2}]}{2}
+                }
+            )
+        )
+    }
+
+    \begin{proc}{tonosDeVozElevados}{\Inout r: reunion,
+        \In freq: \ent,
+        \In prof: \ent,
+        \Out hablantes: \TLista{hablante}}{}
+    \pre{ esReuniónVálidaAux(r, prof, freq) }
+    \post{ \\
+        siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \yLuego \\
+            losHablantesPertenecenALaReunión(r, hablantes) \yLuego \\
+            losHablantesNoSeRepiten(hablantes)
+    }
+    \end{proc}
+    
+    \pred{siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
+        hs: \TLista{hablante}}
+    {
+    
+        \paraTodo{i}{0}{\longitud{hs}}
+        \implicaLuego
+    
+            (r[i]_{1} \in hs 
+            \wedge
+            elPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, r[i]_{0}))
+    
+            \vee
+    
+            (r[i]_{1} \notin hs 
+            \wedge
+            \neg elPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, r[i]_{0}))
+    
+    }
+    
+    \pred{losHablantesPertenecenALaReunión}{r: reunion,
+        hs: \TLista{hablante}}
+    {
+    
+        \paraTodo{i}{0}{\longitud{hs}}
+        \implicaLuego (
+            \existe{j}{0}{\longitud{r}} \yLuego (
+                hs[i] = r[j]_{1}
+            )
+        )
+    }
+    
+    \pred{losHablantesNoSeRepiten}{r: reunion,
+        hs: \TLista{hablante}}
+    {
+    
+        \paraTodo{i}{0}{\longitud{hs}}
+        \implicaLuego (
+            \#apariciones(hs, hs[i]) = 1
+        )
+    }
+    
+    \pred{elPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
+        s: señal}
+    {
+    
+        \paraTodo{i}{0}{\longitud{r}}
+        \implicaLuego (
+            tonoDeVoz(s) \geq tonoDeVoz(r[i]_{0})
+        )
+    }
+    
+    \aux{tonoDeVoz}{s: señal}{\ent}{
+        sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
+    }
+    
+    \aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
+        \sum_{i=0}^{\longitud{s}} abs(s[i])
+    }
+
+    \begin{proc}{ordenar}{\Inout r: reunion,
+        \In freq: \ent,
+        \In prof: \ent}{}
+    \pre{ esReuniónVálidaAux(r, prof, freq) \wedge r_{0} = r }
+    \post{ \\
+        esReuniónVálidaAux(r, prof, freq) \yLuego \\
+            ordenadaDeMayorAMenorPorTonoDeVoz(r) \yLuego \\
+            esUnaPermutación(r_{0}, r)
+    }
+    \end{proc}
+    
+    \pred{ordenadaDeMayorAMenorPorTonoDeVoz}{r: reunion}
+    {
+    
+        \paraTodo{i}{1}{\longitud{r}}
+        \implicaLuego
+        tonoDeVoz(r[i-1]_{0}) \geq tonoDeVoz(r[i]_{0})
+    
+    }
+    
+    \pred{esUnaPermutación}{x: reunion,
+        y: reunion}
+    {
+    
+        \longitud{x} = \longitud{y} \yLuego
+    
+        \paraTodo{i}{0}{\longitud{x}}
+        \implicaLuego (
+    
+            \existe{j}{0}{\longitud{y}} \yLuego (
+                x[i]_{1} = y[j]_{1}
+            ) \yLuego (
+                x[i]_{0} = y[j]_{0}
+            )
+        )
+    }
+    
+    \aux{tonoDeVoz}{s: señal}{\ent}{
+        sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
+    }
+    
+    \aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
+        \sum_{i=0}^{\longitud{s}} abs(s[i])
+    }
+
+    \begin{proc}{silencios}{\In s: señal,
+        \In freq: \ent,
+        \In prof: \ent,
+        \Out intervalos: \TLista{intervalo}}{}
+    \pre{ esSeñalAux(s, prof, freq) \wedge (umbral > 0) }
+    \post{
+    
+        noHayIntervalosRepetidos(intervalos) \yLuego \\
+        \paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (\\
+        esSilencio(s, umbral, freq, intervalos[i])
+        % finEsMayorQueInicio(intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+        % estaDentroDeLaSeñal(s, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+        % esAlMenosUnDecimoDeSegundo(freq, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+        % entreIndicesNoPasaCiertoUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
+        % losAdyacentesSuperanElUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1})
+        )
+    }
+    \end{proc}
+    
+    \pred{noHayIntervalosRepetidos}{ins: \TLista{intervalo}}
+    {
+        \paraTodo{i}{0}{\longitud{ins}}
+        \implicaLuego (
+            \#apariciones(ins, e) = 1
+        )
+    }
+    
+    \pred{finEsMayorQueInicio}{inicio: \ent,
+        fin: \ent}
+    {
+        fin > inicio
+    }
+    
+    \pred{estaDentroDeLaSeñal}{s: señal,
+        inicio: \ent,
+        fin: \ent,}
+    {
+        (inicio \geq 0) \wedge (fin < |s|)
+    }
+    
+    \pred{esAlMenosUnDecimoDeSegundo}{freq: \ent,
+        inicio: \ent,
+        fin: \ent,}
+    {
+        (fin - inicio + 1) \geq (frecuencia * 100)
+    }
+    
+    \pred{losAdyacentesSuperanElUmbral}{s: señal,
+        umbral: \ent,
+        inicio: \ent,
+        fin: \ent}
+    {
+    
+        (
+            (inicio = 0) \oLuego (
+                (
+                    inicio-1 \geq 0 
+                ) \yLuego (
+                    s[inicio-1] \geq umbral
+                )
+            )
+        ) \wedge (
+    
+            (fin = \longitud{s} - 1) \oLuego (
+                (
+                    fin+1 < \longitud{s}
+                ) \yLuego (
+                    s[fin+1] \geq umbral
+                )
+            )
+        )
+    }
+    
+    \pred{entreIndicesNoPasaCiertoUmbral}{s: señal,
+        umbral: \ent,
+        inicio: \ent,
+        fin: \ent}
+    {
+    
+        \paraTodo{i}{inicio}{fin+1}
+        \implicaLuego
+        (abs(s[i]) \leq umbral)
+    }
+    
+    \pred{esSilencio}{s: senal,
+        umbral: \ent,
+        freq: \ent,
+        in: intervalo}
+    {
+    
+        finEsMayorQueInicio(in_{0}, in_{1}) \yLuego
+    
+        estaDentroDeLaSeñal(s, in_{0}, in_{1}) \yLuego
+    
+        esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \yLuego
+    
+        entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \yLuego
+    
+        losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+    }
+    
+
+    \begin{proc}{hablantesSuperpuestos}{\In r: reunion,
+        \In prof: \ent,
+        \In freq: \ent,
+        \In umbral: \ent,
+        \Out result: \bool}{}
+    \pre{ esReuniónVálidaAux(r, prof, freq) }
+    \post{
+        result = \neg noHayHablantesSuperpuestos(r, freq, umbral)
+    }
+    \end{proc}
+    
+    \pred{haySilencio}{s: señal,
+        umbral: \ent,
+        freq: \ent}
+    {
+        \existe{i,j}{0}{\longitud{s} \wedge (i < j)}
+        \yLuego
+        esSilencio(s, umbral, (i,j))
+    }
+    
+    \pred{noHayHablantesSuperpuestos}{r: reunion,
+        freq: \ent,
+        umbral: \ent}
+    {
+    
+        \paraTodo{i,j}{0}{\longitud{r} \wedge (i \neq j)}
+        \implicaLuego
+    
+            \paraTodo{k,l}{0}{\longitud{r[i]_{0}}} \wedge k < l \implicaLuego
+    
+            \neg haySilencio(subseq(r[i]_{0}, k, l),  umbral, freq) \implicaLuego
+            esSilencio(r[j]_{0}, umbral, freq, (k, l))
+    }
+
+    \begin{proc}{reconstruir}{\In s: $señal$,
+        \In prof: \ent,
+        \In freq: \ent,
+        \Out señal: \bool}{}
+    \pre{ esSeñalAux(s, prof, freq) }
+    \post{
+        esSeñalAux(result) \yLuego
+    
+            \longitud{s} = \longitud{result} \yLuego
+    
+            $enDondeNoSeaCeroDebenCoincidir(s, result)$ \yLuego
+    
+            $enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result)$
+    }
+    \end{proc}
+    
+    \pred{enDondeNoSeaCeroDebenCoincidir}{original: señal,
+        reconstruida: señal}
+    {
+    
+        \paraTodo{i}{0}{\longitud{original}}
+        \implicaLuego
+    
+            ($original[i]$ \neq 0) \yLuego 
+    
+            $(original[i] = reconstruida[i])$
+    }
+    
+    \pred{enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos}{original: señal,
+        reconstruida: señal}
+    {
+    
+        \paraTodo{i}{0}{\longitud{original}}
+        \implicaLuego
+    
+            $(original[i] = 0)$ \yLuego 
+    
+            $reconstruida[i] = promedioDeVecinosNoNulos(original[i], reconstruida[i])$
+    }
+    
+    \aux{promedioDeVecinosNoNulos}{s: $señal$,
+        i: \ent}{\ent}
+    {   
+        \frac{(s[elIndiceNoNuloMasCercano(s, i)] + s[el2doIndiceNoNuloMasCercano(s, i)])}{2}
+    }
+    
+    \aux{elIndiceNoNuloMasCercano}{s: $señal$,
+        i: \ent}{\ent}
+    {
+    
+        \IfThenElse{
+            dist(i, indiceSiguienteNoNulo(s, i)) < dist(i, indiceAnteriorNoNulo(s, i))
+        }{
+    
+            $indiceSiguienteNoNulo(s, i)$
+        }{
+    
+            \IfThenElse{
+                dist(i, indiceSiguienteNoNulo(s, i))> dist(i, indiceAnteriorNoNulo(s,i))
+            }{
+    
+                $indiceAnteriorNoNulo(s, i)$
+            }{
+    
+                $indiceAnteriorNoNulo(s, i)$ \vee $indiceSiguienteNoNulo(s, i)$
+            }
+        }
+    }
+    
+    \aux{dist}{x: \ent,
+        y: \ent}{\ent}{
+            abs(x-y)
+        }
+    
+    \aux{el2doIndiceNoNuloMasCercano}{s: $señal$,
+        i: \ent}{\ent}{
+    
+            $elIndiceNoNuloMasCercano(setAt(s, elIndiceNoNuloMasCercano(s, i), 0))$
+    }
+    
+    \aux{indiceAnteriorNoNulo}{s: $señal$,
+        i: \ent}{\ent}{
+        \sum_{p=0}^{i-1}
+        \IfThenElse{esElPrimerAnteriorNoNulo(s, i, p)}{p}{0}
+    }
+    
+    \pred{esElPrimerAnteriorNoNulo}{s: $señal$,
+        i: \ent,
+        p: \ent}
+    {
+        \paraTodo{j}{p}{i}
+        \implicaLuego
+        (s[j] = 0) \yLuego (s[p] \neq 0)
+    }
+    
+    \aux{indiceSiguienteNoNulo}{s: $señal$,
+        i: \ent}{\ent}
+    {
+        \sum_{p=i+1}^{\longitud{s}-1}
+        \IfThenElse{esElPrimerSiguienteNoNulo(s, i, p)}{p}{0}
+    }
+    
+    \pred{esElPrimerSiguienteNoNulo}{s: $señal$,
+        i: \ent,
+        p: \ent}
+    {
+        \paraTodo{j}{i}{p}
+        \implicaLuego
+        (s[j] = 0) \yLuego (s[p] \neq 0)
+    }
+    
+
+\end{document}
