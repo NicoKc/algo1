@@ -1,0 +1,83 @@
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{reconstruir}{\In s: señal,
+    \In prof: \ent,
+    \In freq: \ent,
+    \Out señal: \bool}{}
+\pre{ esSeñalAux(s, prof, freq) }
+\post{
+    esSeñalAux(result) \yLuego
+
+        \longitud{s} = \longitud{result} \yLuego
+
+        enDondeNoSeaCeroDebenCoincidir(s, result) \yLuego
+
+        enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result)
+}
+\end{proc}
+
+\pred{enDondeNoSeaCeroDebenCoincidir}{original: señal,
+    reconstruida: señal}
+{
+
+    \paraTodo{i}{0}{\longitud{original}}
+    \implicaLuego
+
+        (original[i] \neq 0) \yLuego 
+
+        (original[i] = reconstruida[i])
+}
+
+\pred{enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos}{original: señal,
+    reconstruida: señal}
+{
+
+    \paraTodo{i}{0}{\longitud{original}}
+    \implicaLuego
+
+        (original[i] = 0) \yLuego 
+
+        reconstruida[i] = promedioDeVecinosNoNulos(original[i], reconstruida[i])
+}
+
+\aux{promedioDeVecinosNoNulos}{s: señal,
+    i: \ent}{\ent}{
+        \frac{(s[obtenerIndiceAnteriorNoNulo(i)] + s[obtenerIndiceSiguienteNoNulo(i)])}{2}
+}
+
+\aux{obtenerIndiceAnteriorNoNulo}{s: señal,
+    i: \ent}{\ent}{
+
+    \sum_{p=0}^{\longitud{s}-i}
+    \IfThenElse{esElPrimerAnteriorNoNulo(s, i, p)}{s[p]}{0}
+}
+
+\pred{esElPrimerAnteriorNoNulo}{s: señal,
+    i: \ent,
+    p: \ent}
+{
+    \paraTodo{j}{p}{i}
+    \implicaLuego
+    (s[j] = 0) \yLuego (s[p] != 0)
+}
+
+\aux{obtenerIndiceSiguienteNoNulo}{s: señal,
+    i: \ent}{\ent}
+{
+    \sum_{p=i}^{\longitud{s}-2}
+    \IfThenElse{esElPrimerSiguienteNoNulo(s, i, p)}{s[p]}{0}
+}
+
+\pred{esElPrimerSiguienteNoNulo}{s: señal,
+    i: \ent,
+    p: \ent}
+{
+    \paraTodo{j}{i}{p}
+    \implicaLuego
+    (s[j] = 0) \yLuego (s[p] != 0)
+}
+
+\end{document}

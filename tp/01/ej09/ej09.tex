@@ -14,6 +14,15 @@
 }
 \end{proc}
 
+\pred{haySilencio}{s: señal,
+    umbral: \ent,
+    freq: \ent}
+{
+    \existe{i,j}{0}{\longitud{s} \wedge (i < j)}
+    \yLuego
+    esSilencio(s, umbral, (i,j))
+}
+
 \pred{noHayHablantesSuperpuestos}{r: reunion,
     freq: \ent,
     umbral: \ent}
@@ -24,9 +33,8 @@
 
         \paraTodo{k,l}{0}{\longitud{r[i]_{0}}} \wedge k < l \implicaLuego
 
-        \neg esSilencio(r[i]_{0},  umbral, freq, (k, l)) \wedge
+        \neg haySilencio(subseq(r[i]_{0}, k, l),  umbral, freq) \implicaLuego
         esSilencio(r[j]_{0}, umbral, freq, (k, l))
 }
-
 
 \end{document}
