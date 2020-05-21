@@ -19,9 +19,9 @@
 \pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
     r_{0}: reunion}
 {
+
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego
-
     \IfThenElse{esPar(\longitud{r[0]_{0}})}
     {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}}{2}}
     {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}-1}{2}}
@@ -36,9 +36,8 @@
 
         \existe{j}{0}{\longitud{r}} \yLuego (
             r[i]_{1} = r[j]_{1}
-        ) \yLuego
+        ) \yLuego (
 
-        (
             \paraTodo{q}{0}{\longitud{r_{0}[i]_{0}} \wedge
             (\neg esPar(q))}
             \implicaLuego (

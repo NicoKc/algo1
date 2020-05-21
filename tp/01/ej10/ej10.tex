@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\begin{proc}{reconstruir}{\In s: señal,
+\begin{proc}{reconstruir}{\In s: $señal$,
     \In prof: \ent,
     \In freq: \ent,
     \Out señal: \bool}{}
@@ -13,9 +13,9 @@
 
         \longitud{s} = \longitud{result} \yLuego
 
-        enDondeNoSeaCeroDebenCoincidir(s, result) \yLuego
+        $enDondeNoSeaCeroDebenCoincidir(s, result)$ \yLuego
 
-        enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result)
+        $enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result)$
 }
 \end{proc}
 
@@ -26,9 +26,9 @@
     \paraTodo{i}{0}{\longitud{original}}
     \implicaLuego
 
-        (original[i] \neq 0) \yLuego 
+        ($original[i]$ \neq 0) \yLuego 
 
-        (original[i] = reconstruida[i])
+        $(original[i] = reconstruida[i])$
 }
 
 \pred{enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos}{original: señal,
@@ -38,46 +38,80 @@
     \paraTodo{i}{0}{\longitud{original}}
     \implicaLuego
 
-        (original[i] = 0) \yLuego 
+        $(original[i] = 0)$ \yLuego 
 
-        reconstruida[i] = promedioDeVecinosNoNulos(original[i], reconstruida[i])
+        $reconstruida[i] = promedioDeVecinosNoNulos(original[i], reconstruida[i])$
 }
 
-\aux{promedioDeVecinosNoNulos}{s: señal,
+\aux{promedioDeVecinosNoNulos}{s: $señal$,
+    i: \ent}{\ent}
+{   
+    \frac{(s[elIndiceNoNuloMasCercano(s, i)] + s[el2doIndiceNoNuloMasCercano(s, i)])}{2}
+}
+
+\aux{elIndiceNoNuloMasCercano}{s: $señal$,
+    i: \ent}{\ent}
+{
+
+    \IfThenElse{
+        dist(i, indiceSiguienteNoNulo(s, i)) < dist(i, indiceAnteriorNoNulo(s, i))
+    }{
+
+        $indiceSiguienteNoNulo(s, i)$
+    }{
+
+        \IfThenElse{
+            dist(i, indiceSiguienteNoNulo(s, i))> dist(i, indiceAnteriorNoNulo(s,i))
+        }{
+
+            $indiceAnteriorNoNulo(s, i)$
+        }{
+
+            $indiceAnteriorNoNulo(s, i)$ \vee $indiceSiguienteNoNulo(s, i)$
+        }
+    }
+}
+
+\aux{dist}{x: \ent,
+    y: \ent}{\ent}{
+        abs(x-y)
+    }
+
+\aux{el2doIndiceNoNuloMasCercano}{s: $señal$,
     i: \ent}{\ent}{
-        \frac{(s[obtenerIndiceAnteriorNoNulo(i)] + s[obtenerIndiceSiguienteNoNulo(i)])}{2}
+
+        $elIndiceNoNuloMasCercano(setAt(s, elIndiceNoNuloMasCercano(s, i), 0))$
 }
 
-\aux{obtenerIndiceAnteriorNoNulo}{s: señal,
+\aux{indiceAnteriorNoNulo}{s: $señal$,
     i: \ent}{\ent}{
-
-    \sum_{p=0}^{\longitud{s}-i}
-    \IfThenElse{esElPrimerAnteriorNoNulo(s, i, p)}{s[p]}{0}
+    \sum_{p=0}^{i-1}
+    \IfThenElse{esElPrimerAnteriorNoNulo(s, i, p)}{p}{0}
 }
 
-\pred{esElPrimerAnteriorNoNulo}{s: señal,
+\pred{esElPrimerAnteriorNoNulo}{s: $señal$,
     i: \ent,
     p: \ent}
 {
     \paraTodo{j}{p}{i}
     \implicaLuego
-    (s[j] = 0) \yLuego (s[p] != 0)
+    (s[j] = 0) \yLuego (s[p] \neq 0)
 }
 
-\aux{obtenerIndiceSiguienteNoNulo}{s: señal,
+\aux{indiceSiguienteNoNulo}{s: $señal$,
     i: \ent}{\ent}
 {
-    \sum_{p=i}^{\longitud{s}-2}
-    \IfThenElse{esElPrimerSiguienteNoNulo(s, i, p)}{s[p]}{0}
+    \sum_{p=i+1}^{\longitud{s}-1}
+    \IfThenElse{esElPrimerSiguienteNoNulo(s, i, p)}{p}{0}
 }
 
-\pred{esElPrimerSiguienteNoNulo}{s: señal,
+\pred{esElPrimerSiguienteNoNulo}{s: $señal$,
     i: \ent,
     p: \ent}
 {
     \paraTodo{j}{i}{p}
     \implicaLuego
-    (s[j] = 0) \yLuego (s[p] != 0)
+    (s[j] = 0) \yLuego (s[p] \neq 0)
 }
 
 \end{document}

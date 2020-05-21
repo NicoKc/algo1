@@ -19,10 +19,10 @@
 
 \pred{ningunaMuestraSuperaLaProfundidad}{s: \TLista{\ent}, p: \ent}{
 
-    \begin{addmargin}
-        \paraTodo{0}{i}{|s|}
-        \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1
-    \end{addmargin}
+    \paraTodo{0}{i}{|s|}
+
+    \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1
+
 }
 
 \pred{duraMasDeUnSegundo}{s: \TLista{\ent}, freq: \ent}{
@@ -31,14 +31,15 @@
 
 \pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
 
+    \longitud{s} \geq 0 \yLuego
 
-    \begin{addmargin}
-            \longitud{s} \geq 0 \yLuego
-            frecuenciaEnRango(freq) \yLuego
-            profundidadCorrecta(s) \yLuego \\
-            ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego
-            duraMasDeUnSegundo(s, freq)
-    \end{addmargin}
+    frecuenciaEnRango(freq) \yLuego
+
+    profundidadCorrecta(s) \yLuego
+
+    ningunaMuestraSuperaLaProfundidad(s, prof) \yLuego
+
+    duraMasDeUnSegundo(s, freq)
 
 }
 

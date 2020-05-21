@@ -43,10 +43,14 @@
 \pred {esReuniónVálidaAux}{r: reunion,
     prof: \ent,
     freq: \ent}{
-    contieneSeñalesValidas(r, prof, freq) \yLuego \\
-        lasLongitudesDeSeñalSonIguales(r) \yLuego \\
-        todosHablantesDistintos(r) \yLuego \\
-        losHablantesEstanEnRangosDe0ANMenos1(r)
+
+    contieneSeñalesValidas(r, prof, freq) \yLuego
+
+    lasLongitudesDeSeñalSonIguales(r) \yLuego
+
+    todosHablantesDistintos(r) \yLuego
+
+    losHablantesEstanEnRangosDe0ANMenos1(r)
 }
 
 \end{document}

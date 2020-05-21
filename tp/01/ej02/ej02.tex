@@ -15,18 +15,15 @@
 
 \pred{existeUnaSubsecuenciaQueSuperaUmbral}{s: señal, freq: \ent, u: \ent}{
 
-    \begin{addmargin}
-        \existe{d,h}{0}{\longitud{s}}
-        \wedge
-        (d < h) \wedge
-        ((d + freq * 1000 * 5) < h) \yLuego
-        
-        (
-            \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
-            \implicaLuego
-            abs(subseq(s,d,h)[i]) > umbral
-        )
-    \end{addmargin}
+    \existe{d,h}{0}{\longitud{s}}
+    \wedge
+    (d < h) \wedge
+    ((d + freq * 1000 * 5) < h) \yLuego (
+
+        \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
+        \implicaLuego
+        abs(subseq(s,d,h)[i]) > umbral
+    )
 }
 
 \aux{abs}{x: \ent}{\ent}{\IfThenElse{x > 0}{x}{-x}}
