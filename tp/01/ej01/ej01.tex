@@ -12,13 +12,13 @@
 
 \pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
 
-    \longitud{s} \geq 0 \yLuego
+    \longitud{s} \geq 0 \wedge
 
-    $frecuenciaEnRango$(freq) \yLuego
+    $frecuenciaEnRango$(freq) \wedge
 
-    $profundidadCorrecta$(s) \yLuego
+    $profundidadCorrecta$(s) \wedge
 
-    $duraMasDeUnSegundo$(s, freq) \yLuego
+    $duraMasDeUnSegundo$(s, freq) \wedge
 
     $ningunaMuestraSuperaLaProfundidad$(s, prof)
 
