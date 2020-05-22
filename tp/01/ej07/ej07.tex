@@ -1,15 +1,15 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{ordenar}{\Inout r: reunion,
     \In freq: \ent,
     \In prof: \ent}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge r_{0} = r }
 \post{ \\
-    esReuniónVálidaAux(r, prof, freq) \yLuego \\
-        ordenadaDeMayorAMenorPorTonoDeVoz(r) \yLuego \\
+    esReuniónVálidaAux(r, prof, freq) \wedge \\
+        ordenadaDeMayorAMenorPorTonoDeVoz(r) \wedge \\
         esUnaPermutación(r_{0}, r)
 }
 \end{proc}
@@ -40,12 +40,4 @@
     )
 }
 
-\aux{tonoDeVoz}{s: señal}{\ent}{
-    sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
-}
-
-\aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
-    \sum_{i=0}^{\longitud{s}} abs(s[i])
-}
-
-\end{document}
+% \end{document}

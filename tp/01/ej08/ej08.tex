@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{silencios}{\In s: señal,
     \In freq: \ent,
@@ -10,17 +10,29 @@
 \pre{ esSeñalAux(s, prof, freq) \wedge (umbral > 0) }
 \post{
 
-    noHayIntervalosRepetidos(intervalos) \yLuego \\
+    noHayIntervalosRepetidos(intervalos) \wedge \\
     \paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (\\
     esSilencio(s, umbral, freq, intervalos[i])
-    % finEsMayorQueInicio(intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
-    % estaDentroDeLaSeñal(s, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
-    % esAlMenosUnDecimoDeSegundo(freq, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
-    % entreIndicesNoPasaCiertoUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1}) \yLuego \\
-    % losAdyacentesSuperanElUmbral(s, umbral, intervalos[i]_{0}, intervalos[i]_{1})
     )
 }
 \end{proc}
+
+\pred{esSilencio}{s: senal,
+    umbral: \ent,
+    freq: \ent,
+    in: intervalo}
+{
+
+    finEsMayorQueInicio(in_{0}, in_{1}) \wedge
+
+    estaDentroDeLaSeñal(s, in_{0}, in_{1}) \wedge
+
+    esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \wedge
+
+    entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \wedge
+
+    losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+}
 
 \pred{noHayIntervalosRepetidos}{ins: \TLista{intervalo}}
 {
@@ -57,7 +69,7 @@
 {
 
     (
-        (inicio = 0) \oLuego (
+        (inicio = 0) \vee (
             (
                 inicio-1 \geq 0 
             ) \yLuego (
@@ -66,7 +78,7 @@
         )
     ) \wedge (
 
-        (fin = \longitud{s} - 1) \oLuego (
+        (fin = \longitud{s} - 1) \vee (
             (
                 fin+1 < \longitud{s}
             ) \yLuego (
@@ -87,21 +99,4 @@
     (abs(s[i]) \leq umbral)
 }
 
-\pred{esSilencio}{s: senal,
-    umbral: \ent,
-    freq: \ent,
-    in: intervalo}
-{
-
-    finEsMayorQueInicio(in_{0}, in_{1}) \yLuego
-
-    estaDentroDeLaSeñal(s, in_{0}, in_{1}) \yLuego
-
-    esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \yLuego
-
-    entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \yLuego
-
-    losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
-}
-
-\end{document}
+% \end{document}

@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{tonosDeVozElevados}{\Inout r: reunion,
     \In freq: \ent,
@@ -9,8 +9,8 @@
     \Out hablantes: \TLista{hablante}}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) }
 \post{ \\
-    siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \yLuego \\
-        losHablantesPertenecenALaReunión(r, hablantes) \yLuego \\
+    siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \wedge \\
+        losHablantesPertenecenALaReunión(r, hablantes) \wedge \\
         losHablantesNoSeRepiten(hablantes)
 }
 \end{proc}
@@ -34,6 +34,23 @@
 
 }
 
+\pred{elPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
+    s: señal}
+{
+
+    \paraTodo{i}{0}{\longitud{r}}
+    \implicaLuego (
+        tonoDeVoz(s) \geq tonoDeVoz(r[i]_{0})
+    )
+}
+
+\aux{tonoDeVoz}{s: señal}{\ent}{
+    sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
+}
+
+\aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
+    \sum_{i=0}^{\longitud{s}} abs(s[i])
+}
 \pred{losHablantesPertenecenALaReunión}{r: reunion,
     hs: \TLista{hablante}}
 {
@@ -56,22 +73,5 @@
     )
 }
 
-\pred{elPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{r: reunion,
-    s: señal}
-{
 
-    \paraTodo{i}{0}{\longitud{r}}
-    \implicaLuego (
-        tonoDeVoz(s) \geq tonoDeVoz(r[i]_{0})
-    )
-}
-
-\aux{tonoDeVoz}{s: señal}{\ent}{
-    sumaDelValorAbsolutoDeAmplitudes(s)  div  \longitud{s}
-}
-
-\aux{sumaDelValorAbsolutoDeAmplitudes}{s: señal}{\ent}{
-    \sum_{i=0}^{\longitud{s}} abs(s[i])
-}
-
-\end{document}
+% \end{document}

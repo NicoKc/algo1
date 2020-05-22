@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{reconstruir}{\In s: $señal$,
     \In prof: \ent,
@@ -9,27 +9,15 @@
     \Out señal: \bool}{}
 \pre{ esSeñalAux(s, prof, freq) }
 \post{
-    esSeñalAux(result) \yLuego
+    esSeñalAux(result) \wedge
 
-        \longitud{s} = \longitud{result} \yLuego
+        (\longitud{s} = \longitud{result} \yLuego
 
-        $enDondeNoSeaCeroDebenCoincidir(s, result)$ \yLuego
+        $enDondeNoSeaCeroDebenCoincidir$(s, result) \yLuego
 
-        $enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result)$
+        $enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos$(s, result))
 }
 \end{proc}
-
-\pred{enDondeNoSeaCeroDebenCoincidir}{original: señal,
-    reconstruida: señal}
-{
-
-    \paraTodo{i}{0}{\longitud{original}}
-    \implicaLuego
-
-        ($original[i]$ \neq 0) \yLuego 
-
-        $(original[i] = reconstruida[i])$
-}
 
 \pred{enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos}{original: señal,
     reconstruida: señal}
@@ -74,13 +62,7 @@
 
 \aux{dist}{x: \ent,
     y: \ent}{\ent}{
-        abs(x-y)
-    }
-
-\aux{el2doIndiceNoNuloMasCercano}{s: $señal$,
-    i: \ent}{\ent}{
-
-        $elIndiceNoNuloMasCercano(setAt(s, elIndiceNoNuloMasCercano(s, i), 0))$
+    abs(x-y)
 }
 
 \aux{indiceAnteriorNoNulo}{s: $señal$,
@@ -114,4 +96,23 @@
     (s[j] = 0) \yLuego (s[p] \neq 0)
 }
 
-\end{document}
+\aux{el2doIndiceNoNuloMasCercano}{s: $señal$,
+    i: \ent}{\ent}{
+
+    $elIndiceNoNuloMasCercano(setAt(s, elIndiceNoNuloMasCercano(s, i), 0))$
+}
+
+
+\pred{enDondeNoSeaCeroDebenCoincidir}{original: señal,
+    reconstruida: señal}
+{
+
+    \paraTodo{i}{0}{\longitud{original}}
+    \implicaLuego
+
+        ($original[i]$ \neq 0) \yLuego 
+
+        $(original[i] = reconstruida[i])$
+}
+
+% \end{document}

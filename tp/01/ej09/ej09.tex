@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{hablantesSuperpuestos}{\In r: reunion,
     \In prof: \ent,
@@ -13,15 +13,6 @@
     result = \neg noHayHablantesSuperpuestos(r, freq, umbral)
 }
 \end{proc}
-
-\pred{haySilencio}{s: señal,
-    umbral: \ent,
-    freq: \ent}
-{
-    \existe{i,j}{0}{\longitud{s} \wedge (i < j)}
-    \yLuego
-    esSilencio(s, umbral, (i,j))
-}
 
 \pred{noHayHablantesSuperpuestos}{r: reunion,
     freq: \ent,
@@ -37,4 +28,13 @@
         esSilencio(r[j]_{0}, umbral, freq, (k, l))
 }
 
-\end{document}
+\pred{haySilencio}{s: señal,
+    umbral: \ent,
+    freq: \ent}
+{
+    \existe{i,j}{0}{\longitud{s} \wedge (i < j)}
+    \yLuego
+    esSilencio(s, umbral, (i,j))
+}
+
+% \end{document}

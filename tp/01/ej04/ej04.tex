@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{acelerar}{\Inout r: reunion,
     \In prof: \ent,
@@ -9,42 +9,42 @@
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
     r_{0} = r }
 \post{ \\
-    esReuniónVálidaAux(r, prof, freq) \yLuego \\
-        \longitud{r} = \longitud{r_{0}} \yLuego \\
+    esReuniónVálidaAux(r, prof, freq) \wedge \\
+        (\longitud{r} = \longitud{r_{0}} \yLuego \\
         lasSeñalesTieneLaMitadDeMuestras(r, r_{0}) \yLuego \\
-        losImpares(r, r_{0})
+        losImpares(r, r_{0}))
 }
 \end{proc}
 
 \pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
-    r_{0}: reunion}
+    r_{v}: reunion}
 {
 
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego
-    \IfThenElse{esPar(\longitud{r[0]_{0}})}
-    {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}}{2}}
-    {\longitud{r[i]_{0}} = \frac{\longitud{r[0]_{0}}-1}{2}}
+    \IfThenElse{esPar(\longitud{r_{v}[i]_{0}})}
+    {\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}}{2}}
+    {\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}-1}{2}}
 
 }
 
 \pred{losImpares}{r: reunion,
-    r_{0}: reunion}
+    r_{v}: reunion}
 {
-    \paraTodo{i}{0}{\longitud{r}}
+    \paraTodo{i}{0}{\longitud{r_{v}}}
     \implicaLuego (
 
         \existe{j}{0}{\longitud{r}} \yLuego (
-            r[i]_{1} = r[j]_{1}
+            r_{v}[i]_{1} = r[j]_{1}
         ) \yLuego (
 
-            \paraTodo{q}{0}{\longitud{r_{0}[i]_{0}} \wedge
+            \paraTodo{q}{0}{\longitud{r_{v}[i]_{0}} \wedge
             (\neg esPar(q))}
             \implicaLuego (
-                r_{0}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
+                r_{v}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
             )
         )
     )
 }
 
-\end{document}
+% \end{document}

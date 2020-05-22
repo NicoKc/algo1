@@ -1,7 +1,7 @@
-\documentclass{standalone}
-\input{../Latex/Algo1Macros.tex}
+% \documentclass{standalone}
+% \input{../Latex/Algo1Macros.tex}
 
-\begin{document}
+% \begin{document}
 
 \begin{proc}{ralentizar}{\Inout r: reunion,
     \In prof: \ent,
@@ -9,10 +9,10 @@
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
     r_{0} = r }
 \post{ \\
-    esReuniónVálidaAux(r, prof, freq) \yLuego \\
-        \longitud{r} = \longitud{r_{0}} \yLuego \\
+    esReuniónVálidaAux(r, prof, freq) \wedge \\
+        (\longitud{r} = \longitud{r_{0}} \yLuego \\
         lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego \\
-        promedioEntrePares(r, r_{0})
+        promedioEntrePares(r, r_{0}))
 }
 \end{proc}
 
@@ -32,7 +32,7 @@
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego (
 
-        \existe{j}{0}{\longitud{r_{0}}} \yLuego (
+        \existe{j}{0}{\longitud{r_{v}}} \yLuego (
             r[i]_{1} = r_{v}[j]_{1}
         ) \yLuego (
             
@@ -40,12 +40,12 @@
             \implicaLuego
 
             \IfThenElse{esPar(q)}{
-                r[j]_{0}[q] = r_{v}[i]_{0}[\frac{q}{2}]
+                r[i]_{0}[q] = r_{v}[j]_{0}[\frac{q}{2}]
             }{
-                r[j]_{0}[q] = \frac{r_{v}[i]_{0}[\frac{q-1}{2}] + r_{v}[i]_{0}[\frac{q+1}{2}]}{2}
+                r[i]_{0}[q] = \frac{r_{v}[j]_{0}[\frac{q-1}{2}] + r_{v}[j]_{0}[\frac{q+1}{2}]}{2}
             }
         )
     )
 }
 
-\end{document}
+% \end{document}
