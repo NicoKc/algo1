@@ -4,9 +4,9 @@
 \begin{document}
 
 \begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
-\pre{ umbral > 0 \yLuego esSeñalAux(s, prof, freq) }
+\pre{ umbral > 0 \wedge esSeñalAux(s, prof, freq) }
 \post{ \\
-    result = umbralEnRango(umbral, prof) \yLuego \\
+    result = umbralEnRango(umbral, prof) \wedge \\
         existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)
 }
 \end{proc}
@@ -15,10 +15,9 @@
 
 \pred{existeUnaSubsecuenciaQueSuperaUmbral}{s: señal, freq: \ent, u: \ent}{
 
-    \existe{d,h}{0}{\longitud{s}}
+    \existe{d,h}{0}{\longitud{s} + 1}
     \wedge
-    (d < h) \wedge
-    ((d + freq * 1000 * 5) < h) \yLuego (
+    (h > (d + freq * 1000 * 5)) \yLuego (
 
         \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
         \implicaLuego
