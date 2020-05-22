@@ -8,13 +8,23 @@
     \In freq: \ent,
     out result: \bool}{}
 \pre{ \longitud{r} > 0 \wedge prof > 0 \wedge freq > 0 }
-\post{ \\
-    result = contieneSeñalesValidas(r, prof, freq) \yLuego \\
-        lasLongitudesDeSeñalSonIguales(r) \yLuego \\
-        todosHablantesDistintos(r) \yLuego \\
-        losHablantesEstanEnRangosDe0ANMenos1(r)
-}
+\post{ 
+    result = esReuniónVálidaAux(r, prof, freq)
+    }
 \end{proc}
+
+\pred {esReuniónVálidaAux}{r: reunion,
+    prof: \ent,
+    freq: \ent}{
+
+    contieneSeñalesValidas(r, prof, freq) \wedge
+
+    lasLongitudesDeSeñalSonIguales(r) \wedge
+
+    todosHablantesDistintos(r) \wedge
+
+    losHablantesEstanEnRangosDe0ANMenos1(r)
+}
 
 \pred{contieneSeñalesValidas}{r: reunion,
     prof: \ent,
@@ -40,17 +50,5 @@
     \implicaLuego 0 \leq r[i]_{1} < \longitud{r}
 }
 
-\pred {esReuniónVálidaAux}{r: reunion,
-    prof: \ent,
-    freq: \ent}{
-
-    contieneSeñalesValidas(r, prof, freq) \yLuego
-
-    lasLongitudesDeSeñalSonIguales(r) \yLuego
-
-    todosHablantesDistintos(r) \yLuego
-
-    losHablantesEstanEnRangosDe0ANMenos1(r)
-}
 
 \end{document}
