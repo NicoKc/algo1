@@ -1,0 +1,358 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Teorema del invariante}
+\begin{itemize}
+    \item $P_{c} \implica I$
+    \item $(I \wedge \neg B) \implica Q_{c}$
+    \item $\{I \wedge B\}$ ciclo $\{ I \}$
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+\end{itemize}
+
+\section*{Ejercicio 1}
+
+a) $P_{c} \equiv result = 0 \wedge i = 0$
+
+    $Q_{c} \equiv 
+        (result = \sum_{i=0}^{\longitud{s}-1} i) \yLuego
+        (i = \longitud{s})$
+
+b) Al demostrar $\{I \wedge B\}$ ciclo $\{ I \}$
+
+c) $(I \wedge \neg B) \implica Q_{c}$
+
+d) $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+
+e y f)
+
+\subsection*{Demostración}
+
+$P_{c} \equiv result = 0 \wedge i = 0$
+
+$Q_{c} \equiv 
+    (result = \sum_{k=0}^{\longitud{s}-1} k) \yLuego
+    (i = \longitud{s})$
+
+$I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+
+\subsubsection*{$P_{c} \implica I$}
+
+$P_{c} \implica I \equiv 
+    result = 0 \wedge i = 0 \implica 
+        0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+
+$i = 0 \implica 0 \leq i \leq \longitud{s} \equiv
+    0 \leq 0 \leq \longitud{s} \wedge \longitud{s} \geq 0 \equiv
+    \True$
+
+$result = 0 \wedge i = 0 \implica 
+        result = \sum_{j=0}^{i-1} s[j] \equiv$
+
+$0 = \sum_{j=0}^{-1} s[j] \wedge
+    \sum_{j=0}^{-1} s[j] = 0$
+
+$0 = \sum_{j=0}^{-1} s[j] \equiv 0 = 0 \equiv \True$
+
+
+\subsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+$0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge 
+    \neg (i < \longitud{s})
+    \implica
+    (result = \sum_{k=0}^{\longitud{s}-1} k) \yLuego
+    (i = \longitud{s})$
+
+\begin{itemize}
+    \item $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge \neg (i < \longitud{s})$
+
+    $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge 
+        (i \geq \longitud{s}) \equiv$
+
+    $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge 
+        (i \geq \longitud{s}) \equiv$
+
+    $(i = \longitud{s}) \yLuego result = \sum_{j=0}^{\longitud{s}-1} s[j]$
+
+\end{itemize}
+
+$(i = \longitud{s}) \yLuego \sum_{j=0}^{\longitud{s}-1} s[j] \implica
+    (result = \sum_{k=0}^{\longitud{s}-1} k) \yLuego
+    (i = \longitud{s})$
+
+\subsection*{$\{I \wedge B\}  ciclo  \{ I \}$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+    \item $B \equiv (i < \longitud{s})$
+    \item $S1: result := result + s[i];$
+    \item $S2: i := i + 1;$
+    \item $ciclo \equiv S1; S2$
+\end{itemize}
+
+
+\begin{itemize}
+    \item $\{I \wedge B\} ciclo \{ I \} \equiv $
+
+    $\{(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge (i < \longitud{s})\} 
+    S1;S2;
+    \{(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j])\} \equiv$
+
+    \begin{itemize}
+        \item $wp(S1;S2;, I) \stackrel{Ax3}{\equiv} wp(S1, wp(S2, I))$
+        
+        $wp(S2, I) \equiv wp(i := i + 1, 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \stackrel{Ax1}{\equiv}$
+        
+        $0 \leq i + 1 \leq \longitud{s} \yLuego result = \sum_{j=0}^{i} s[j]$
+    \end{itemize}
+
+    \begin{itemize}
+        \item $wp(S1,wp(S2, I)) \equiv$
+        
+        $wp(result := result + s[i];, 0 \leq i + 1 \leq \longitud{s} \yLuego result = \sum_{j=0}^{i} s[j]) \stackrel{Ax1}{\equiv}$
+        
+        $def(result:= result + s[i]) \yLuego 0 \leq i + 1 \leq \longitud{s} \yLuego result + s[i] = \sum_{j=0}^{i} s[j] \equiv$
+
+        $ 0 \leq i < \longitud{s} \yLuego 0 \leq i + 1 \leq \longitud{s} \yLuego result + s[i] = \sum_{j=0}^{i} s[j] \equiv$
+
+        $ 0 \leq i < \longitud{s} \yLuego (-1) \leq i \leq \longitud{s} - 1 \yLuego result = \sum_{j=0}^{i} s[j] - s[i] \equiv$
+
+        $ 0 \leq i < \longitud{s} \yLuego (-1) \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] $
+
+        $ 0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] $
+    \end{itemize}
+
+    \begin{itemize}
+        \item Qvq $I \wedge B \implica wp(ciclo, I)$
+        \begin{itemize}
+            \item $I \wedge B \equiv (0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge (i < \longitud{s}) \equiv$
+            
+            $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j])$
+
+            \item $wp(ciclo, I) \equiv 0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+
+        \end{itemize}
+
+        $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \implica 
+        (0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \equiv$
+
+        $\True$
+
+
+    \end{itemize}
+
+\end{itemize}
+
+\subsection*{$\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+    \item $B \equiv (i < \longitud{s})$
+    \item $f_{v} \equiv \longitud{s}-i$
+    \item $S1: result := result + s[i];$
+    \item $S2: i := i + 1;$
+    \item $ciclo \equiv S1; S2$
+\end{itemize}
+
+\begin{itemize}
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+
+        \begin{itemize}
+            \item $wp(ciclo, f_{v} < v_{0})$
+
+                $wp(ciclo, f_{v} < v_{0}) \equiv wp(S1;S2, \longitud{s} - i < v_{0}) \stackrel{Ax3}{\equiv}$ 
+    
+            \begin{itemize}
+                \item $wp(S1, wp(S2, (\longitud{s} - i) < v_{0}))$
+
+                \item $wp(S2, (\longitud{s} - i) < v_{0})$
+
+                    $wp(i:= i + 1, (\longitud{s}-i) < v_{0}) \stackrel{Ax1}{\equiv}$
+
+                    $def(i + 1) \yLuego (\longitud{s}-(i+1)) < v_{0} \equiv$
+
+                    $(\longitud{s}-i-1) < v_{0}$
+
+                \item $wp(S1, (\longitud{s}-i+1) < v_{0})$
+                
+                    $wp(S1, (\longitud{s}-i+1) < v_{0}) \equiv$
+
+                    $wp(result := result + s[i], (\longitud{s}-i-1) < v_{0}) \stackrel{Ax1}{\equiv}$
+
+                    $def(result + s[i]) \yLuego (\longitud{s}-i-1) < v_{0} \equiv$
+
+                    $0 \leq i < \longitud{s} \yLuego (\longitud{s}-i-1) < v_{0}$
+            \end{itemize}
+
+            \item Qvq $I \wedge B \wedge (v_{0} = f_{v}) \implica wp(ciclo, f_{v} < v_{0})$
+
+                $I \wedge B \wedge (v_{0} = f_{v}) \implica wp(ciclo, f_{v} < v_{0}) \equiv$
+
+                $(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge
+                    (i < \longitud{s}) \wedge (v_{0} = \longitud{s} - i) \implica
+                    0 \leq i < \longitud{s} \yLuego (\longitud{s}-i+1) < v_{0} \equiv$
+
+                $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge
+                    (v_{0} = \longitud{s} - i) \implica
+                    0 \leq i < \longitud{s} \yLuego \longitud{s}-i < v_{0} + 1  \equiv$
+
+                $\True$
+
+        \end{itemize}
+
+\end{itemize}
+
+\subsection*{$(I \wedge f_{v} \leq 0) \implica \neg B$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+    \item $B \equiv (i < \longitud{s})$
+    \item $f_{v} \equiv \longitud{s}-i$
+\end{itemize}
+
+\begin{itemize}
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+
+        $(I \wedge f_{v} \leq 0) \implica \neg B \equiv$
+
+        $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge$
+        $\longitud{s}-i \leq 0 \implica$
+        $\neg (i < \longitud{s}) \equiv$
+
+        $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge$
+        $\longitud{s}-i \leq 0 \implica$
+        $i \geq \longitud{s} \equiv$
+
+        $0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j] \wedge$
+        $\longitud{s} \leq i \implica$
+        $i \geq \longitud{s} \equiv$
+        $\True$
+
+\end{itemize}
+
+
+\section*{Cuerpo del ciclo invertido}
+
+\subsection*{$\{I \wedge B\}  ciclo  \{ I \}$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+    \item $B \equiv (i < \longitud{s})$
+    \item $S1: result := result + s[i];$
+    \item $S2: i := i + 1;$
+    \item $ciclo \equiv S2; S1$
+\end{itemize}
+
+\begin{itemize}
+    \item $\{I \wedge B\} ciclo \{ I \} \equiv $
+
+    $\{(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge (i < \longitud{s})\} 
+    S2;S1;
+    \{(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j])\} \equiv$
+
+    \begin{itemize}
+        \item $wp(S2;S1;, I) \stackrel{Ax3}{\equiv} wp(S2, wp(S1, I))$
+        
+        $wp(S1, I) \equiv wp(result := result + s[i], 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \stackrel{Ax1}{\equiv}$
+        
+        $def(result + s[i]) \yLuego 0 \leq i \leq \longitud{s} \yLuego result + s[i]= \sum_{j=0}^{i-1} s[j]) \equiv$
+
+        $ 0 \leq i < \longitud{s} \yLuego 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i} s[j]) $
+    \end{itemize}
+
+    \begin{itemize}
+        \item $wp(S2,wp(S1, I)) \equiv$
+        
+        $wp(i := i + 1;, 0 \leq i < \longitud{s} \yLuego 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i} s[j])) \stackrel{Ax1}{\equiv}$
+        
+        $0 \leq i < \longitud{s} \yLuego 0 \leq i + 1 \leq \longitud{s} \yLuego result = \sum_{j=0}^{i+1} s[j]) \equiv$
+
+        $0 \leq i < \longitud{s} \yLuego 0 < i < \longitud{s} \yLuego result = \sum_{j=0}^{i+1} s[j]) \equiv$
+
+        $0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i+1} s[j]) \equiv$
+    \end{itemize}
+
+    \begin{itemize}
+        \item Qvq $I \wedge B \implica wp(ciclo, I)$
+        \begin{itemize}
+            \item $I \wedge B \equiv (0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge (i < \longitud{s}) \equiv$
+            
+            $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j])$
+
+            \item $wp(ciclo, I) \equiv 0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i+1} s[j])$
+
+        \end{itemize}
+
+        $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \implica
+            0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i+1} s[j]) \equiv$
+
+        $\True$
+
+
+    \end{itemize}
+
+\end{itemize}
+
+\subsection*{$\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]$
+    \item $B \equiv (i < \longitud{s})$
+    \item $f_{v} \equiv \longitud{s}-i$
+    \item $S1: result := result + s[i];$
+    \item $S2: i := i + 1;$
+    \item $ciclo \equiv S2; S1$
+\end{itemize}
+
+\begin{itemize}
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+
+        \begin{itemize}
+            \item $wp(ciclo, f_{v} < v_{0})$
+
+                $wp(ciclo, f_{v} < v_{0}) \equiv wp(S2;S1, \longitud{s} - i < v_{0}) \stackrel{Ax3}{\equiv}$ 
+    
+            \begin{itemize}
+                \item $wp(S2, wp(S1, (\longitud{s} - i) < v_{0}))$
+
+                \item $wp(S1, (\longitud{s} - i) < v_{0})$
+
+                    $wp(result := resutl + s[i], (\longitud{s}-i) < v_{0}) \stackrel{Ax1}{\equiv}$
+
+                    $def(resutl + s[i]) \yLuego (\longitud{s}-i) < v_{0} \equiv$
+
+                    $ 0 \leq i < \longitud{s} \yLuego (\longitud{s}-i) < v_{0}$
+
+                \item $wp(S2, 0 \leq i < \longitud{s} \yLuego (\longitud{s}-i) < v_{0})$
+                
+                    $wp(S2, 0 \leq i < \longitud{s} \yLuego (\longitud{s}-i) < v_{0}) \equiv$
+
+                    $wp(i := i+1, 0 \leq i < \longitud{s} \yLuego (\longitud{s}-i) < v_{0}) \stackrel{Ax1}{\equiv}$
+
+                    $0 \leq i+1 < \longitud{s} \yLuego (\longitud{s}-i-1) < v_{0} \equiv$
+
+                    $0 \leq i+1 < \longitud{s} \yLuego (\longitud{s}-i-1) < v_{0}$
+            \end{itemize}
+
+            \item Qvq $I \wedge B \wedge (v_{0} = f_{v}) \implica wp(ciclo, f_{v} < v_{0})$
+
+                $I \wedge B \wedge (v_{0} = f_{v}) \implica wp(ciclo, f_{v} < v_{0}) \equiv$
+
+                $(0 \leq i \leq \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge
+                    (i < \longitud{s}) \wedge (v_{0} = \longitud{s} - i) \implica
+                    0 \leq i+1 < \longitud{s} \yLuego (\longitud{s}-i-1) < v_{0} \equiv$
+
+                $(0 \leq i < \longitud{s} \yLuego result = \sum_{j=0}^{i-1} s[j]) \wedge
+                    (v_{0} = \longitud{s} - i) \implica
+                    0 \leq i+1 < \longitud{s} \yLuego (\longitud{s}-i-1) < v_{0}  \equiv$
+
+                $\True$
+
+        \end{itemize}
+
+\end{itemize}
+
+\end{document}
