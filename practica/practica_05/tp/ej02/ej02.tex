@@ -1,0 +1,229 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Teorema del invariante}
+\begin{itemize}
+    \item $P_{c} \implica I$
+    \item $(I \wedge \neg B) \implica Q_{c}$
+    \item $\{I \wedge B\}$ ciclo $\{ I \}$
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+\end{itemize}
+
+\section*{Ejercicio 2}
+
+\subsection*{Demostración}
+
+\begin{itemize}
+    \item $P_{c} \equiv n \geq 0 \wedge result = 0 \wedge i = 0$
+    \item $Q_{c} \equiv result = \sum_{j=0}^{n-1} \IfThenElse{j \bmod 2}{j}{0}$
+    \item $B \equiv i < n$
+    \item $I \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+    \item $f_{v} \equiv n-i$
+\end{itemize}
+
+\subsubsection*{$P_{c} \implica I$}
+
+$P_{c} \implica I \equiv 
+    n \geq 0 \wedge result = 0 \wedge i = 0 \implica 
+    0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+
+    \begin{itemize}
+        \item $n \geq 0 \wedge result = 0 \wedge i = 0 \implica 0 \leq i \leq n+1 \equiv \True$
+        \item $n \geq 0 \wedge result = 0 \wedge i = 0 \implica i \bmod 2 = 0 \equiv \True$
+        \item $n \geq 0 \wedge result = 0 \wedge i = 0 \implica result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \equiv \True$
+    \end{itemize}
+
+\subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+$(I \wedge \neg B) \implica Q_{c} \equiv$ \\
+
+$0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge 
+    \neg (i < n)
+    \implica$
+
+$result = \sum_{j=0}^{n-1} \IfThenElse{j mod 2}{j}{0} \equiv$ \\
+
+$0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge 
+    (i \geq n)
+    \implica$
+
+$result = \sum_{j=0}^{n-1} \IfThenElse{j \bmod 2}{j}{0} \equiv$ \\
+
+$0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}
+    \implica$
+
+$result = \sum_{j=0}^{n-1} \IfThenElse{j \bmod 2}{j}{0}$
+
+\begin{itemize}
+    \item $ 0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} $
+
+    $ 0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \equiv$
+
+    $ 0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{n} \IfThenElse{j \bmod 2 = 0}{j}{0} \equiv$
+
+    $0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) + \IfThenElse{n \bmod 2 = 0}{n}{0} \equiv$
+
+    $0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0})$
+
+\end{itemize}
+
+$0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \implica$
+
+$result = \sum_{j=0}^{n-1} \IfThenElse{j \bmod 2}{j}{0} \equiv$
+
+\begin{itemize}
+    \item $0 \leq i = n+1$ \implica (n-1) = i
+\end{itemize}
+
+$0 \leq i = n+1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \implica$
+
+$result = \sum_{j=0}^{i} \IfThenElse{j \bmod 2}{j}{0} \equiv$
+
+$\True$
+
+\subsubsection*{$\{I \wedge B\}  ciclo  \{ I \}$}
+
+\begin{itemize}
+    \item $P_{c} \equiv n \geq 0 \wedge result = 0 \wedge i = 0$
+    \item $Q_{c} \equiv result = \sum_{j=0}^{n-1} \IfThenElse{j \bmod 2}{j}{0}$
+    \item $B \equiv i < n$
+    \item $I \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+    \item $S1: result := result + i;$
+    \item $S2: i := i + 2;$
+    \item $ciclo \equiv S1; S2$
+    \item $f_{v} \equiv n-i$
+\end{itemize}
+
+$\{I \wedge B\} ciclo \{ I \} \equiv$ \\
+
+$wp(ciclo, I) \equiv wp(S1;S2,I) \stackrel{Ax3}{\equiv} wp(S1, wp(S2, I))$
+
+\begin{itemize}
+    \item wp(S2, I)
+
+    $wp(i := i + 2;, 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}) \stackrel{Ax1}{\equiv}$
+
+    $\{ def(i+2) \yLuego 0 \leq i+2 \leq n+1 \wedge i+2 \bmod 2 = 0 \wedge result = \sum_{j=0}^{i+1} \IfThenElse{j \bmod 2 = 0}{j}{0} \}\equiv$
+
+    $\{ 0 \leq i+2 \leq n+1 \wedge i+2 \bmod 2 = 0 \wedge result = \sum_{j=0}^{i+1} \IfThenElse{j \bmod 2 = 0}{j}{0} \}\equiv$
+
+    $\{ 0 \leq i+2 \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i+1} \IfThenElse{j \bmod 2 = 0}{j}{0} \}\equiv$
+
+    $\{ -2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i+1} \IfThenElse{j \bmod 2 = 0}{j}{0} \}\equiv$
+
+    $\{ -2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) + \IfThenElse{i+1 \bmod 2 = 0}{i+1}{0}) \}\equiv$
+
+    $\{ -2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \}$
+
+    \item wp(S2, wp(S1, I))
+
+    $wp(S2, wp(S1, I)) \equiv$
+
+    $wp(result := result + i, \{ -2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \}) \stackrel{Ax1}{\equiv}$ 
+
+    $\{ def(result + i) \yLuego -2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result + i = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \}\equiv$
+
+    $\{ \leq i -2 \leq n-1 \wedge i \bmod 2 = 0 \wedge result + i = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0}) \}$
+
+\end{itemize}
+
+Qvq $ (I \wedge B) \implica wp(ciclo, I) $
+
+\begin{itemize}
+    \item $( I \wedge B)$
+
+    $( I \wedge B) \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge i < n \equiv$
+
+    $( I \wedge B) \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \equiv$
+
+    $( I \wedge B) \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-2} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+\end{itemize}
+
+    $0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-2} \IfThenElse{j \bmod 2 = 0}{j}{0} \implica$
+
+    $-2 \leq i \leq n-1 \wedge i \bmod 2 = 0 \wedge result + i = (\sum_{j=0}^{i} \IfThenElse{j \bmod 2 = 0}{j}{0})$
+
+\subsubsection*{$\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+    \item $B \equiv i < n$
+    \item $f_{v} \equiv n-i$
+    \item $S1: result := result + i;$
+    \item $S2: i := i + 2;$
+    \item $ciclo \equiv S1; S2$
+\end{itemize}
+
+\begin{itemize}
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+
+        \begin{itemize}
+            \item $wp(ciclo, f_{v} < v_{0})$
+
+            $wp(ciclo, f_{v} < v_{0}) \equiv wp(S1;S2, n - i < v_{0}) \stackrel{Ax3}{\equiv}$ 
+
+            $wp(S1, wp(S2, n-i<v_{0}))$
+
+            \begin{itemize}
+                \item wp(S2, $n-i< v_{0}$)
+
+                $wp(S2, n-i< v_{0}) \equiv wp(i=i+2, n-i<v_{0}) \stackrel{Ax1}{\equiv}$
+
+                ${def(i+2) \yLuego n-i-2 < v_{0}} \equiv$
+
+                $n-i-2 < v_{0}$
+
+            \end{itemize}
+
+            $wp(S1, wp(S2, n-i-2 < v_{0})) \equiv$
+
+            $wp(result:= result+1, n-i-2 < v_{0}) \stackrel{Ax1}{\equiv}$
+
+            $\{def(result+1) \yLuego n-i-2 < v_{0}\} \equiv$ 
+
+            $\{n-i-2 < v_{0}\}$ 
+
+        \end{itemize}
+
+    \item Qvq $I \wedge B \wedge (v_{0} = f_{v}) \implica n-i-2 < v_{0}$
+    
+    $( I \wedge B \wedge v_{0}=f_{v}) \equiv $
+
+    $0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-2} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge$
+    $v_{0}=n-i$
+
+    $0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-2} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge$
+    $v_{0}=n-i \implica$
+    $n-i-2 < v_{0} \equiv$
+    
+    $\True$
+
+\end{itemize}
+
+
+\subsubsection*{$(I \wedge f_{v} \leq 0) \implica \neg B$}
+
+\begin{itemize}
+    \item $I \equiv 0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0}$
+    \item $B \equiv (i < n)$
+    \item $f_{v} \equiv n-i$
+\end{itemize}
+
+\begin{itemize}
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+
+        $(I \wedge f_{v} \leq 0) \implica \neg B \equiv$
+
+        $0 \leq i \leq n+1 \wedge i \bmod 2 = 0 \wedge result = \sum_{j=0}^{i-1} \IfThenElse{j \bmod 2 = 0}{j}{0} \wedge$
+        $n-i \leq 0 \implica$
+        $(i \geq n) \equiv$
+
+        $\True$
+
+\end{itemize}
+
+\end {document}
