@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Ejercicio 6}
+
+\subsection*{a)}
+
+\begin{verbatim}
+    i:= 0;
+    j:= 1;
+    result:= 0;
+    while(j < s.size()) do
+        if (s[j] > s[i])
+            i:= j;
+        else
+            skip;
+        endif 
+    j:= j + 1;
+    endwhile
+    
+\end{verbatim}
+\subsection*{Teorema del invariante}
+\begin{itemize}
+    \item $P_{c} \implica I$
+    \item $(I \wedge \neg B) \implica Q_{c}$
+    \item $\{I \wedge B\}$ ciclo $\{ I \}$
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+\end{itemize}
+
+
+\subsection*{Demostración}
+\subsubsection*{Datos}
+\begin{itemize}
+    \item $P_{c}    \equiv \longitud{s} \geq 1 \wedge i = 0 \wedge j = 1$
+    \item $Q_{c}    \equiv 0 \leq i < \longitud{s} \yLuego \paraTodo{j}{0}{\longitud{s}} \implicaLuego s[j] \leq s[i]$
+    \item $I        \equiv (0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i]$
+    \item $B        \equiv j < \longitud{s}$
+    \item $S1       \equiv \IfThenElse{s[j] > s[i]}{i:=j;}{skip;}$
+    \item $S2       \equiv j:= j + 1;$
+    \item $ciclo    \equiv S1;S2;$
+    \item $f_{v}    \equiv \longitud{s}-j$
+\end{itemize}
+
+\subsubsection*{$P_{c} \implica I$}
+
+$P_{c} \implica I \equiv$
+
+$\longitud{s} \geq 1 \wedge i = 0 \wedge j = 1 \implica$
+$(0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \equiv \True$
+
+\subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+$(I \wedge \neg B) \implica Q_{c} \equiv$
+
+$(0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \wedge j \geq \longitud{s} \implica$
+
+$0 \leq i < \longitud{s} \yLuego \paraTodo{j}{0}{\longitud{s}} \implicaLuego s[j] \leq s[i] \equiv$
+
+$(0 \leq i < \longitud{s} \wedge j = \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \implica$
+
+$0 \leq i < \longitud{s} \yLuego \paraTodo{j}{0}{\longitud{s}} \implicaLuego s[j] \leq s[i] \equiv \True$
+
+\subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
+
+$wp(S1;S2, I) \stackrel{Ax3}{\equiv}$
+
+$wp(S1, wp(S2, I))$
+
+\begin{itemize}
+    \item $wp(S2; I) \equiv$
+
+    $wp(j:= j+1, (0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i]) \stackrel{Ax1}{\equiv}$
+
+    $\{(0 \leq i < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[i] \}$
+
+    \item $wp(S1, wp(S2, I)) \equiv$
+
+    $wp(\IfThenElse{s[j] > s[i]}{i:=j;}{skip;}, (0 \leq i < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[i])\stackrel{Ax4}{\equiv}$\\
+
+    $\{ (0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego ($
+
+    $ ((s[j] > s[i]) \wedge (0 \leq j < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[j] ) \vee$
+
+    $ ((s[j] \leq s[i]) \wedge ((0 \leq i < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[i]))) \}\equiv$ \\
+
+    $\{ (0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego ($
+
+    $ ((s[j] > s[i]) \wedge (0 \leq j < \longitud{s} \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[j] ) \vee$
+
+    $ ((s[j] \leq s[i]) \wedge ((0 \leq i < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[i]))) \} $
+
+\end{itemize}
+
+Qvq $I \wedge B \implica wp(S1;S2, I)$
+
+\begin{itemize}
+    \item $I \wedge B \equiv$
+    
+    $ (0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \wedge j < \longitud{s} \equiv$
+
+    $(0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i]$
+
+    \item $I \wedge B \implica wp(S1;S2, I) \equiv$
+
+    $(0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \implica$
+
+    $ (0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego ($
+
+    $ ((s[j] > s[i]) \wedge (0 \leq j < \longitud{s} \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[j] ) \vee$
+
+    $ ((s[j] \leq s[i]) \wedge ((0 \leq i < \longitud{s} \wedge 0 \leq j+1 \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j+1} \implicaLuego s[k] \leq s[i]))) \equiv \True$
+\end{itemize}
+
+\subsubsection*{$\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$}
+
+$wp(S1;S2, \longitud{s}-j<v_{0}) \stackrel{Ax3}{\equiv}$
+
+$wp(S1, wp(S2, \longitud{s}-j<v_{0})) \stackrel{Ax3}{\equiv}$
+
+\begin{itemize}
+    \item $wp(S2, n-i<v_{0}) \equiv$
+    
+    $ wp(j:= j+1, \longitud{s}-j<v_{0})) \stackrel{Ax1}{\equiv}$
+
+    $\{\longitud{s}-j-1<v_{0}) \}$
+
+    \item $wp(S1, wp(S2, f_{v} < v_{0})) \equiv$
+
+    $wp(\IfThenElse{s[j] > s[i]}{i:=j;}{skip;}, \longitud{s}-j-1<v_{0}) \stackrel{Ax4}{\equiv}$
+
+    $\{ (0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego ( $
+
+    $ (s[j] > s[i] \wedge \longitud{s}-j-1<v_{0} ) \vee $
+
+    $ (s[j] \geq s[i] \wedge \longitud{s}-j-1<v_{0} ) $
+
+\end{itemize}
+
+Qvq $(I \wedge B \wedge (v_{0} = f_{v})) \implica wp(S1;S2, f_{v} < v_{0})$ \\
+
+$(I \wedge B \wedge (v_{0} = f_{v})) \implica wp(S1;S2, f_{v} < v_{0}) \equiv$ \\
+
+$(0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \wedge (v_{0} = \longitud{s}-j)\implica$
+
+$(0 \leq i < \longitud{s} \wedge 0 \leq j < \longitud{s}) \yLuego \longitud{s}-j-1<v_{0} \equiv \True$
+
+\subsubsection*{$(I \wedge f_{v} \leq 0) \implica \neg B$}
+
+$(I \wedge f_{v} \leq 0) \implica \neg B \equiv $
+
+$(0 \leq i < \longitud{s} \wedge 0 \leq j \leq \longitud{s}) \yLuego \paraTodo{k}{0}{j} \implicaLuego s[k] \leq s[i] \wedge \longitud{s}-j \leq 0 \implica j \geq \longitud{s} $
+
+$\equiv \True$
+
+\end{document}

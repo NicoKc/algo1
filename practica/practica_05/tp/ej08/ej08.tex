@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Ejercicio 8}
+
+\subsection*{a)}
+
+\begin{verbatim}
+    i:= d;
+    while(i < s.size()) do
+        s[i] := e;
+        i := i + 1;
+    endwhile
+    
+\end{verbatim}
+\subsection*{Teorema del invariante}
+\begin{itemize}
+    \item $P_{c} \implica I$
+    \item $(I \wedge \neg B) \implica Q_{c}$
+    \item $\{I \wedge B\}$ ciclo $\{ I \}$
+    \item $\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$
+    \item $(I \wedge f_{v} \leq 0) \implica \neg B$
+\end{itemize}
+
+\subsection*{Demostración}
+\subsubsection*{Datos}
+\begin{itemize}
+    \item $P_{c}    \equiv d \geq 0 \wedge d < \longitud{s} \wedge s = S_{0} \wedge i = d$
+    \item $Q_{c}    \equiv \longitud{s} = \longitud{S_{0}} \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{\longitud{s}}\implicaLuego s[j] = e ))$
+    \item $I        \equiv (d \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e ))$
+    \item $B        \equiv i < \longitud{s}$
+    \item $S1       \equiv s[i] := e$
+    \item $S2       \equiv i:= i + 1;$
+    \item $ciclo    \equiv S1;S2;$
+    \item $f_{v}    \equiv \longitud{s}-i$
+\end{itemize}
+
+\subsubsection*{$P_{c} \implica I$}
+
+$P_{c} \implica I \equiv$
+
+$ d \geq 0 \wedge d < \longitud{s} \wedge s = S_{0} \wedge i = d \implica$
+
+$ (d \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e )) \equiv \True$
+
+\subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+$(I \wedge \neg B) \implica Q_{c} \equiv \\$
+
+$(d \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e )) \wedge i \geq \longitud{s} \implica$
+
+$\longitud{s} = \longitud{S_{0}} \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{\longitud{s}}\implicaLuego s[j] = e )) \equiv \\$
+
+$(d \leq i = \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e )) \implica$
+
+$\longitud{s} = \longitud{S_{0}} \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{\longitud{s}}\implicaLuego s[j] = e )) \equiv \True$
+
+\subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
+
+$wp(S1;S2, I) \stackrel{Ax3}{\equiv}$
+
+$wp(S1, wp(S2, I))$
+
+\begin{itemize}
+    \item $wp(S2; I) \equiv$
+
+    $wp(i:= i+1, (d \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e ))) \stackrel{Ax1}{\equiv}$
+
+    $\{(d \leq i+1 \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i+1}\implicaLuego s[j] = e )) \}$
+
+    \item $wp(S1, wp(S2, I)) \equiv$
+
+    $wp(s[i] := e;, (d \leq i+1 \leq \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ($
+    
+    $(\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i+1}\implicaLuego s[j] = e )))\stackrel{Ax1}{\equiv}$ \\
+
+    $\{ (0 \leq i < \longitud{s}) \yLuego ($
+
+    $ (d \leq i+1 \leq \longitud{setAt(s,i,e)} \wedge \longitud{setAt(s,i,e)} = \longitud{S_{0}}) \yLuego ($
+    
+    $(\paraTodo{j}{0}{d}\implicaLuego setAt(s,i,e)[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i+1}\implicaLuego setAt(s,i,e)[j] = e ))\} \equiv$ \\
+
+    $\{ (d \leq i < \longitud{s}) \yLuego $
+    
+    $(\longitud{setAt(s,i,e)} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego setAt(s,i,e)[j] = S_{0}[j]) \wedge $
+    
+    $(\paraTodo{j}{d}{i+1}\implicaLuego setAt(s,i,e)[j] = e )) \}$
+
+\end{itemize}
+
+Qvq $I \wedge B \implica wp(S1;S2, I)$
+
+\begin{itemize}
+    \item $I \wedge B \equiv$
+    
+    $ (d \leq i < \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e )) \equiv$
+
+    \item $I \wedge B \implica wp(S1;S2, I) \equiv$
+
+    $ (d \leq i < \longitud{s} \wedge \longitud{s} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego s[j] = S_{0}[j]) \wedge (\paraTodo{j}{d}{i}\implicaLuego s[j] = e )) \implica$
+
+    $ (d \leq i < \longitud{s}) \yLuego $
+    
+    $(\longitud{setAt(s,i,e)} = \longitud{S_{0}}) \yLuego ((\paraTodo{j}{0}{d}\implicaLuego setAt(s,i,e)[j] = S_{0}[j]) \wedge $
+    
+    $(\paraTodo{j}{d}{i+1}\implicaLuego setAt(s,i,e)[j] = e )) \equiv \True$
+\end{itemize}
+
+\subsubsection*{$\{I \wedge B \wedge (v_{0} = f_{v})\}$ ciclo $\{f_{v} < v_{0}\}$}
+
+$wp(S1;S2, \longitud{s}-i<v_{0}) \stackrel{Ax3}{\equiv}$
+
+$wp(S1, wp(S2, \longitud{s}-i<v_{0})) \stackrel{Ax3}{\equiv}$
+
+\begin{itemize}
+    \item $wp(S2, n-i<v_{0}) \equiv$
+    
+    $ wp(i:= i+1, \longitud{s}-i<v_{0})) \stackrel{Ax1}{\equiv}$
+
+    $\{\longitud{s}-i-1<v_{0}) \}$
+
+    \item $wp(S1, wp(S2, f_{v} < v_{0})) \equiv$
+
+    $wp(r[i]:= s[i], \longitud{s}-i-1<v_{0}) \stackrel{Ax4}{\equiv}$
+
+    $\{ (0 \leq i < \longitud{s}) \yLuego \longitud{s}-i-1<v_{0} \} $
+
+\end{itemize}
+
+Qvq $(I \wedge B \wedge (v_{0} = f_{v})) \implica wp(S1;S2, f_{v} < v_{0})$ \\
+
+$(I \wedge B \wedge (v_{0} = f_{v})) \implica wp(S1;S2, f_{v} < v_{0}) \equiv$ \\
+
+$(I \wedge B \wedge (v_{0} = \longitud{s}-i)\implica$
+
+$(0 \leq i < \longitud{s}) \yLuego \longitud{s}-i-1<v_{0} \equiv \True$
+
+\subsubsection*{$(I \wedge f_{v} \leq 0) \implica \neg B$}
+
+$(I \wedge f_{v} \leq 0) \implica \neg B \equiv $
+
+$(I \wedge \longitud{s}-i \leq 0 \implica i \geq \longitud{s} \equiv \True$
+
+\end{document}
