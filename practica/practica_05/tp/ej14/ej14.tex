@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Ejercicio 14}
+
+\subsection*{Correctitud}
+\begin{itemize}
+    \item $Pre \implica wp($codigo previo a los ciclos$, P_{c})$
+    \item $P_{c} \implica wp(ciclo1;ciclo2, Q_{c})$
+    \item $Q_{c} \implica wp($codigo posterior a los ciclos$, Post)$
+\end{itemize}
+
+Por monotonía sabemos que Pre \implica wp(programa completo, Post)
+
+\subsection*{Demostración}
+
+\subsubsection*{Datos}
+\begin{itemize}
+    \item $Pre      \equiv \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0}$
+    \item $Post     \equiv \longitud{r} = \longitud{R_{0}} \wedge (\paraTodo{j}{0}{\longitud{a}} \implicaLuego r[j] = a[j]) \wedge (\paraTodo{j}{0}{\longitud{b}} \implicaLuego r[j+\longitud{a}] = b[j])$
+    \item $P_{c}    \equiv \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0} \wedge i:= 0$
+    \item $Q_{c}    \equiv \longitud{r} = \longitud{R_{0}} \wedge (\paraTodo{j}{0}{\longitud{a}} \implicaLuego r[j] = a[j]) \wedge (\paraTodo{j}{0}{\longitud{b}} \implicaLuego r[j+\longitud{a}] = b[j])$
+\end{itemize}
+
+\subsubsection*{$Pre \implica wp($codigo previo al ciclo$, P_{c})$}
+
+$wp(i:=0, \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0} \wedge i:= 0) \equiv$
+
+$ \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0} $
+
+$ Pre \implica \True \equiv $
+
+$ \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0} \implica $
+$ \longitud{r} = \longitud{a} + \longitud{b} \wedge r = R_{0} \equiv \True$
+
+\subsubsection*{$Q_{c} \implica wp($codigo posterior al ciclo$, Post)$}
+
+$Q_{c} \implica wp($codigo posterior al ciclo$, Post) \equiv$ \\
+
+$\longitud{r} = \longitud{R_{0}} \wedge (\paraTodo{j}{0}{\longitud{a}} \implicaLuego r[j] = a[j]) \wedge (\paraTodo{j}{0}{\longitud{b}} \implicaLuego r[j+\longitud{a}] = b[j]) \implica$
+
+$\longitud{r} = \longitud{R_{0}} \wedge (\paraTodo{j}{0}{\longitud{a}} \implicaLuego r[j] = a[j]) \wedge (\paraTodo{j}{0}{\longitud{b}} \implicaLuego r[j+\longitud{a}] = b[j]) \equiv \True$
+
+\subsubsection*{$P_{c} \implica wp(ciclo1;ciclo2, Q_{c})$}
+
+ciclo1.pdf
+ciclo2.pdf
+
+\end{document}

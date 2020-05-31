@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\section*{Ejercicio 15}
+
+\begin{proc}{buscarPosicionUltimoMaximo}{\In s: \TLista{\ent}, \Out r: \ent}{}
+
+\pre{\longitud{s} > 0}
+\post{
+    0 \leq r < \longitud{s} \yLuego 
+
+    (\paraTodo{j}{0}{r} \implicaLuego s[r] \geq s[j]) \wedge
+    (\paraTodo{j}{r}{\longitud{s}}\implicaLuego s[r] > s[j])
+}
+\end{proc}
+
+\subsection*{Programas}
+
+\subsubsection*{Programa 1}
+\begin{verbatim}
+    i := 0;
+    r := 0;
+    while(i < s.size()) do
+        if(s[i] >= s[r]) then
+            r := i  
+        else
+            skip
+        endif;
+        i := i + 1;
+    endwhile
+\end{verbatim}
+
+\subsubsection*{Programa 2}
+\begin{verbatim}
+    i := s.size() - 1;
+    r := s.size() - 1;
+    while(i >= 0) do
+        if(s[i] > s[r]) then
+            r := i  
+        else
+            skip
+        endif;
+        i := i - 1;
+    endwhile
+\end{verbatim}
+
+\end{document}
