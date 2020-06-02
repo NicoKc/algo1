@@ -1,4 +1,4 @@
-.vscode/settings.json
+.vscode/*
 *.aux
 *.fdb_latexmk
 *.fls
