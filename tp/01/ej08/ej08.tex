@@ -79,23 +79,26 @@ $ $
 {
 
     \quad(
-        (inicio = 0) \vee (
+
+        \quad\quad(inicio = 0) \vee\ (
             (
                 inicio-1 \geq 0 
             ) \yLuego (
                 s[inicio-1] \geq umbral
             )
         )
-    ) \wedge (
 
-        \quad\quad(fin = \longitud{s} - 1) \vee (
+    \quad) \wedge\ (
+
+    \quad\quad(fin = \longitud{s} - 1) \vee\ (
             (
                 fin+1 < \longitud{s}
             ) \yLuego (
                 s[fin+1] \geq umbral
             )
         )
-    )
+
+    \quad)
 
 }
 
