@@ -6,18 +6,35 @@
 \begin{proc}{acelerar}{\Inout r: reunion,
     \In prof: \ent,
     \In freq: \ent}{}
-\pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
-    r_{0} = r }
-\post{ \\
-    \quad esReuniónVálidaAux(r, prof, freq) \wedge
+\pre{
+    
+    \quad esReuniónVálidaAux(r, prof, freq) \yLuego
 
-        \quad\quad (\longitud{r} = \longitud{r_{0}} \yLuego
+    \quad\quad lasSeñalesDuranMásDe2Segundos(r) \wedge
+
+    \quad\quad r_{0} = r
+
+}
+\post{
+
+    % \quad esReuniónVálidaAux(r, prof, freq) \wedge
+
+    \quad \longitud{r} = \longitud{r_{0}} \yLuego
 
         \quad\quad lasSeñalesTieneLaMitadDeMuestras(r, r_{0}) \yLuego
 
-        \quad\quad losImpares(r, r_{0}))
+        \quad\quad losImpares(r, r_{0})
+
 }
 \end{proc}
+
+\pred{lasSeñalesDuranMásDe2Segundos}{$r: reunion,
+    freq: \ent$}
+{
+    duraciónEnSegundos(r[0]_{0}, freq) > 2
+}
+
+$ $
 
 \pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
     r_{v}: reunion}

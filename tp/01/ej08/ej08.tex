@@ -26,9 +26,9 @@
     in: intervalo}
 {
 
-    \quad finEsMayorQueInicio(in_{0}, in_{1}) \wedge
+    \quad (finEsMayorQueInicio(in_{0}, in_{1}) \wedge
 
-    \quad\quad estaDentroDeLaSeñal(s, in_{0}, in_{1}) \wedge
+    \quad\quad estaDentroDeLaSeñal(s, in_{0}, in_{1})) \yLuego
 
     \quad\quad esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \wedge
 
@@ -48,11 +48,15 @@ $ $
     )
 }
 
+$ $
+
 \pred{finEsMayorQueInicio}{inicio: \ent,
     fin: \ent}
 {
     fin > inicio
 }
+
+$ $
 
 \pred{estaDentroDeLaSeñal}{s: señal,
     inicio: \ent,
@@ -61,12 +65,16 @@ $ $
     (inicio \geq 0) \wedge (fin < |s|)
 }
 
+$ $
+
 \pred{esAlMenosUnDecimoDeSegundo}{freq: \ent,
     inicio: \ent,
     fin: \ent,}
 {
     (fin - inicio + 1) \geq (frecuencia * 100)
 }
+
+$ $
 
 \pred{losAdyacentesSuperanElUmbral}{s: señal,
     umbral: \ent,
@@ -95,6 +103,8 @@ $ $
 
 }
 
+$ $
+
 \pred{entreIndicesNoPasaCiertoUmbral}{s: señal,
     umbral: \ent,
     inicio: \ent,
@@ -103,7 +113,7 @@ $ $
 
     \quad\paraTodo{i}{inicio}{fin+1}
     \implicaLuego
-    (abs(s[i]) \leq umbral)
+    (abs(s[i]) < umbral)
 
 }
 

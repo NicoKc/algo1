@@ -8,14 +8,12 @@
     \In freq: \ent,
     out result: \bool}{}
 \pre{ prof > 0 \wedge freq > 0 }
-\post{ 
-    result = esReuniónVálidaAux(r, prof, freq)
-    }
+\post{ $result = esReuniónVálidaAux(r, prof, freq)$ }
 \end{proc}
 
-\pred {esReuniónVálidaAux}{r: reunion,
+\pred {esReuniónVálidaAux}{$r: reunion,
     prof: \ent,
-    freq: \ent}{
+    freq: \ent$}{
 
     \quad $contieneSeñalesValidas(r, prof, freq)$ $\wedge$
 
@@ -29,9 +27,9 @@
 
 $ $
 
-\pred{contieneSeñalesValidas}{r: reunion,
+\pred{contieneSeñalesValidas}{$r: reunion,
     prof: \ent,
-    freq: \ent}
+    freq: \ent$}
 {
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego esSeñalAux(r[i]_{0}, prof, freq)
@@ -39,7 +37,7 @@ $ $
 
 $ $
 
-\pred{lasLongitudesDeSeñalSonIguales}{r: reunion}
+\pred{lasLongitudesDeSeñalSonIguales}{$r: reunion$}
 {
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (\longitud{r[i]_{0}} = \longitud{r[j]_{0}})
@@ -47,14 +45,14 @@ $ $
 
 $ $
 
-\pred {todosHablantesDistintos}{r: reunion}{
+\pred {todosHablantesDistintos}{$r: reunion$}{
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (r[i]_{1} \neq r[j]_{1})
 }
 
 $ $
 
-\pred {losHablantesEstanEnRangosDe0ANMenos1}{r: reunion}{
+\pred {losHablantesEstanEnRangosDe0ANMenos1}{$r: reunion$}{
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego 0 \leq r[i]_{1} < \longitud{r}
 }

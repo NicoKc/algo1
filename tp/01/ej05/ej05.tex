@@ -8,20 +8,19 @@
     \In freq: \ent}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
     r_{0} = r }
-\post{ \\
-    \quad esReuniónVálidaAux(r, prof, freq) \wedge
+\post{
 
-        \quad\quad (\longitud{r} = \longitud{r_{0}} \yLuego
+    \quad \longitud{r} = \longitud{r_{0}} \yLuego
 
         \quad\quad lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego
 
-        \quad\quad promedioEntrePares(r, r_{0}))
+        \quad\quad promedioEntrePares(r, r_{0})
 
 }
 \end{proc}
 
-\pred{lasSeñalesTienenElDobleDeMuestras}{r: reunion,
-    r_{v}: reunion}
+\pred{lasSeñalesTienenElDobleDeMuestras}{$r: reunion,
+    r_{v}: reunion$}
 {
 
     \quad\paraTodo{i}{0}{\longitud{r_{v}}}
@@ -32,8 +31,8 @@
 
 $ $
 
-\pred{promedioEntrePares}{r: reunion,
-    r_{v}: reunion}
+\pred{promedioEntrePares}{$r: reunion,
+    r_{v}: reunion$}
 {
 
     \quad\paraTodo{i}{0}{\longitud{r}}

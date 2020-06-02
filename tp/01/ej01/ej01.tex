@@ -33,7 +33,7 @@ $ $
 $ $
 
 \pred{duraMasDeUnSegundo}{$s$: \TLista{\ent}, $freq$: \ent}{
-    \frac{\longitud{s}}{(freq \cdot 1000)} > 1
+    duraciónEnSegundos(s, freq) > 1
 }
 
 $ $
@@ -43,5 +43,9 @@ $ $
     $\quad\paraTodo{i}{0}{|s|} \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1$
 
 }
+
+$ $
+
+\aux{duraciónEnSegundos}{$s$: \TLista{\ent}, $freq$: \ent}{\ent}{\frac{\longitud{s}}{(freq \cdot 1000)}}
 
 \end{document}

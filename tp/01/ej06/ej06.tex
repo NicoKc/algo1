@@ -8,12 +8,16 @@
     \In prof: \ent,
     \Out hablantes: \TLista{hablante}}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) }
-\post{ \\
-    \quad siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \wedge
+\post{
+
+    \quad \longitud{h} \geq \longitud{hs} \yLuego
+
+        \quad\quad siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes) \wedge
 
         \quad\quad losHablantesPertenecenALaReunión(r, hablantes) \wedge
 
         \quad\quad losHablantesNoSeRepiten(hablantes)
+
 }
 \end{proc}
 
