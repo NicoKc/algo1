@@ -1,7 +1,7 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{hablantesSuperpuestos}{\In r: reunion,
     \In prof: \ent,
@@ -19,14 +19,16 @@
     umbral: \ent}
 {
 
-    \paraTodo{i,j}{0}{\longitud{r} \wedge (i \neq j)}
+    \quad\paraTodo{i,j}{0}{\longitud{r} \wedge (i \neq j)}
     \implicaLuego
 
-        \paraTodo{k,l}{0}{\longitud{r[i]_{0}}} \wedge k < l \implicaLuego
+        \quad\quad\paraTodo{k,l}{0}{\longitud{r[i]_{0}}} \wedge k < l \implicaLuego
 
-        \neg haySilencio(subseq(r[i]_{0}, k, l),  umbral, freq) \implicaLuego
+        \quad\quad\quad\neg haySilencio(subseq(r[i]_{0}, k, l),  umbral, freq) \implicaLuego
         esSilencio(r[j]_{0}, umbral, freq, (k, l))
 }
+
+$ $
 
 \pred{haySilencio}{s: señal,
     umbral: \ent,
@@ -37,4 +39,4 @@
     esSilencio(s, umbral, (i,j))
 }
 
-% \end{document}
+\end{document}

@@ -29,7 +29,7 @@
 \begin{itemize}
     \item $P_{c}    \equiv \longitud{s} \bmod 2 = 0 \wedge i = \longitud{s} - 1 \wedge suma = 0 $
     \item $Q_{c}    \equiv \longitud{s} \bmod 2 = 0 \wedge i = \frac{\longitud{s}}{2} - 1 \yLuego suma = \sum_{j=0}^{\frac{\longitud{s}}{2}-1} s[j] $
-    \item $I        \equiv (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] $
+    \item $I        \equiv (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] $
     \item $B        \equiv i \geq \frac{\longitud{s}}{2}$
     \item $S1       \equiv suma := suma + s[\longitud{s}-1-i];$
     \item $S2       \equiv i:= i - 1;$
@@ -42,7 +42,8 @@
 $P_{c} \implica I \equiv$
 
 $ \longitud{s} \bmod 2 = 0 \wedge i = \longitud{s} - 1 \wedge suma = 0 \implica$
-$ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \equiv \True$
+
+$ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \equiv \True$
 
 \subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
 
@@ -51,58 +52,18 @@ $ (I \wedge \neg B) \implica Q_{c} \equiv $
 \begin{itemize}
     \item $(I \wedge \neg B) \equiv $
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \wedge \neg (i \geq \frac{\longitud{s}}{2}) \equiv$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \wedge \neg (i \geq \frac{\longitud{s}}{2}) \equiv$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \wedge \frac{\longitud{s}}{2} > i \equiv$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \wedge \frac{\longitud{s}}{2} > i \equiv$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 = i) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] $
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 = i ) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] $
 \end{itemize}
 
-$ (I \wedge \neg B) \implica Q_{c} \equiv $
+$ (I \wedge \neg B) \implica Q_{c} \equiv $ \\
 
-$ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 = i) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \implica$
+$ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 = i ) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \implica$
 
-$ \longitud{s} \bmod 2 = 0 \wedge i = \frac{\longitud{s}}{2} - 1 \yLuego suma = \sum_{j=0}^{\frac{\longitud{s}}{2}-1} s[j] $
-
-% \subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
-
-% $wp(S1;S2, I) \stackrel{Ax3}{\equiv}$
-
-% $wp(S1, wp(S2, I))$
-
-% \begin{itemize}
-%     \item $wp(S2; I) \equiv$
-
-%     $wp(i:= i-1;, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j]) \stackrel{Ax1}{\equiv}$
-
-%     $\{(\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i+1} s[j]\}$
-
-%     \item $wp(S1, wp(S2, I)) \equiv$
-
-%     $wp(suma := suma + s[\longitud{s}-1-i];, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i+1} s[j])\stackrel{Ax1}{\equiv}$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j]) \equiv$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s}) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j])$
-
-% \end{itemize}
-
-% Qvq $I \wedge B \implica wp(S1;S2, I)$
-
-% \begin{itemize}
-%     \item $I \wedge B \equiv$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \wedge i \geq \frac{\longitud{s}}{2} \equiv$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] $
-
-%     \item $I \wedge B \implica wp(S1;S2, I) \equiv$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \implica$
-
-%     $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s}) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j])$
-
-% \end{itemize}
+$ \longitud{s} \bmod 2 = 0 \wedge i = \frac{\longitud{s}}{2} - 1 \yLuego suma = \sum_{j=0}^{\frac{\longitud{s}}{2}-1} s[j] \equiv \True $
 
 \subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
 
@@ -113,17 +74,15 @@ $wp(S1, wp(S2, I))$
 \begin{itemize}
     \item $wp(S2; I) \equiv$
 
-    $wp(i:= i-1;, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j]) \stackrel{Ax1}{\equiv}$
+    $wp(i:= i-1;, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j]) \stackrel{Ax1}{\equiv}$
 
-    $\{(\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-(i-1)+2} s[j]\}$
+    $\{(\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i - 1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-1-i} s[j]\}$
 
     \item $wp(S1, wp(S2, I)) \equiv$
 
-    $wp(suma := suma + s[\longitud{s}-1-i];, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i+1} s[j])\stackrel{Ax1}{\equiv}$
+    $wp(suma := suma + s[\longitud{s}-1-i];, (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i - 1 \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-1-i} s[j])\stackrel{Ax1}{\equiv}$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i-1 \leq \longitud{s} - 1) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j]) \equiv$
-
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s}) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j])$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i - 1 \leq \longitud{s} - 1) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-1-i} s[j]$
 
 \end{itemize}
 
@@ -132,15 +91,15 @@ Qvq $I \wedge B \implica wp(S1;S2, I)$
 \begin{itemize}
     \item $I \wedge B \equiv$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \wedge i \geq \frac{\longitud{s}}{2} \equiv$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \wedge i \geq \frac{\longitud{s}}{2} \equiv$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] $
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] $
 
     \item $I \wedge B \implica wp(S1;S2, I) \equiv$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-i} s[j] \implica$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s} - 1) \yLuego suma = \sum_{j=0}^{\longitud{s}-2-i} s[j] \implica$
 
-    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} \leq i \leq \longitud{s}) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i+1} s[j])$
+    $ (\longitud{s} \bmod 2 = 0 \wedge \frac{\longitud{s}}{2} - 1 \leq i - 1 \leq \longitud{s} - 1) \yLuego suma + s[\longitud{s}-1-i] = \sum_{j=0}^{\longitud{s}-i} s[j] $
 
 \end{itemize}
 

@@ -1,43 +1,50 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{ordenar}{\Inout r: reunion,
     \In freq: \ent,
     \In prof: \ent}{}
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge r_{0} = r }
-\post{ \\
-    esReuniónVálidaAux(r, prof, freq) \wedge \\
-        ordenadaDeMayorAMenorPorTonoDeVoz(r) \wedge \\
-        esUnaPermutación(r_{0}, r)
+\post{
+
+    \quad esReuniónVálidaAux(r, prof, freq) \wedge
+
+        \quad\quad ordenadaDeMayorAMenorPorTonoDeVoz(r) \wedge
+
+        \quad\quad esUnaPermutación(r_{0}, r)
+
 }
 \end{proc}
 
 \pred{ordenadaDeMayorAMenorPorTonoDeVoz}{r: reunion}
 {
 
-    \paraTodo{i}{1}{\longitud{r}}
+    \quad\paraTodo{i}{1}{\longitud{r}}
     \implicaLuego
     tonoDeVoz(r[i-1]_{0}) \geq tonoDeVoz(r[i]_{0})
 
 }
 
+$ $
+
 \pred{esUnaPermutación}{x: reunion,
     y: reunion}
 {
 
-    \longitud{x} = \longitud{y} \yLuego
+    \quad\longitud{x} = \longitud{y} \yLuego
 
-    \paraTodo{i}{0}{\longitud{x}}
+    \quad\quad\paraTodo{i}{0}{\longitud{x}}
     \implicaLuego (
 
-        \existe{j}{0}{\longitud{y}} \yLuego (
+        \quad\quad\quad\existe{j}{0}{\longitud{y}} \yLuego (
             x[i]_{1} = y[j]_{1}
         ) \yLuego (
             x[i]_{0} = y[j]_{0}
         )
     )
+
 }
 
-% \end{document}
+\end{document}

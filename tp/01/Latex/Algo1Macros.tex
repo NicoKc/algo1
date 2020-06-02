@@ -256,7 +256,7 @@ Primer Cuatrimestre 2018\\
 \newcommand{\pred}[3]{%
     {\normalfont\bfseries\ttfamily pred }%
     {\normalfont\ttfamily #1}%
-    \ifthenelse{\equal{#2}{}}{}{\ (#2) }%
+    \ifthenelse{\equal{#2}{}}{}{ (#2) }%
     \{\ensuremath{#3}\}%
     {\normalfont\bfseries\,\par}%
   }

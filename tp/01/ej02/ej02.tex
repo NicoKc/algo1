@@ -1,7 +1,7 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
 \pre{ umbral > 0 \wedge esSeñalAux(s, prof, freq) }
@@ -11,20 +11,25 @@
 }
 \end{proc}
 
-\pred{umbralEnRango}{umbral: \ent, p: \ent}{ umbral \geq 2^{p-1}-1 }
+\pred{umbralEnRango}{$umbral$: \ent, $p$: \ent}{ umbral \leq 2^{p-1}-1 }
 
-\pred{existeUnaSubsecuenciaQueSuperaUmbral}{s: señal, freq: \ent, u: \ent}{
+$ $
 
-    \existe{d,h}{0}{\longitud{s} + 1}
+\pred{existeUnaSubsecuenciaQueSuperaUmbral}{$s: señal$, freq: \ent, umbral: \ent}{
+
+    \quad\existe{d,h}{0}{\longitud{s} + 1}
     \wedge
     (h > (d + freq * 1000 * 5)) \yLuego (
 
-        \paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
+        \qquad\paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
         \implicaLuego
         abs(subseq(s,d,h)[i]) > umbral
     )
+
 }
 
-\aux{abs}{x: \ent}{\ent}{\IfThenElse{x > 0}{x}{-x}}
+$ $
 
-% \end{document}
+\aux{abs}{$x$: \ent}{\ent}{\IfThenElse{x > 0}{x}{-x}}
+
+\end{document}

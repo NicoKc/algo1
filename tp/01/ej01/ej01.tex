@@ -1,43 +1,47 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{esSeñal}{\In s: \TLista{\ent}, \In prof: \ent, \In freq: \ent, out result: \bool}{}
-\pre{\longitud{s} > 0 \wedge prof > 0 \wedge freq > 0}
-\post{ \\
-    result = esSeñalAux(s, prof, freq)
-}
+\pre{  prof > 0 \wedge freq > 0 }
+\post{ result = \True \Iff esSeñalAux(s, prof, freq) }
 \end{proc}
 
 \pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
 
-    \longitud{s} \geq 0 \wedge
+    $\quad\longitud{s} \geq 0 \wedge$
 
-    $frecuenciaEnRango$(freq) \wedge
+    $\quad\quad frecuenciaEnRango (freq) \wedge$
 
-    $profundidadCorrecta$(s) \wedge
+    $\quad\quad profundidadCorrecta (s) \wedge$
 
-    $duraMasDeUnSegundo$(s, freq) \wedge
+    $\quad\quad duraMasDeUnSegundo (s, freq) \wedge$
 
-    $ningunaMuestraSuperaLaProfundidad$(s, prof)
+    $\quad\quad ningunaMuestraSuperaLaProfundidad(s, prof)$
 
 }
 
-\pred{frecuenciaEnRango}{freq: \ent}{ freq \in [8,32] }
+$ $
 
-\pred{profundidadCorrecta}{prof: \ent}{ freq \in [8,16,32] }
+\pred{frecuenciaEnRango}{$freq$: \ent}{ freq \in [8,32] }
 
-\pred{duraMasDeUnSegundo}{s: \TLista{\ent}, freq: \ent}{
-    \frac{\longitud{s}}{(freq\cdot 1000)} > 1
+$ $
+
+\pred{profundidadCorrecta}{$prof$: \ent}{ prof \in [8,16,32] }
+
+$ $
+
+\pred{duraMasDeUnSegundo}{$s$: \TLista{\ent}, $freq$: \ent}{
+    \frac{\longitud{s}}{(freq \cdot 1000)} > 1
 }
+
+$ $
 
 \pred{ningunaMuestraSuperaLaProfundidad}{s: \TLista{\ent}, p: \ent}{
 
-    \paraTodo{i}{0}{|s|}
-
-    \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1
+    $\quad\paraTodo{i}{0}{|s|} \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1$
 
 }
 
-% \end{document}
+\end{document}

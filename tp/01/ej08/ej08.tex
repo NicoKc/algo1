@@ -1,7 +1,7 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{silencios}{\In s: señal,
     \In freq: \ent,
@@ -10,10 +10,13 @@
 \pre{ esSeñalAux(s, prof, freq) \wedge (umbral > 0) }
 \post{
 
-    noHayIntervalosRepetidos(intervalos) \wedge \\
-    \paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (\\
-    esSilencio(s, umbral, freq, intervalos[i])
+    \quad noHayIntervalosRepetidos(intervalos) \wedge
+
+    \quad\quad\paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (
+
+    \quad\quad\quad esSilencio(s, umbral, freq, intervalos[i])
     )
+
 }
 \end{proc}
 
@@ -23,16 +26,19 @@
     in: intervalo}
 {
 
-    finEsMayorQueInicio(in_{0}, in_{1}) \wedge
+    \quad finEsMayorQueInicio(in_{0}, in_{1}) \wedge
 
-    estaDentroDeLaSeñal(s, in_{0}, in_{1}) \wedge
+    \quad\quad estaDentroDeLaSeñal(s, in_{0}, in_{1}) \wedge
 
-    esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \wedge
+    \quad\quad esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \wedge
 
-    entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \wedge
+    \quad\quad entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \wedge
 
-    losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+    \quad\quad losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+
 }
+
+$ $
 
 \pred{noHayIntervalosRepetidos}{ins: \TLista{intervalo}}
 {
@@ -68,7 +74,7 @@
     fin: \ent}
 {
 
-    (
+    \quad(
         (inicio = 0) \vee (
             (
                 inicio-1 \geq 0 
@@ -78,7 +84,7 @@
         )
     ) \wedge (
 
-        (fin = \longitud{s} - 1) \vee (
+        \quad\quad(fin = \longitud{s} - 1) \vee (
             (
                 fin+1 < \longitud{s}
             ) \yLuego (
@@ -86,6 +92,7 @@
             )
         )
     )
+
 }
 
 \pred{entreIndicesNoPasaCiertoUmbral}{s: señal,
@@ -94,9 +101,10 @@
     fin: \ent}
 {
 
-    \paraTodo{i}{inicio}{fin+1}
+    \quad\paraTodo{i}{inicio}{fin+1}
     \implicaLuego
     (abs(s[i]) \leq umbral)
+
 }
 
-% \end{document}
+\end{document}

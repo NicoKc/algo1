@@ -1,13 +1,13 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{esReuniónVálida?}{\In r: reunion,
     \In prof: \ent,
     \In freq: \ent,
     out result: \bool}{}
-\pre{ \longitud{r} > 0 \wedge prof > 0 \wedge freq > 0 }
+\pre{ prof > 0 \wedge freq > 0 }
 \post{ 
     result = esReuniónVálidaAux(r, prof, freq)
     }
@@ -17,14 +17,17 @@
     prof: \ent,
     freq: \ent}{
 
-    contieneSeñalesValidas(r, prof, freq) \wedge
+    \quad $contieneSeñalesValidas(r, prof, freq)$ $\wedge$
 
-    lasLongitudesDeSeñalSonIguales(r) \wedge
+    \quad\quad $lasLongitudesDeSeñalSonIguales(r)$ $\wedge$
 
-    todosHablantesDistintos(r) \wedge
+    \quad\quad $todosHablantesDistintos(r)$ $\wedge$
 
-    losHablantesEstanEnRangosDe0ANMenos1(r)
+    \quad\quad $losHablantesEstanEnRangosDe0ANMenos1(r)$
+
 }
+
+$ $
 
 \pred{contieneSeñalesValidas}{r: reunion,
     prof: \ent,
@@ -34,21 +37,26 @@
     \implicaLuego esSeñalAux(r[i]_{0}, prof, freq)
 }
 
+$ $
+
 \pred{lasLongitudesDeSeñalSonIguales}{r: reunion}
 {
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (\longitud{r[i]_{0}} = \longitud{r[j]_{0}})
 }
 
+$ $
+
 \pred {todosHablantesDistintos}{r: reunion}{
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (r[i]_{1} \neq r[j]_{1})
 }
+
+$ $
 
 \pred {losHablantesEstanEnRangosDe0ANMenos1}{r: reunion}{
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego 0 \leq r[i]_{1} < \longitud{r}
 }
 
-
-% \end{document}
+\end{document}

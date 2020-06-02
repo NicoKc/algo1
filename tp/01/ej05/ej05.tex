@@ -1,7 +1,7 @@
-% \documentclass{standalone}
-% \input{../Latex/Algo1Macros.tex}
+\documentclass{article}
+\input{../Latex/Algo1Macros.tex}
 
-% \begin{document}
+\begin{document}
 
 \begin{proc}{ralentizar}{\Inout r: reunion,
     \In prof: \ent,
@@ -9,10 +9,14 @@
 \pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
     r_{0} = r }
 \post{ \\
-    esReuniónVálidaAux(r, prof, freq) \wedge \\
-        (\longitud{r} = \longitud{r_{0}} \yLuego \\
-        lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego \\
-        promedioEntrePares(r, r_{0}))
+    \quad esReuniónVálidaAux(r, prof, freq) \wedge
+
+        \quad\quad (\longitud{r} = \longitud{r_{0}} \yLuego
+
+        \quad\quad lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego
+
+        \quad\quad promedioEntrePares(r, r_{0}))
+
 }
 \end{proc}
 
@@ -20,32 +24,36 @@
     r_{v}: reunion}
 {
 
-    \paraTodo{i}{0}{\longitud{r_{v}}}
+    \quad\paraTodo{i}{0}{\longitud{r_{v}}}
     \implicaLuego
         (2 \cdot \longitud{r_{v}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)
+
 }
+
+$ $
 
 \pred{promedioEntrePares}{r: reunion,
     r_{v}: reunion}
 {
 
-    \paraTodo{i}{0}{\longitud{r}}
+    \quad\paraTodo{i}{0}{\longitud{r}}
     \implicaLuego (
 
-        \existe{j}{0}{\longitud{r_{v}}} \yLuego (
+        \quad\quad\existe{j}{0}{\longitud{r_{v}}} \yLuego (
             r[i]_{1} = r_{v}[j]_{1}
         ) \yLuego (
             
-            \paraTodo{q}{0}{\longitud{r[i]_{0}}}
+            \quad\quad\quad\paraTodo{q}{0}{\longitud{r[i]_{0}}}
             \implicaLuego
 
-            \IfThenElse{esPar(q)}{
+            \quad\quad\quad\quad\IfThenElse{esPar(q)}{
                 r[i]_{0}[q] = r_{v}[j]_{0}[\frac{q}{2}]
             }{
                 r[i]_{0}[q] = \frac{r_{v}[j]_{0}[\frac{q-1}{2}] + r_{v}[j]_{0}[\frac{q+1}{2}]}{2}
             }
         )
     )
+
 }
 
-% \end{document}
+\end{document}
