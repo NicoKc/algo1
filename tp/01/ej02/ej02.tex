@@ -1,9 +1,15 @@
 
-\begin{proc}{seEnojó?}{\In s: señal, \In umbral: \ent, \In prof: \ent, \In freq: \ent, out result: \bool}{}
-\pre{ umbral > 0 \wedge esSeñalAux(s, prof, freq) }
-\post{ \\
-    result = umbralEnRango(umbral, prof) \wedge \\
-        existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)
+\begin{proc}{seEnojó?}{\In $s$: $se\tilde{n}al$,
+    \In $umbral$: \ent,
+    \In $prof$: \ent,
+    \In $freq$: \ent,
+    \Out $result$: \bool}{}
+\pre{ umbral > 0 \wedge esSe\tilde{n}alAux(s, prof, freq) }
+\post{
+
+    $\quad result = true \Iff umbralEnRango(umbral, prof)\ \wedge$
+
+        $\quad\quad existeUnaSubsecuenciaQueSuperaUmbral(s, freq, umbral)$
 }
 \end{proc}
 
@@ -11,16 +17,16 @@
 
 $ $
 
-\pred{existeUnaSubsecuenciaQueSuperaUmbral}{$s: señal$, freq: \ent, umbral: \ent}{
+\pred{existeUnaSubsecuenciaQueSuperaUmbral}{$s$: $señal$, $freq$: \ent, $umbral$: \ent}{
 
-    \quad\existe{d,h}{0}{\longitud{s} + 1}
-    \wedge
-    (h > (d + freq * 1000 * 5)) \yLuego (
+    $\quad\existe{d,h}{0}{\longitud{s} + 1}$
+    $\wedge$
+    $(h > (d + freq * 1000 * 5))\ \yLuego ($
 
-        \qquad\paraTodo{i}{0}{\longitud{subseq(s,d,h)}} 
-        \implicaLuego
-        abs(subseq(s,d,h)[i]) > umbral
-    )
+        $\qquad\paraTodo{i}{0}{\longitud{subseq(s,d,h)}}$
+        $\implicaLuego$
+        $abs(subseq(s,d,h)[i]) > umbral$
+    $)$
 
 }
 

@@ -1,17 +1,16 @@
 
-\begin{proc}{silencios}{\In s: señal,
-    \In freq: \ent,
-    \In prof: \ent,
-    \Out intervalos: \TLista{intervalo}}{}
-\pre{ esSeñalAux(s, prof, freq) \wedge (umbral > 0) }
+\begin{proc}{silencios}{\In $s$: $se\tilde{n}al$,
+    \In $freq$: \ent,
+    \In $prof$: \ent,
+    \Out $intervalos$: \TLista{intervalo}}{}
+\pre{ esSe\tilde{n}alAux(s, prof, freq) \wedge (umbral > 0) }
 \post{
 
-    \quad noHayIntervalosRepetidos(intervalos) \wedge
+    $\quad noHayIntervalosRepetidos(intervalos)\ \wedge$
 
-    \quad\quad\paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego (
-
-    \quad\quad\quad esSilencio(s, umbral, freq, intervalos[i])
-    )
+    $\quad\quad\paraTodo{i}{0}{\longitud{intervalos}} \implicaLuego ($
+    $esSilencio(s, umbral, freq, intervalos[i])$
+    $)$
 
 }
 \end{proc}
@@ -22,96 +21,95 @@
     in: intervalo}
 {
 
-    \quad (finEsMayorQueInicio(in_{0}, in_{1}) \wedge
+    $\quad (finEsMayorQueInicio(in_{0}, in_{1})\ \wedge$
+    $estaDentroDeLaSeñal(s, in_{0}, in_{1}))\ \yLuego$
 
-    \quad\quad estaDentroDeLaSeñal(s, in_{0}, in_{1})) \yLuego
+    $\quad\quad (esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1})\ \wedge$
 
-    \quad\quad esAlMenosUnDecimoDeSegundo(freq, in_{0}, in_{1}) \wedge
+    $\quad\quad entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1})\ \wedge$
 
-    \quad\quad entreIndicesNoPasaCiertoUmbral(s, umbral, in_{0}, in_{1}) \wedge
-
-    \quad\quad losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1})
+    $\quad\quad losAdyacentesSuperanElUmbral(s, umbral, in_{0}, in_{1}))$
 
 }
 
 $ $
 
-\pred{noHayIntervalosRepetidos}{ins: \TLista{intervalo}}
+\pred{noHayIntervalosRepetidos}{$ins$: \TLista{intervalo}}
 {
     \paraTodo{i}{0}{\longitud{ins}}
     \implicaLuego (
-        \#apariciones(ins, e) = 1
+        \#apariciones(ins, i) = 1
     )
 }
 
 $ $
 
-\pred{finEsMayorQueInicio}{inicio: \ent,
-    fin: \ent}
+\pred{finEsMayorQueInicio}{$inicio$: \ent,
+    $fin$: \ent}
 {
     fin > inicio
 }
 
 $ $
 
-\pred{estaDentroDeLaSeñal}{s: señal,
-    inicio: \ent,
-    fin: \ent,}
+\pred{estaDentroDeLaSeñal}{$s$: $se\tilde{n}al$,
+    $inicio$: \ent,
+    $fin$: \ent,}
 {
     (inicio \geq 0) \wedge (fin < |s|)
 }
 
 $ $
 
-\pred{esAlMenosUnDecimoDeSegundo}{freq: \ent,
-    inicio: \ent,
-    fin: \ent,}
+\pred{esAlMenosUnDecimoDeSegundo}{$freq$: \ent,
+    $inicio$: \ent,
+    $fin$: \ent,}
 {
     (fin - inicio + 1) \geq (frecuencia * 100)
 }
 
 $ $
 
-\pred{losAdyacentesSuperanElUmbral}{s: señal,
-    umbral: \ent,
-    inicio: \ent,
-    fin: \ent}
+\pred{losAdyacentesSuperanElUmbral}{$s$: $se\tilde{n}al$,
+    $umbral$: \ent,
+    $inicio$: \ent,
+    $fin$: \ent}
 {
 
-    \quad(
+    $\quad($
 
-        \quad\quad(inicio = 0) \vee\ (
-            (
-                inicio-1 \geq 0 
-            ) \yLuego (
-                s[inicio-1] \geq umbral
-            )
-        )
+        $\quad\quad(inicio = 0)\ \vee\ ($
+            $($
+                $inicio-1 \geq 0$
+            $)\ \yLuego ($
+                $s[inicio-1] \geq umbral$
+            $)$
+        $)$
 
-    \quad) \wedge\ (
+    $\quad)\ \wedge\ ($
 
-    \quad\quad(fin = \longitud{s} - 1) \vee\ (
-            (
-                fin+1 < \longitud{s}
-            ) \yLuego (
-                s[fin+1] \geq umbral
-            )
-        )
+    $\quad\quad(fin = \longitud{s} - 1)\ \vee\ ($
+            $($
+                $fin+1 < \longitud{s}$
+            $)\ \yLuego ($
+                $s[fin+1] \geq umbral$
+            $)$
+        $)$
 
-    \quad)
+    $\quad)$
 
 }
 
 $ $
 
-\pred{entreIndicesNoPasaCiertoUmbral}{s: señal,
-    umbral: \ent,
-    inicio: \ent,
-    fin: \ent}
+\pred{entreIndicesNoPasaCiertoUmbral}{$s$: $se\tilde{n}al$,
+    $umbral$: \ent,
+    $inicio$: \ent,
+    $fin$: \ent}
 {
 
-    \quad\paraTodo{i}{inicio}{fin+1}
-    \implicaLuego
-    (abs(s[i]) < umbral)
+    $\quad\paraTodo{i}{inicio}{fin+1}$
+    $\implicaLuego$
+    $(abs(s[i]) < umbral)$
 
 }

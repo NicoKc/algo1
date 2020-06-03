@@ -1,52 +1,52 @@
 
-\begin{proc}{ralentizar}{\Inout r: reunion,
-    \In prof: \ent,
-    \In freq: \ent}{}
-\pre{ esReuniónVálidaAux(r, prof, freq) \wedge 
+\begin{proc}{ralentizar}{\Inout $r$: $reunion$,
+    \In $prof$: \ent,
+    \In $freq$: \ent}{}
+\pre{ esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) \wedge 
     r_{0} = r }
 \post{
 
-    \quad \longitud{r} = \longitud{r_{0}} \yLuego
+    $\quad \longitud{r} = \longitud{r_{0}}\ \yLuego$
 
-        \quad\quad lasSeñalesTienenElDobleDeMuestras(r, r_{0}) \yLuego
+        $\quad\quad (lasSeñalesTienenElDobleDeMuestras(r, r_{0})\ \yLuego$
 
-        \quad\quad promedioEntrePares(r, r_{0})
+        $\quad\quad promedioEntrePares(r, r_{0}))$
 
 }
 \end{proc}
 
-\pred{lasSeñalesTienenElDobleDeMuestras}{$r: reunion,
-    r_{v}: reunion$}
+\pred{lasSeñalesTienenElDobleDeMuestras}{$r$: $reunion$,
+    $r_{v}$: $reunion$}
 {
 
-    \quad\paraTodo{i}{0}{\longitud{r_{v}}}
-    \implicaLuego
-        (2 \cdot \longitud{r_{v}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)
+    $\quad\paraTodo{i}{0}{\longitud{r_{v}}}$
+    $\implicaLuego$
+        $(2 \cdot \longitud{r_{v}[i]_{0}}) = (\longitud{r[i]_{0}} + 1)$
 
 }
 
 $ $
 
-\pred{promedioEntrePares}{$r: reunion,
-    r_{v}: reunion$}
+\pred{promedioEntrePares}{$r$: $reunion$,
+    $r_{v}$: $reunion$}
 {
 
-    \quad\paraTodo{i}{0}{\longitud{r}}
-    \implicaLuego (
+    $\quad\paraTodo{i}{0}{\longitud{r}}$
+    $\implicaLuego ($
 
-        \quad\quad\existe{j}{0}{\longitud{r_{v}}} \yLuego (
-            r[i]_{1} = r_{v}[j]_{1}
-        ) \yLuego (
+        $\quad\quad\existe{j}{0}{\longitud{r_{v}}} \yLuego ($
+            $r[i]_{1} = r_{v}[j]_{1}$
+        $) \yLuego ($
             
-            \quad\quad\quad\paraTodo{q}{0}{\longitud{r[i]_{0}}}
-            \implicaLuego
+            $\quad\quad\quad\paraTodo{q}{0}{\longitud{r[i]_{0}}}$
+            $\implicaLuego$
 
-            \quad\quad\quad\quad\IfThenElse{esPar(q)}{
-                r[i]_{0}[q] = r_{v}[j]_{0}[\frac{q}{2}]
-            }{
-                r[i]_{0}[q] = \frac{r_{v}[j]_{0}[\frac{q-1}{2}] + r_{v}[j]_{0}[\frac{q+1}{2}]}{2}
-            }
-        )
-    )
+            $\quad\quad\quad\quad\IfThenElse{esPar(q)}{$
+                $r[i]_{0}[q] = r_{v}[j]_{0}[\frac{q}{2}]$
+            $}{$
+                $r[i]_{0}[q] = \frac{r_{v}[j]_{0}[\frac{q-1}{2}] + r_{v}[j]_{0}[\frac{q+1}{2}]}{2}$
+            $}$
+        $)$
+    $)$
 
 }

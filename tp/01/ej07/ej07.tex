@@ -1,44 +1,44 @@
 
-\begin{proc}{ordenar}{\Inout r: reunion,
-    \In freq: \ent,
-    \In prof: \ent}{}
-\pre{ esReuniónVálidaAux(r, prof, freq) \wedge r_{0} = r }
+\begin{proc}{ordenar}{\Inout $r$: $reunion$,
+    \In $freq$: \ent,
+    \In $prof$: \ent}{}
+\pre{ esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) \wedge r_{0} = r }
 \post{
 
-    \quad esReuniónVálidaAux(r, prof, freq) \wedge
+    $\quad esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq)\ \wedge$
 
-        \quad\quad ordenadaDeMayorAMenorPorTonoDeVoz(r) \wedge
+        $\quad\quad ordenadaDeMayorAMenorPorTonoDeVoz(r)\ \wedge$
 
-        \quad\quad esUnaPermutación(r_{0}, r)
+        $\quad\quad esUnaPermutación(r_{0}, r)$
 
 }
 \end{proc}
 
-\pred{ordenadaDeMayorAMenorPorTonoDeVoz}{r: reunion}
+\pred{ordenadaDeMayorAMenorPorTonoDeVoz}{$r$: $reunion$}
 {
 
-    \quad\paraTodo{i}{1}{\longitud{r}}
-    \implicaLuego
-    tonoDeVoz(r[i-1]_{0}) \geq tonoDeVoz(r[i]_{0})
+    $\quad\paraTodo{i}{1}{\longitud{r}}$
+    $\implicaLuego$
+    $tonoDeVoz(r[i-1]_{0}) \geq tonoDeVoz(r[i]_{0})$
 
 }
 
 $ $
 
-\pred{esUnaPermutación}{x: reunion,
-    y: reunion}
+\pred{esUnaPermutación}{$x$: $reunion$,
+    $y$: $reunion$}
 {
 
-    \quad\longitud{x} = \longitud{y} \yLuego
+    $\quad\longitud{x} = \longitud{y}\ \yLuego$
 
-    \quad\quad\paraTodo{i}{0}{\longitud{x}}
-    \implicaLuego (
+    $\quad\quad\paraTodo{i}{0}{\longitud{x}}$
+    $\implicaLuego ($
 
-        \quad\quad\quad\existe{j}{0}{\longitud{y}} \yLuego (
-            x[i]_{1} = y[j]_{1}
-        \wedge 
-            x[i]_{0} = y[j]_{0}
-        )
-    )
+        $\quad\quad\quad\existe{j}{0}{\longitud{y}} \yLuego ($
+            $x[i]_{1} = y[j]_{1}$
+        $\wedge$
+            $x[i]_{0} = y[j]_{0}$
+        $)$
+    $)$
 
 }

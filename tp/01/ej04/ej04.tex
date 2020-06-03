@@ -1,68 +1,66 @@
 
-\begin{proc}{acelerar}{\Inout r: reunion,
-    \In prof: \ent,
-    \In freq: \ent}{}
+\begin{proc}{acelerar}{\Inout $r$: $reunion$,
+    \In $prof$: \ent,
+    \In $freq$: \ent}{}
 \pre{
     
-    \quad esReuniónVálidaAux(r, prof, freq) \yLuego
+    $\quad r_{0} = r\ \wedge$
+    
+        $\quad\quad esReuniónVálidaAux(r, prof, freq)\ \yLuego$
 
-    \quad\quad lasSeñalesDuranMásDe2Segundos(r) \wedge
-
-    \quad\quad r_{0} = r
+        $\quad\quad lasSeñalesDuranMásDe2Segundos(r)$
 
 }
 \post{
 
-    % \quad esReuniónVálidaAux(r, prof, freq) \wedge
+    $\quad \longitud{r} = \longitud{r_{0}}\ \yLuego$
 
-    \quad \longitud{r} = \longitud{r_{0}} \yLuego
+        $\quad\quad lasSeñalesTieneLaMitadDeMuestras(r, r_{0})\ \yLuego$
 
-        \quad\quad lasSeñalesTieneLaMitadDeMuestras(r, r_{0}) \yLuego
-
-        \quad\quad losImpares(r, r_{0})
+        $\quad\quad losImpares(r, r_{0})$
 
 }
 \end{proc}
 
-\pred{lasSeñalesDuranMásDe2Segundos}{$r: reunion,
-    freq: \ent$}
+\pred{lasSeñalesDuranMásDe2Segundos}{$r$: $reunion$,
+    $freq$: \ent}
 {
-    duraciónEnSegundos(r[0]_{0}, freq) > 2
+    duraci\acute{o}nEnSegundos(r[0]_{0}, freq) > 2
 }
 
 $ $
 
-\pred{lasSeñalesTieneLaMitadDeMuestras}{r: reunion,
-    r_{v}: reunion}
+\pred{lasSeñalesTieneLaMitadDeMuestras}{$r$: $reunion$,
+    $r_{v}$: $reunion$}
 {
 
-    \quad \paraTodo{i}{0}{\longitud{r}}
-    \implicaLuego
-    \IfThenElse{esPar(\longitud{r_{v}[i]_{0}})}
-    {\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}}{2}}
-    {\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}-1}{2}}
+    $\quad\paraTodo{i}{0}{\longitud{r}}$
+    $\implicaLuego$
+    $\IfThenElse{esPar(\longitud{r_{v}[i]_{0}})}$
+    ${\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}}{2}}$
+    ${\longitud{r[i]_{0}} = \frac{\longitud{r_{v}[i]_{0}}-1}{2}}$
 
 }
 
 $ $
 
-\pred{losImpares}{r: reunion,
-    r_{v}: reunion}
+\pred{losImpares}{$r$: $reunion$,
+    $r_{v}$: $reunion$}
 {
 
-    \quad \paraTodo{i}{0}{\longitud{r_{v}}}
-    \implicaLuego (
+    $\quad \paraTodo{i}{0}{\longitud{r_{v}}}$
+    $\implicaLuego ($
 
-        \quad\quad \existe{j}{0}{\longitud{r}} \yLuego (
-            r_{v}[i]_{1} = r[j]_{1}
-        ) \yLuego (
+        $\quad\quad \existe{j}{0}{\longitud{r}}\ \yLuego ($
+            $r_{v}[i]_{1} = r[j]_{1}$
+        $) \yLuego ($
 
-            \quad\quad\quad \paraTodo{q}{0}{\longitud{r_{v}[i]_{0}} \wedge
-            (\neg esPar(q))}
-            \implicaLuego (
-                r_{v}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]
-            )
-        )
-    )
+            $\quad\quad\quad \paraTodo{q}{0}{\longitud{r_{v}[i]_{0}} \wedge$
+            $(\neg esPar(q))}$
+            $\implicaLuego ($
+                $r_{v}[i]_{0}[q] = r[j]_{0}[\frac{q-1}{2}]$
+            $)$
+        $)$
+    $)$
 
 }

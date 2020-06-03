@@ -1,39 +1,39 @@
 
-\begin{proc}{esReuniónVálida?}{\In r: reunion,
-    \In prof: \ent,
-    \In freq: \ent,
-    out result: \bool}{}
+\begin{proc}{esReuniónVálida?}{\In r: $reunion$,
+    \In $prof$: \ent,
+    \In $freq$: \ent,
+    \Out $result$: \bool}{}
 \pre{ prof > 0 \wedge freq > 0 }
-\post{ $result = esReuniónVálidaAux(r, prof, freq)$ }
+\post{ result = \True \Iff esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) }
 \end{proc}
 
-\pred {esReuniónVálidaAux}{$r: reunion,
-    prof: \ent,
-    freq: \ent$}{
+\pred {esReuniónVálidaAux}{$r$: $reunion$,
+    $prof$: \ent,
+    $freq$: \ent}{
 
-    \quad $contieneSeñalesValidas(r, prof, freq)$ $\wedge$
+    $\quad contieneSeñalesValidas(r, prof, freq)\ \wedge$
 
-    \quad\quad $lasLongitudesDeSeñalSonIguales(r)$ $\wedge$
+    $\quad\quad lasLongitudesDeSeñalSonIguales(r)\ \wedge$
 
-    \quad\quad $todosHablantesDistintos(r)$ $\wedge$
+    $\quad\quad todosHablantesDistintos(r)\ \wedge$
 
-    \quad\quad $losHablantesEstanEnRangosDe0ANMenos1(r)$
+    $\quad\quad losHablantesEstanEnRangosDe0ANMenos1(r)$
 
 }
 
 $ $
 
-\pred{contieneSeñalesValidas}{$r: reunion,
-    prof: \ent,
-    freq: \ent$}
+\pred{contieneSeñalesValidas}{$r$: $reunion$,
+    $prof$: \ent,
+    $freq$: \ent}
 {
     \paraTodo{i}{0}{\longitud{r}}
-    \implicaLuego esSeñalAux(r[i]_{0}, prof, freq)
+    \implicaLuego esSe\tilde{n}alAux(r[i]_{0}, prof, freq)
 }
 
 $ $
 
-\pred{lasLongitudesDeSeñalSonIguales}{$r: reunion$}
+\pred{lasLongitudesDeSeñalSonIguales}{$r$: $reunion$}
 {
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (\longitud{r[i]_{0}} = \longitud{r[j]_{0}})
@@ -41,14 +41,14 @@ $ $
 
 $ $
 
-\pred {todosHablantesDistintos}{$r: reunion$}{
+\pred {todosHablantesDistintos}{$r$: $reunion$}{
     \paraTodo{i,j}{0}{\longitud{r} \wedge i \neq j}
     \implicaLuego (r[i]_{1} \neq r[j]_{1})
 }
 
 $ $
 
-\pred {losHablantesEstanEnRangosDe0ANMenos1}{$r: reunion$}{
+\pred {losHablantesEstanEnRangosDe0ANMenos1}{$r$: $reunion$}{
     \paraTodo{i}{0}{\longitud{r}}
     \implicaLuego 0 \leq r[i]_{1} < \longitud{r}
 }

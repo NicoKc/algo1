@@ -1,18 +1,21 @@
 
-\begin{proc}{esSeñal}{\In s: \TLista{\ent}, \In prof: \ent, \In freq: \ent, out result: \bool}{}
+\begin{proc}{esSeñal}{\In $s$: \TLista{\ent},
+    \In $prof$: \ent,
+    \In $freq$: \ent,
+    \Out $result$: \bool}{}
 \pre{  prof > 0 \wedge freq > 0 }
-\post{ result = \True \Iff esSeñalAux(s, prof, freq) }
+\post{ result = \True \Iff esSe\tilde{n}alAux(s, prof, freq) }
 \end{proc}
 
-\pred{esSeñalAux}{s: \TLista{\ent}, prof: \ent, freq: \ent}{
+\pred{esSeñalAux}{$s$: \TLista{\ent}, $prof$: \ent, $freq$: \ent}{
 
-    $\quad\longitud{s} \geq 0 \wedge$
+    $\quad\longitud{s} \geq 0\ \wedge$
 
-    $\quad\quad frecuenciaEnRango (freq) \wedge$
+    $\quad\quad frecuenciaEnRango(freq)\ \wedge$
 
-    $\quad\quad profundidadCorrecta (s) \wedge$
+    $\quad\quad profundidadCorrecta(s)\ \wedge$
 
-    $\quad\quad duraMasDeUnSegundo (s, freq) \wedge$
+    $\quad\quad duraMasDeUnSegundo(s, freq)\ \wedge$
 
     $\quad\quad ningunaMuestraSuperaLaProfundidad(s, prof)$
 
@@ -34,7 +37,7 @@ $ $
 
 $ $
 
-\pred{ningunaMuestraSuperaLaProfundidad}{s: \TLista{\ent}, p: \ent}{
+\pred{ningunaMuestraSuperaLaProfundidad}{$s$: \TLista{\ent}, $p$: \ent}{
 
     $\quad\paraTodo{i}{0}{|s|} \implicaLuego (-2)^{p-1} \leq s[i] \leq 2^{p-1}-1$
 
@@ -42,4 +45,4 @@ $ $
 
 $ $
 
-\aux{duraciónEnSegundos}{$s$: \TLista{\ent}, $freq$: \ent}{\ent}{\frac{\longitud{s}}{(freq \cdot 1000)}}
+\aux{duraciónEnSegundos}{$s$: \TLista{\ent}, $freq$: \ent}{\ent}{\longitud{s}\ div\ (freq \cdot 1000)}
