@@ -1,0 +1,56 @@
+\documentclass{article}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+\usepackage{listings}
+
+\lstset
+{
+    language=Caml,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejericio 2}
+
+\begin{enumerate}
+    \item Diagrama de flujo
+
+    \quad\includegraphics[scale=0.65]{./recursos/min.png}
+
+    \item El caso de test minA, devuelve 1 cuando la salida esperada es 0, ademas el programa no cumple con la especificación
+
+    El siguiente programa cumple la especificación:
+
+    \lstinputlisting{./code/min.cpp}
+
+    Con el nuevo programa el test suite ejececuta todas las líneas.
+
+    \item Con el nuevo programa el test suite ejececuta todas las decisiones.
+
+    \item Los tests suite ayudaron a demostrar que el programa propuesto inicialmente no cumplia con la especificación dada
+
+    \item Yo agregaria nuevos tests suite
+
+    \begin{itemize}
+        \item minSinCero
+        \begin{itemize}
+            \item entrada: x=29, y=38
+            \item resultado esperado: 29
+        \end{itemize}
+        \item minSinCero2
+        \begin{itemize}
+            \item entrada: x=60, y=4
+            \item resultado esperado: 4
+        \end{itemize}
+    \end{itemize}
+
+\end{enumerate}
+
+
+\end{document}}

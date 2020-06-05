@@ -1,0 +1,18 @@
+graph TD
+    A{"a <= 0 || b <= 0 || c <= 0"}
+    A   --False-->  C
+    A   --True-->   B
+    B("return 4;")
+    C{"!(a + b > c && a + c > b && b + c > a)"}
+    C   --False-->  E
+    C   --True-->   D
+    D("return 4;")
+    E{"a == b && b == c"}
+    E   --False-->  G
+    E   --True-->   F
+    F("return 1;")
+    G{"a == b || b ==c || a == c"}
+    G   --False-->  I
+    I("return 3;")
+    G   --True-->   H
+    H("return 2;")

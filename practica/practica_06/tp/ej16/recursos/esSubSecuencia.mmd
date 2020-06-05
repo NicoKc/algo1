@@ -1,0 +1,43 @@
+graph TD
+    A["bool result = false;"]       -->         B
+    B["int ultimoIndice = s.size() - r.size() - r.size();"] --> C
+    C["int i = 0;"]                 -->         D
+    D{"i < ultimoIndice"}
+    D                               --false-->  RT
+    RT("return result;")
+    D                               --true-->   E
+    E["i++;"]                       -->         F
+    F["vector<int> subseq = subsecuencia(s,i,r.size());"]   --> G
+    G["bool sonIguales = iguales(subseq, r);"]              --> H
+    H{"sonIguales == true"}
+    H                               --false-->  D
+    H                               --true-->   I
+    I["result=true;"]               -->         J
+    J["break;"]                     -->         RT
+
+    K["vector<int> rv;"]            -->         L
+    L["int hasta = desde + hasta;"] -->         M
+    M["int i = desde;"]             -->         N
+    N{"i < hasta;"}
+    N                               --false-->  RV
+    RV("return rv;")
+    N                               --true-->   O
+    O["int elem = s[i];"]           -->         P
+    P["rv.push_back(elem);"]        -->         N
+
+    R["bool result == true;"]       -->         S
+    S{"a.size() == b.size()"}
+    S                               --false-->  T
+    T["result = false;"]            -->         RX
+    RX("return result;")
+    S                               --true-->   U
+    U["int i = 0;"]                 -->         V
+    V{"i < a.size()"}
+    V                               --false-->  RX
+    V                               --true-->   W
+    W["i++;"]                       -->         X
+    X{"a[i] != b[i]"}
+    X                               --false-->  V
+    X                               --true-->   Y
+    Y["result = false;"]            -->         Z
+    Z["break;"]                     -->         RX

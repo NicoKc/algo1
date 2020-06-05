@@ -1,0 +1,6 @@
+graph TD
+    A["int result = 0;"]    -->         B{x < 0}
+    B                       --True-->   C
+    B                       --False-->  D
+    C["result = -1;"]       -->         D
+    D("return result;")

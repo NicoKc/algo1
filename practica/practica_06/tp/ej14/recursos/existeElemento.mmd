@@ -1,0 +1,13 @@
+graph TD
+    A["bool result = false;"]   -->         B
+    B["int i = 0;"]             -->         C
+    C{"i < s.size()"}
+    C                           --False-->  R
+    R("return result;")
+    C                           --True-->   D
+    D["i++;"]                   -->         E
+    E{"s[i] == e"}
+    E                           --False-->  C
+    E                           --True-->   F
+    F["result = true;"]         -->         G
+    G["break;"]                 -->         R

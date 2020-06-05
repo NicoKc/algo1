@@ -1,0 +1,16 @@
+graph TD
+    A["int sumando = 0;"]   -->         B
+    B["int abs_y = 0;"]     -->         C{y<0}
+    C                       --False-->  G
+    C                       --True-->   D
+    G["sumando = 1;"]       -->         H
+    H["abs_y = y;"]         -->         F
+    D["sumando = -1;"]      -->         E
+    E["abs_y = -y;"]        -->         F
+    F["int result = x;"]    -->         I
+    I["int count = 0;"]     -->         J{count < abs_y}
+    J                       --False-->  M
+    J                       --True-->   K
+    K["result = result + sumando;"] --> L
+    L["count = count + 1;"] -->         J
+    M("return result;")

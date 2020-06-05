@@ -1,0 +1,9 @@
+graph TD
+    A("assert(x >= 0 && y >=0") -->         B
+    B["int tmp = 0;"]           -->         C{y != 0}
+    C                           --False-->  G
+    C                           --True-->   D
+    D["tmp = x % y;"]           -->         E
+    E["x = y;"]                 -->         F
+    F["y = tmp;"]               -->         C
+    G("return x;")

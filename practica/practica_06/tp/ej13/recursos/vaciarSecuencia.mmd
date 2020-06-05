@@ -1,0 +1,8 @@
+graph TD
+    A["int i = 0;"]     -->         B
+    B{"i < s.size();"}
+    B                   --False-->  E
+    E("return;")
+    B                   --True-->   C
+    C["i++;"]           -->         D
+    D["s[i] = 0;"]      -->         B

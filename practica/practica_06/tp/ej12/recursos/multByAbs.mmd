@@ -1,0 +1,14 @@
+graph TD
+    A["int abs_y = fabs(y);"]   -->         B
+    B{"abs_y < 0"}
+    B                           --False-->  D
+    B                           --True-->   C
+    C("return -1;")
+    D["int result = 0;"]        -->         E
+    E["int i = 0;"]             -->         F
+    F{i < abs_y}
+    H["i = i + 1;"]             -->         F
+    F                           --False-->  I
+    F                           --True-->   G
+    G["result = result + x;"]   -->         H
+    I("return result;")

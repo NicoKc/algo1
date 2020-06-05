@@ -1,0 +1,8 @@
+graph TD
+    A["int result = 0;"]        -->         B
+    B["int count = 0;"]         -->         C
+    C{"count < 10"}             --False-->  F
+    C{"count < 10"}             --True-->   D
+    D["result = result + x;"]   -->         E
+    E["count = count + 1;"]     -->         C
+    F("return result;")

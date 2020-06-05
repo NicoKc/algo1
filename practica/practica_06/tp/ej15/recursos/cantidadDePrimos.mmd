@@ -1,0 +1,26 @@
+graph TD
+    A["int result = 0;"]    -->         B
+    B["int i = 2;"]         -->         C
+    C{"i <= n;"}
+    C                       --False-->  R
+    R("return result;")
+    C                       --True-->   D
+    D["i++;"]               -->         E
+    E["inc == esPrimo(i);"] -->         F
+    F{"inc == true "}
+    F                       --False-->  C
+    F                       --True-->   G
+    G["result++;"]          -->         C
+
+    M["int result = true;"] -->         N
+    N["int i = 2;"]         -->         O
+    O{"i < x"}
+    O                       --False-->  Z
+    Z["return result;"]
+    O                       --True-->   P
+    P["i++;"]               -->         S
+    S{"x % i == 0"}
+    S                       --False-->  O
+    S                       --True-->   T
+    T["result = false;"]    -->         U
+    U["break"]              -->         Z
