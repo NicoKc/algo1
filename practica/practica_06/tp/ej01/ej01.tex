@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{listings} 
+\usepackage{multirow}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\lstset
+{
+    language=Matlab,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejercicio 1}
+
+\lstinputlisting[language=Matlab]{./code/max.cpp}
+
+\begin{itemize}
+    \item test1:
+        \begin{itemize}
+            \item entrada x = 0, y = 0
+            \item Resultado esperado result = 0
+        \end{itemize}
+    \item test2:
+        \begin{itemize}
+            \item entrada x = 0, y = 1
+            \item Resultado esperado result = 1
+        \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+    \item Diagrama de flujo
+
+    \quad\includegraphics[scale=0.65]{./recursos/flow-chart.png}
+
+    \item Líneas del programa que cubre cada test
+    
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c|c| } 
+        \hline
+        Test &  2   & 3     & 4     & 6     & 7     \\
+        \hline
+        test1 & Si  & Si    & No    & Si    & Si    \\
+        test2 & Si  & Si    & Si    & No    & Si    \\
+        \hline
+        \end{tabular}
+    \end{center}
+
+    \item Decisiones
+
+    \begin{center}
+        \begin{tabular}{ |c|c|c| } 
+        \hline
+        Test  & branch true & branch false \\
+        \hline
+        test1 & No          & Si            \\
+        test2 & Si          & No            \\
+        \hline
+        \end{tabular}
+    \end{center}
+
+    \item El test suit cubre 100\% de las líneas del programa y los branches
+
+\end{enumerate}
+
+\end{document}

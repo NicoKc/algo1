@@ -1,0 +1,7 @@
+graph TD
+    B["int result = 0;"] --> C{ x < y }
+    C -->|True| E[result = y]
+    C -->|False| F[result = x]
+    F --> G
+    E --> G
+    G("return result;")
