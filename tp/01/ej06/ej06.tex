@@ -6,16 +6,45 @@
 \pre{ esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) }
 \post{
 
-    $\quad \longitud{h} \geq \longitud{hs}\ \yLuego$
+    $\quad losHablantesPertenecenALaReunión(r, hablantes)\ \wedge$
 
-        $\quad\quad (siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes)\ \wedge$
+    $\quad\quad losHablantesNoSeRepiten(hablantes)\ \wedge$
 
-        $\quad\quad losHablantesPertenecenALaReunión(r, hablantes)\ \wedge$
+    $\quad\quad \longitud{r} \geq \longitud{hablantes}\ \yLuego$
 
-        $\quad\quad losHablantesNoSeRepiten(hablantes))$
+    $\quad\quad siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes)$
 
 }
 \end{proc}
+
+
+\pred{losHablantesPertenecenALaReunión}{$r$: $reunion$,
+    $hs$: \TLista{hablante}}
+{
+
+    $\quad\paraTodo{i}{0}{\longitud{hs}}$
+    $\implicaLuego ($
+        $\existe{j}{0}{\longitud{r}} \yLuego ($
+            $hs[i] = r[j]_{1}$
+        $)$
+    $)$
+
+}
+
+$ $
+
+\pred{losHablantesNoSeRepiten}{$r$: reunion,
+    $hs$: \TLista{hablante}}
+{
+
+    $\quad\paraTodo{i}{0}{\longitud{hs}}$
+    $\implicaLuego ($
+        $\#apariciones(hs, hs[i]) = 1$
+    $)$
+
+}
+
+$ $
 
 \pred{siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto}{$r$: $reunion$,
     $hs$: \TLista{hablante}}
@@ -62,29 +91,3 @@ $ $
 }
 
 $ $
-
-\pred{losHablantesPertenecenALaReunión}{$r$: $reunion$,
-    $hs$: \TLista{hablante}}
-{
-
-    $\quad\paraTodo{i}{0}{\longitud{hs}}$
-    $\implicaLuego ($
-        $\existe{j}{0}{\longitud{r}} \yLuego ($
-            $hs[i] = r[j]_{1}$
-        $)$
-    $)$
-
-}
-
-$ $
-
-\pred{losHablantesNoSeRepiten}{$r$: reunion,
-    $hs$: \TLista{hablante}}
-{
-
-    $\quad\paraTodo{i}{0}{\longitud{hs}}$
-    $\implicaLuego ($
-        $\#apariciones(hs, hs[i]) = 1$
-    $)$
-
-}
