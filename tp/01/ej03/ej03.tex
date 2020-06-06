@@ -3,7 +3,7 @@
     \In $prof$: \ent,
     \In $freq$: \ent,
     \Out $result$: \bool}{}
-\pre{ prof > 0 \wedge freq > 0 }
+\pre{ \longitud{r} \geq 0 \wedge prof > 0 \wedge freq > 0 }
 \post{ result = \True \Iff esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) }
 \end{proc}
 

@@ -3,7 +3,7 @@
     \In $prof$: \ent,
     \In $freq$: \ent,
     \Out $result$: \bool}{}
-\pre{  prof > 0 \wedge freq > 0 }
+\pre{ \longitud{s} \geq 0 \wedge prof > 0 \wedge freq > 0 }
 \post{ result = \True \Iff esSe\tilde{n}alAux(s, prof, freq) }
 \end{proc}
 
