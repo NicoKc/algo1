@@ -1,0 +1,91 @@
+
+\begin{proc}{reconstruir}{\In $s$: $se\tilde{n}al$,
+    \In $prof$: \ent,
+    \In $freq$: \ent,
+    \Out $result$: $se\tilde{n}al$}{}
+\pre{ esSe\tilde{n}alAux(s, prof, freq) \wedge elPrimeroYElUltimoSonDistintosDeCero(s) }
+\post{
+
+    $\quad \longitud{s} = \longitud{result}\ \yLuego ($
+
+        $\quad\quad enDondeNoSeaCeroDebenCoincidir(s, result)\ \wedge$
+
+        $\quad\quad enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos(s, result))$
+
+}
+\end{proc}
+
+\pred{elPrimeroYElUltimoSonDistintosDeCero}{s: señal}{
+    \longitud{s} > 0 \yLuego (s[0] \neq 0 \wedge s[\longitud{s}-1] \neq 0)
+}
+
+$ $
+
+\pred{enDondeNoSeaCeroDebenCoincidir}{$original$: $se\tilde{n}al$,
+    $reconstruida$: $se\tilde{n}al$}
+{
+
+    $\quad\paraTodo{i}{0}{\longitud{original}}$
+    $\implicaLuego$
+    $((original[i] \neq 0) \implica (original[i] = reconstruida[i]))$
+
+}
+
+$ $
+
+\pred{enDondeEsCeroDebeSerElPromedioDeSusVecinosNoNulos}{$original$: $se\tilde{n}al$,
+    $reconstruida$: $se\tilde{n}al$}
+{
+
+    $\quad\paraTodo{i}{0}{\longitud{original}}$
+    $\implicaLuego$
+    $((original[i] = 0) \implica $
+
+    $\quad\quad esUnPromedioDeSusVecinosNoNulosMasCercanos(original, reconstruida, i))$
+
+}
+
+$ $
+
+\pred{esUnPromedioDeSusVecinosNoNulosMasCercanos}{$original$: $se\tilde{n}al$,
+$reconstruida$: $se\tilde{n}al$,
+$i$: \ent}{
+
+    $\quad \existe{j,k}{0}{\longitud{original}} \yLuego $
+    
+        $\quad\quad\quad original[j] \neq 0 \wedge original[k] \neq 0\ \wedge$
+
+        $\quad\quad\quad esElMinimoIndiceNoNuloDesdeIHastaElFinal(original, i, j)\ \wedge$
+
+        $\quad\quad\quad esElMaximoIndiceNoNuloDesdeCeroHastaI(original, i, k)\ \wedge$
+
+        $\quad\quad\quad reconstruida[i] = promedio(original[j],original[k])$
+
+}
+
+$ $
+
+\pred{esElMinimoIndiceNoNuloDesdeIHastaElFinal}{$s$: $se\tilde{n}al$,
+    $i$: \ent,
+    $j$: \ent}{
+        \paraTodo{t}{i}{\longitud{s}} \implicaLuego s[t] \neq 0 \implica j \leq t
+}
+
+$ $
+
+\pred{esElMaximoIndiceNoNuloDesdeCeroHastaI}{$s$: $se\tilde{n}al$,
+    $i$: \ent,
+    $k$: \ent}{
+        \paraTodo{t}{0}{i} \implicaLuego s[t] \neq 0 \implica k \geq t
+}
+
+$ $
+
+\aux{promedio}{$a$: \ent,
+    $b$: \ent}{\ent}{
+    (a+b)\ div\ 2
+}
+
+$ $
+
+\subsubsection*{Aclaración: asumi que son los vecinos más cercanos a derecha e izquierda, porque de la otra manera no lo se hacer}
