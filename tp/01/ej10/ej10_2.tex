@@ -51,58 +51,36 @@ $ $
 $reconstruida$: $se\tilde{n}al$,
 $i$: \ent}{
 
-    $\quad \existe{j,k,l}{0}{\longitud{original}} \wedge $
-        $(puedeHaber3MuestrasCercanas(i, j, k, l)\ \vee\ hayMuestrasEquidistantes(i, j, k, l) )\ \yLuego\ $
+    $\quad \existe{j,k}{0}{\longitud{original}} \wedge j \neq k\ \yLuego\ $
+    
+        $\quad\quad (noSonNulas(original, j, k)\ \wedge$
 
-        $\quad\quad (noSonNulas(original, j, k, l)\ \wedge$
+        $\quad\quad\quad sonLasMuestrasMasCercanas(original, i, j, k)\ \wedge$
 
-        $\quad\quad\quad sonLasMuestrasMasCercanas(original, i, j, k,l)\ \wedge$
-
-        $\quad\quad\quad reconstruida[i] \in [promedio(original[j],original[k]), promedio(original[j],original[l])]$
+        $\quad\quad\quad reconstruida[i] = promedio(original[j],original[k])$
         $)$
 
 }
 
 $ $
 
-\pred{puedeHaber3MuestrasCercanas}{$i$: \ent,
-    $j$: \ent,
-    $k$: \ent,
-    $l$: \ent}{
-
-    $\quad dist(i, j) < dist(i, k) \wedge dist(i, j) < dist(i, l) \wedge dist(i,k) = dist(i,l)$
-
-}
-
-$ $
-
-\pred{hayMuestrasEquidistantes}{$i$: \ent,
-    $j$: \ent,
-    $k$: \ent,
-    $l$: \ent}{dist(i, j) = dist(i, k) \wedge l = k \wedge j \neq k}
-
-$ $
-
 \pred{noSonNulas}{$s$: $se\tilde{n}al$,
     $j$: \ent,
-    $k$: \ent,
-    $l$: \ent}{s[j] \neq 0 \wedge s[k] \neq 0 \wedge s[l] \neq 0}
+    $k$: \ent}{s[j] \neq 0 \wedge s[k] \neq 0}
 
 $ $
 
 \pred{sonLasMuestrasMasCercanas}{$s$: $se\tilde{n}al$,
     $i$: \ent,
     $j$: \ent,
-    $k$: \ent,
-    $l$: \ent}{
+    $k$: \ent}{
 
-    $\quad\quad \paraTodo{m}{0}{\longitud{s}} \wedge m \notin [j, k, l] \implicaLuego $
+    $\quad\quad \paraTodo{m}{0}{\longitud{s}} \wedge m \notin [j, k] \implicaLuego $
 
     $\quad\quad\quad s[m] \neq 0\ \implica $
     $($
         $dist(i, m) > dist(i, j)\ \wedge$
-        $dist(i, m) > dist(i, k)\ \wedge $
-        $dist(i, m) > dist(i, l)$
+        $dist(i, m) \geq dist(i, k)$
         $)$
 
 }
