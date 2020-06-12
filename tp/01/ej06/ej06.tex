@@ -6,11 +6,9 @@
 \pre{ esReuni\acute{o}nV\acute{a}lidaAux(r, prof, freq) }
 \post{
 
-    $\quad losHablantesPertenecenALaReunión(r, hablantes)\ \wedge$
+    $\quad (losHablantesPertenecenALaReunión(r, hablantes)\ \wedge$
 
-    $\quad\quad losHablantesNoSeRepiten(hablantes)\ \wedge$
-
-    $\quad\quad \longitud{r} \geq \longitud{hablantes}\ \yLuego$
+    $\quad\quad losHablantesNoSeRepiten(hablantes))\ \yLuego$
 
     $\quad\quad siPertenecenAHablantesElPromedioDeAmplitudEsMasGrandeOIgualQueElResto(r, hablantes)$
 
