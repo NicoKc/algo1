@@ -1,7 +1,9 @@
-.vscode/*
+.vscode/
 *.aux
 *.fdb_latexmk
 *.fls
 *.log
 *.synctex.gz
 __latexindent_temp.tex
+.idea/
+cmake-build-debug/
