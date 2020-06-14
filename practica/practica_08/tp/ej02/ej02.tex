@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{listings}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\lstset
+{
+    language=Caml,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejercio 2}
+
+\begin{enumerate}
+    \item $ $
+        \lstinputlisting{./code/f1.cpp}
+        \begin{itemize}
+            \item i = v.size() / 2; $\equiv 2$
+            \item i $>$= 0; $\equiv 1$
+
+            $ $
+
+            \item $ciclo \equiv 1 + n*($
+                \begin{itemize}
+                    \item i $>$=0; $\equiv 1$
+                    \item vec[vec.size()/2-1] = i; $\equiv 3$
+                    \item vec[vec.size()/2+1] = i; $\equiv 3$
+                    \item i--; $\equiv 1$
+                \end{itemize}
+                $)$
+        \end{itemize}
+        $t(n) = 4 + 8n \equiv O(n)$
+    \item $ $
+        \lstinputlisting{./code/f2.cpp}
+        \begin{itemize}
+            \item $i = 0; \equiv 1$
+
+            $ $
+
+            \item $ciclo \equiv 1 + 10000*($
+                \begin{itemize}
+                    \item $i < 10000 \equiv 1$
+                    \item $vec[vec.size()/2-i] = 1; \equiv 3$
+                    \item $vec[vec.size()/2+i] = 1; \equiv 3$
+                    \item $i++; \equiv 1$
+                \end{itemize}
+                $)$
+        \end{itemize}
+        $t(n) = 80002 \equiv O(1)$
+    \item $ $
+        \lstinputlisting{./code/f3.cpp}
+        \begin{itemize}
+            \item int i = 0; $\equiv 1$
+            \item $ciclo \equiv 1 + n *($
+                \begin{itemize}
+                    \item $v1[i] != e \equiv 1$
+                    \item $i++; \equiv 1$
+                \end{itemize}
+            $)$
+        \end{itemize}
+        $t(n)= 2 + 2n \equiv O(n)$
+    \item $ $
+        \lstinputlisting{./code/f4.cpp}
+        \begin{itemize}
+            \item int rec = 0; $\equiv 1$
+            \item int max\_iter = 1000; $\equiv 1$
+            \item max\_iteer $>$ vec.size(); $\equiv 1$
+            \item max\_iteer = vec.size(); $\equiv 1$
+            \item $ciclo \equiv 2 + n *($
+                \begin{itemize}
+                    \item $ciclo \equiv 2 + n *($
+                        \begin{itemize}
+                            \item res += vec[i]*vec[j]$\equiv 3$
+                        \end{itemize}
+                    $)$
+                \end{itemize}
+            $)$
+        \end{itemize}
+        $t(n)= 6 + n*(2+3n) \equiv O(n^{2})$
+    \item $ $
+        \lstinputlisting{./code/f5.cpp}
+        \begin{itemize}
+            \item int rec = 0; $\equiv 1$
+            \item int max\_iter = 1000; $\equiv 1$
+            \item max\_iteer $>$ vec.size(); $\equiv 1$
+            \item max\_iteer = vec.size(); $\equiv 1$
+            \item $ciclo \equiv 2 + n *($
+                \begin{itemize}
+                    \item $ciclo \equiv 2 + m *($
+                        \begin{itemize}
+                            \item res += vec[i]*vec[j]$\equiv 3$
+                        \end{itemize}
+                    $)$
+                \end{itemize}
+            $)$
+        \end{itemize}
+        $t(n)= 6 + n*(2+3m) \equiv O(n*m)$
+\end{enumerate}
+
+\end{document}

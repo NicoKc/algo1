@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage[shortlabels]{enumitem}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\lstset
+{
+    language=Caml,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejercicio 13}
+
+\lstinputlisting{./code/elevar.cpp}
+
+
+\begin{enumerate}[a)]
+    \item $O(n*N^{3})$
+    \item $O(2^m*N^{3})$
+\end{enumerate}
+
+\end{document}

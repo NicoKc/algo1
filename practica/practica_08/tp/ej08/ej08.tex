@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage[shortlabels]{enumitem}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\lstset
+{
+    language=Caml,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejercio 8}
+\begin{enumerate}[a)]
+    \item $ $
+        \begin{proc}{multiplicar}{\In $m1$: \TLista{\TLista{\ent}},
+            \In $m2$: \TLista{\TLista{\ent}},
+            \Out $res$: \TLista{\TLista{\ent}}}{}
+        \pre{
+
+            $\quad\quad\quad\quad$ 
+            $\longitud{m1} > 0 \yLuego$
+
+            $\quad\quad\quad\quad\quad$ 
+            $(\paraTodo{i}{0}{\longitud{m1}} \implicaLuego$
+                $\longitud{m1[0]} = \longitud{m1[i]}) \yLuego$
+
+            $\quad\quad\quad\quad\quad$ 
+            $(\paraTodo{i}{0}{\longitud{m2}} \implicaLuego$
+                $\longitud{m2[0]} = \longitud{m2[i]}) \yLuego$
+
+            $\quad\quad\quad\quad\quad$
+            $(\longitud{m1[0]} = \longitud{m2})$
+
+        \quad\quad}
+        \quad\quad\post{ 
+
+            $\quad\quad\quad\quad$
+            $\longitud{res} = \longitud{m1}\ \yLuego $
+
+            $\quad\quad\quad\quad\quad$
+            $\paraTodo{i}{0}{\longitud{m1}} \implicaLuego $
+
+            $\quad\quad\quad\quad\quad\quad$
+            $(\longitud{res[i]} = \longitud{m2[0]}\ \yLuego $
+
+            $\quad\quad\quad\quad\quad\quad\quad$
+            $\paraTodo{j}{0}{\longitud{m2[0]}} \implicaLuego $
+
+            $\quad\quad\quad\quad\quad\quad\quad\quad$
+            $res[i][j] = \sum_{k=0}^{\longitud{m2}-1} m1[i][k]*m2[k][j])))$
+
+        \quad\quad\quad}
+        \end{proc}
+    \item $ $
+        \lstinputlisting{./code/src/multiplicar.cpp}
+    \item $ $
+        \begin{enumerate}[a)]
+            \item $O(filas_{m1}*columnas_{m1}*columnas_{m2})$
+            \item $O(N^{3})$
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

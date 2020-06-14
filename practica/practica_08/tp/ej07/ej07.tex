@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage[shortlabels]{enumitem}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\lstset
+{
+    language=Caml,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\begin{document}
+
+\section*{Ejercio 6}
+
+\begin{enumerate}[a)]
+    \item $ $
+        \lstinputlisting{./code/determinanteDeUnaMatrizTriangular.cpp}
+    \item $ $
+        \lstinputlisting{./code/esTriangular.cpp}
+    \item $ $
+        \begin{enumerate}[a)]
+            \item 3 + 5n $\equiv O(n)$
+            \item$ 3 + 6n + 2*(3 + n(6 + 4n)) = 9 + 18n + 8n^{2} \equiv O(n^{2})$
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}
