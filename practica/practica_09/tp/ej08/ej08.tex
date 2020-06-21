@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[shortlabels]{enumitem}
+\input{../../../../recursos/latex/Algo1Macros.tex}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset
+{
+    language=Caml,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\begin{document}
+    \section*{Ejercicio 8}
+
+    \lstinputlisting{./code/burbujeo.cpp}
+    
+    \begin{enumerate}[a)]
+        \item Compara los ítems adyacentes e intercambia los que no están en orden.\\
+        Cada pasada a lo largo de la listaubica el siguiente valor más grande en su lugar apropiado.\\
+        En esencia, cada ítem “burbujea” hasta el lugar al que pertenece.
+        \item $0 \leq i \leq \longitud{a} - 1 \yLuego \paraTodo{j}{\longitud{a}-i}{\longitud{a}} \implicaLuego a[j-1] \leq a[j] $
+        \item $0 \leq j \leq \longitud{a} - 1 \yLuego \paraTodo{k}{0}{j} \implicaLuego a_0[k] > a_0[k+1] \implica a[k] = a_0[k+1] \wedge a[j+1] = a_0[j] $
+        \item $ O(n^2) $
+    \end{enumerate}
+
+\end{document}
