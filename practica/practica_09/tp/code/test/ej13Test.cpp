@@ -12,7 +12,7 @@ TEST(ReconstruyeTest, caso1) {
 
 TEST(ReconstruyeTest, caso2) {
     vector<int> a{0, 5, 0, 0, 0, 1, 1};
-    vector<int> expectedB{1, 1, 1, 1, 1, 5, 6};
+    vector<int> expectedB{1, 1, 1, 1, 1, 5, 6we};
 
     vector<int> b = reconstruye(a);
 
