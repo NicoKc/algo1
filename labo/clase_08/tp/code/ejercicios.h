@@ -11,6 +11,7 @@ void mostrar_vector(vector<int>& v);
 vector<int> construir_vector(int n, string disposicion);
 
 bool hayDuplicados ( vector < int >& v );
+bool hayDuplicadosModificado(vector<int> &v);
 
 bool aux(vector<int>& vec, int i, int sum);
 bool algunSubconjSuma(vector<int>& vec, int sum);
