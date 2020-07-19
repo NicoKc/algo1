@@ -10,7 +10,7 @@ add_executable(L09-BusquedaYOrdenamiento
         main.cpp
         src/ejercicio1.cpp
         src/ejercicio1.h
-        test/ejercicio1Test.cpp)
+        test/ejercicio1Test.cpp src/ejercicio2.cpp src/ejercicio2.h test/ejercicio2Test.cpp src/ejercicio3.cpp src/ejercicio3.h test/ejercicio3Test.cpp)
 
 
 

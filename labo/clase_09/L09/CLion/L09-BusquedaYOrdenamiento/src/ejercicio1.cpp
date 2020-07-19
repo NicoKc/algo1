@@ -96,16 +96,12 @@ bool esAnagramaConOrdenamiento(string p1, string p2) {
     selectionSort(p1);
     selectionSort(p2);
     return p1 == p2;
-}
+}//O(|p1| + |p2|)
 
 bool esAnagramaConNumerosPrimos(string p1, string p2) {
-    cout << "=============" << endl;
-    cout << p1 << "= " << ponderar(p1) << endl;
-    cout << p2 << "= " << ponderar(p2) << endl;
-    cout << "=============" << endl;
     return ponderar(p1) == ponderar(p2);
-}
+}//O(|p1| + |p2|)
 
 bool esAnagramaConMetodoPersonal(string p1, string p2) {
-    return false;
-}
+    return esAnagramaConNumerosPrimos(p1, p2);
+}//O(|p1| + |p2|)
