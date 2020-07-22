@@ -16,11 +16,11 @@
     
     $(\paraTodo{i}{1}{\longitud{s}} \yLuego s_0[i-1] \geq s_0[i] \implicaLuego s[i-1] = s_0[i-1])}$
 
-    \item $I        \equiv 1 \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0} \yLuego$
+    \item $I        \equiv 1 \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
 
-    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j]) \wedge $
+    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
 
-    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])$
+    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
 
     $(\paraTodo{j}{i-1}{\longitud{s}} \implicaLuego s[j] = s_0[j])$
 
@@ -32,9 +32,7 @@
 
 \subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
 
-$wp(S1;S2, I) \stackrel{Ax3}{\equiv}$
-
-$wp(S1, wp(S2, I))$
+$wp(S1;S2, I) \stackrel{Ax3}{\equiv} wp(S1, wp(S2, I))$
 
 \begin{itemize}
     \item $wp(S2; I) \equiv$
@@ -43,13 +41,13 @@ $wp(S1, wp(S2, I))$
 
     $\{def(i + 1) \yLuego I_{i+1}^{i})\} \equiv$
 
-    $ \{\True \yLuego 1 \leq i+1 \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0} \yLuego$
+    $ \{\ \True \yLuego 1 \leq i+1 \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0} \yLuego$
 
     $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
 
     $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge$
 
-    $\quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j])\} \equiv $
+    $\quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j])\ \} \equiv $
 
     $ $
 
@@ -67,11 +65,19 @@ $wp(S1, wp(S2, I))$
 
     $ $
 
-    $ \{ def(s[i-1] < s[i]) \yLuego ((s[i-1] < s[i] \yLuego wp(s[i-1]:=s[i], I_{i+1}^{i}) \vee $
-    $ ( s[i-1] \geq s[i] \yLuego wp(skip;, I_{i+1}^{i}))) \} $
+    $ \{\ def(s[i-1] < s[i]) \yLuego ((s[i-1] < s[i] \yLuego wp(s[i-1]:=s[i], I_{i+1}^{i}) \vee $
+    $ ( s[i-1] \geq s[i] \yLuego wp(skip;, I_{i+1}^{i})))\ \} $
+
+    $ $
 
     \begin{itemize}
-        \item $def(s[i-1] < s[i]) \equiv 0 \leq i-1 < \longitud{s} \equiv 1 \leq i \leq \longitud{s} $
+        \item $def(s[i-1] < s[i]) \equiv 0 \leq i-1 < \longitud{s} \wedge 0 \leq i < \longitud{s} \equiv $
+
+        $ $
+
+        $1 \leq i \leq \longitud{s} \wedge 0 \leq i < \longitud{s} \equiv 1 \leq i < \longitud{s} $
+
+        $ $
 
         \item $wp(skip;, I_{i+1}^{i}) \stackrel{Ax3}{\equiv} I_{i+1}^{i} $
 
@@ -84,68 +90,68 @@ $wp(S1, wp(S2, I))$
 
         $ $
 
-        $ 1 \leq i \leq \longitud{s} \yLuego (I_{i+1}^{i})_{setAt(s,i-1, s[i])}^{s}$
+        $ 1 \leq i < \longitud{s} \yLuego (I_{i+1}^{i})_{setAt(s,i-1, s[i])}^{s}$
 
     \end{itemize}
 
     \item $wp(S1, wp(S2, I)) \equiv$
 
-    $ \Big\{ 1 \leq i \leq \longitud{s}\ \yLuego $ 
-    $ \Big( (s[i-1] < s[i] \yLuego 1 \leq i \leq \longitud{s} \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s}) \vee $
+    $ $
+
+    $ \Big\{ 1 \leq i < \longitud{s}\ \yLuego $ 
+    $ \Big( (s[i-1] < s[i] \yLuego 1 \leq i \leq \longitud{s} \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s})\ \vee $
     $ (s[i-1] \geq s[i] \yLuego I_{i+1}^{i}) \Big) \Big\} \equiv $
  
-    $ \Big\{ \Big((1 \leq i \leq \longitud{s} \yLuego s[i-1] < s[i] \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s}) \vee $
-    $ (1 \leq i \leq \longitud{s}\ \yLuego s[i-1] \geq s[i] \yLuego I_{i+1}^{i}) \Big) \Big\} $
+    $ \Big\{ (1 \leq i < \longitud{s} \yLuego \Big((s[i-1] < s[i] \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s})\ \vee $
+    $ (s[i-1] \geq s[i] \yLuego I_{i+1}^{i}) \Big) \Big\} $
 
     \begin{itemize}
         
-        \item $1 \leq i \leq \longitud{s}\ \yLuego s[i-1] \geq s[i] \yLuego I_{i+1}^{i} \equiv$
+        \item $(s[i-1] < s[i] \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s}) \equiv$
 
         $ $
 
-        $ 1 \leq i \leq \longitud{s}\ \yLuego s[i-1] \geq s[i] \yLuego 0 \leq i < \longitud{s} \wedge \longitud{s} = \longitud{s_0} \yLuego$
-
-        $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
-    
-        $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge$
-    
-        $\quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) \equiv$
-
-        $ $
-
-        $ 1 \leq i < \longitud{s}\ \yLuego s[i-1] \geq s[i] \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
-
-        $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
-    
-        $\quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge$
-    
-        $\quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j])$
-
-        $ $
-
-        \item $1 \leq i \leq \longitud{s} \yLuego s[i-1] < s[i] \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s} \equiv$
-
-        $ $
-
-        $ 1 \leq i \leq \longitud{s} \yLuego s[i-1] < setAt(s,i-1, s[i])[i]\ \yLuego $
-
-        $ 0 \leq i < \longitud{s} \wedge \longitud{setAt(s,i-1, s[i])} = \longitud{s_0} \yLuego$
+        $ s[i-1] < s[i]\ \yLuego\ 0 \leq i < \longitud{setAt(s,i-1, s[i])} \wedge \longitud{setAt(s,i-1, s[i])} = \longitud{s_0}\ \yLuego $
 
         $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j])\ \wedge $
 
-        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j-1])\ \wedge$
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j-1])\ \wedge $
 
-        $ \quad (\paraTodo{j}{i}{\longitud{setAt(s,i-1, s[i])}} \implicaLuego s[j] = s_0[j]) \equiv$
+        $ \quad (\paraTodo{j}{i}{\longitud{setAt(s,i-1, s[i])}} \implicaLuego setAt(s,i-1, s[i])[j] = s_0[j])\ $
 
         $ $
 
-        $ 1 \leq i < \longitud{s} \yLuego s[i-1] < s[i]\ \yLuego \longitud{s} = \longitud{s_0}\ \yLuego $
+        \begin{itemize}
+            \item si $0 \leq j \leq i -1$ entonces $-1 < j - 1 \leq i - 2$ entonces $setAt(s,i-1, s[i])[j-1] = s[j-1]$ por definicion de setAt
+                \begin{itemize}
+                    \item si $j-1 = i-1$ entonces $setAt(s,i-1, s[i])[j-1] = s[i]$
+                    \item si $j-1 \neq i-1$ entonces $setAt(s,i-1, s[i])[j-1] = s[j-1]$
+                \end{itemize}
+        \end{itemize}
 
-        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j])\ \wedge $
+        $ $
 
-        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j-1])\ \wedge$
+        $ s[i-1] < s[i]\ \yLuego\ 0 \leq i < \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego $
 
-        $ \quad (\paraTodo{j}{i}{\longitud{setAt(s,i-1, s[i])}} \implicaLuego s[j] = s_0[j]) $
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
+
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
+
+        $ \quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) $
+
+        $ $
+
+        \item $(s[i-1] \geq s[i] \yLuego I_{i+1}^{i}) \equiv$
+
+        $ $
+
+        $ s[i-1] \geq s[i]\ \yLuego\ 0 \leq i < \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego $
+
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
+
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
+
+        $ \quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) $
 
     \end{itemize} %%%%%%%%%%
 
@@ -153,30 +159,10 @@ $wp(S1, wp(S2, I))$
 
     $ $
 
-    $ \Big\{ \Big((1 \leq i \leq \longitud{s} \yLuego s[i-1] < s[i] \yLuego {I_{i+1}^{i}}_{setAt(s,i-1, s[i])}^{s}) \vee $
-    $ (1 \leq i \leq \longitud{s}\ \yLuego s[i-1] \geq s[i] \yLuego I_{i+1}^{i}) \Big) \Big\} $
+    $ \Big\{(1 \leq i < \longitud{s} \yLuego \Big((s[i-1] < s[i] \yLuego E_1)\ \vee $
+    $ (s[i-1] \geq s[i] \yLuego E_1) \Big) \Big\}\ \equiv$
 
-    $ $
-
-    $ \Big\{ \Big( $
-    $ \big(1 \leq i < \longitud{s} \yLuego s[i-1] < s[i]\ \yLuego \longitud{s} = \longitud{s_0}\ \yLuego $
-
-    $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j])\ \wedge $
-
-    $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j-1])\ \wedge$
-
-    $ \qquad (\paraTodo{j}{i}{\longitud{setAt(s,i-1, s[i])}} \implicaLuego setAt(s,i-1, s[i])[j] = s_0[j]) \big) $
-
-    $ \quad \vee $
-    
-    $ \quad \big( 1 \leq i < \longitud{s}\ \yLuego s[i-1] \geq s[i] \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
-
-    $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
-
-    $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge$
-
-    $ \qquad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) \big)$
-    $ \Big) \Big\} $
+    $ \Big\{(1 \leq i < \longitud{s} \yLuego E_1 \yLuego \Big((s[i-1] < s[i] \vee s[i-1] \geq s[i]) \Big) \Big\}\ \equiv$
 
 \end{itemize}
 
@@ -220,30 +206,13 @@ $wp(S1, wp(S2, I))$
 
         $ \qquad\qquad \implica$
 
-        $ \Big\{ \Big( $
-        $ \big(1 \leq i < \longitud{s} \yLuego s[i-1] < s[i]\ \yLuego \longitud{s} = \longitud{s_0}\ \yLuego $
-    
-        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j])\ \wedge $
+        $ \Big\{(1 \leq i < \longitud{s} \yLuego \Big( s[i-1] \geq s[i]\ \yLuego\ 0 \leq i < \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego $
 
-        $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego setAt(s,i-1, s[i])[j-1] = s_0[j-1])\ \wedge$
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
 
-        $ \qquad (\paraTodo{j}{i}{\longitud{setAt(s,i-1, s[i])}} \implicaLuego setAt(s,i-1, s[i])[j] = s_0[j]) \big) $
+        $ \quad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
 
-        $ \quad \vee $
-
-        $ \quad \big( 1 \leq i < \longitud{s}\ \yLuego s[i-1] \geq s[i] \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
-
-        $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
-
-        $ \qquad (\paraTodo{j}{0}{i} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge$
-
-        $ \qquad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) \big)$
-        $ \Big) \Big\}  $
-
-        \paragraph{Por el antecente se sabe que se cumple para todo 0 \leq j < i - 1, hay que ver si se cumple cuando j = i-1}
-
-        \item $j = i - 1$
-
+        $ \quad (\paraTodo{j}{i}{\longitud{s}} \implicaLuego s[j] = s_0[j]) \Big) \Big\}\ $
 
     \end{itemize}
 
