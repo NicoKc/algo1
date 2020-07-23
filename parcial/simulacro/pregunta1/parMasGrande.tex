@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{xcolor}
+\input{../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\begin{proc}{esSeñal}{\In $s$: \TLista{\ent},
+    \In $prof$: \ent,
+    \In $freq$: \ent,
+    \Out $result$: \bool}{}{
+        \pre
+        {
+            prof > 0 \wedge freq > 0 
+        }
+    }{
+        \post
+        { 
+            result = \True \Iff esSe\tilde{n}alAux(s, prof, freq) 
+        }
+    }
+
+\end{proc}
+
+
+\end{document}

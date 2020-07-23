@@ -1,0 +1,36 @@
+\documentclass{article}
+\input{../../../recursos/latex/Algo1Macros.tex}
+
+\begin{document}
+
+\subsubsection*{Datos}
+\begin{itemize}
+    \item $Q_{c}    \equiv \longitud{s} = \longitud{s_0} \yLuego (\paraTodo{i}{1}{\longitud{s} \yLuego s_0[i-1] < s_0[i] \implicaLuego s[i-1]=s_0[i])  \yLuego $
+    
+    $(\paraTodo{i}{1}{\longitud{s}} \yLuego s_0[i-1] \geq s_0[i] \implicaLuego s[i-1] = s_0[i-1])}$
+
+    \item $I        \equiv 1 \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
+
+    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
+
+    $(\paraTodo{j}{i-1}{\longitud{s}} \implicaLuego s[j] = s_0[j])$
+
+    \item $B        \equiv i < \longitud{s}$
+    \item $S1       \equiv \IfThenElse{s[i-1] < s[i]}{s[i-1]:= s[i];}{skip;};$
+    \item $S2       \equiv i := i + 1$
+    \item $ciclo    \equiv S1;S2;$
+\end{itemize}
+
+\begin{itemize}
+    \item $(I \wedge \neg B) \implica Q_{c}$
+    \item $\{I \wedge B\}$ ciclo $\{ I \}$
+\end{itemize}
+
+\subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+
+\subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
+
+\end{document}
