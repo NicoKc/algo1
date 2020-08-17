@@ -4,28 +4,46 @@
 
 \begin{document}
 
-\begin{proc}{esSeñal}{\In $s$: \TLista{\ent},
-    \In $prof$: \ent,
-    \In $freq$: \ent,
-    \Out $result$: \bool}{}{
+\begin{proc}{posicionDeEscalera}{\In $s$: \TLista{\ent},
+    \Out $posicionInicial$: \ent}{}{
         \pre
         {
-            prof > 0 \wedge freq > 0 
+
+            $\quad existeAlgunaEscalera(s)$
+
         }
     }{
         \post
-        { 
-            result = \True \Iff esSe\tilde{n}alAux(s, prof, freq) 
+        {
+
+            $\quad \existe{j}{posicionInicial}{\longitud{s}+1}\ \yLuego$
+
+                $\qquad \big( esEscalera(subSeq(posicionInicial, j, s))\ \wedge$
+
+                $\qquad esUnaDeLasEscalerasMasLargas(s, subSeq(posicionInicial, j, s)) \big)$
+
         }
     }
 
 \end{proc}
 
-
-\pred{esSeñalAux}{$s$: \TLista{\ent}, $prof$: \ent, $freq$: \ent}{
-
+\pred{existeAlgunaEscalera}{$s$: \TLista{\ent}}{
+    $(\exists i,j : \ent)\  0 \leq i < j \leq \longitud{s} \yLuego esEscalera(subSeq(s, i, j))$
 }
 
-\aux{duraciónEnSegundos}{$s$: \TLista{\ent}, $freq$: \ent}{\ent}{\longitud{s}\ div\ (freq \cdot 1000)}
+$ $
+
+\pred{esEscalera}{$s$: \TLista{\ent}}{
+    $\longitud{s} \geq 3 \wedge \paraTodo{i}{1}{\longitud{s}} \implicaLuego s[i] = s[i-1]+1$
+}
+
+$ $
+
+\pred{esUnaDeLasEscalerasMasLargas}{$s_0$: \TLista{\ent}, $s$: \TLista{\ent}}{
+
+    $\quad (\forall i,j : \ent) \ 0 \leq i < j \leq \longitud{s} \implicaLuego 
+        \big( esEscalera(subSeq(s_0, i, j)) \implica \longitud{subSeq(s_0, i, j)} \leq \longitud{s} \big)$
+
+}
 
 \end{document}

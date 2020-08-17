@@ -3,23 +3,19 @@
 
 \begin{document}
 
-\subsubsection*{Datos}
+\section*{Datos}
 \begin{itemize}
-    \item $Q_{c}    \equiv \longitud{s} = \longitud{s_0} \yLuego (\paraTodo{i}{1}{\longitud{s} \yLuego s_0[i-1] < s_0[i] \implicaLuego s[i-1]=s_0[i])  \yLuego $
-    
-    $(\paraTodo{i}{1}{\longitud{s}} \yLuego s_0[i-1] \geq s_0[i] \implicaLuego s[i-1] = s_0[i-1])}$
+    \item $Q_{c}    \equiv \{ \longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n    \} $
 
-    \item $I        \equiv 1 \leq i \leq \longitud{s} \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+    \item $I        \equiv \{ -1 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
 
-    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] < s_0[j] \implicaLuego s[j-1] = s_0[j])\ \wedge $
+        $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
 
-    $(\paraTodo{j}{0}{i-1} \yLuego s_0[j-1] \geq s_0[j] \implicaLuego s[j-1] = s_0[j-1])\ \wedge $
+        $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \} $
 
-    $(\paraTodo{j}{i-1}{\longitud{s}} \implicaLuego s[j] = s_0[j])$
-
-    \item $B        \equiv i < \longitud{s}$
-    \item $S1       \equiv \IfThenElse{s[i-1] < s[i]}{s[i-1]:= s[i];}{skip;};$
-    \item $S2       \equiv i := i + 1$
+    \item $B        \equiv \{ i \geq 0 \}$
+    \item $S1       \equiv s[i]:= s[i] \cdot n; $
+    \item $S2       \equiv i:= i - 1$
     \item $ciclo    \equiv S1;S2;$
 \end{itemize}
 
@@ -28,9 +24,207 @@
     \item $\{I \wedge B\}$ ciclo $\{ I \}$
 \end{itemize}
 
-\subsubsection*{$(I \wedge \neg B) \implica Q_{c}$}
+\subsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
+
+\begin{itemize}
+
+    \item $wp(ciclo, I) \equiv wp(S1;S2;, I) \stackrel{Ax3}{\equiv} wp(S1,wp(S2,I)) $
+
+    \begin{itemize}
+        \item $wp(S2, I)$
+
+            $ $
+
+            $wp(S2, I) \equiv wp(i:= i-1, I) \stackrel{Ax1}{\equiv}$
+
+            $ $
+
+            \{ $def(i-1) \wedge I_{i-1}^i $ \} $\equiv$
+
+            $ $
+
+            \{ $\True \wedge I_{i-1}^i $ \} $\equiv$
+
+            $ $
+
+            \{ $I_{i-1}^i $ \} $\equiv$
+
+            $ $
+
+            \{ $ -1 \leq i-1 \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+            
+            $ \quad (\forall j: \ent)( i-1 < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge $
+            
+            $ \quad (\forall j: \ent)( 0 < j \leq i-1 \implicaLuego s[j] = s_0[j]) $ \}
 
 
-\subsubsection*{$\{I \wedge B\}$ ciclo $\{ I \}$}
+        \item $wp(S1,wp(S2,I))$
+
+            $ wp(S1,wp(S2,I)) \equiv wp(s[i]:= s[i] \cdot n;, wp(S2; I)) \equiv wp(s:= setAt(s, i, s[i] \cdot n);, wp(S2,I)) \stackrel{Ax1}{\equiv} $
+
+            $ $
+
+            $ \{ def(setAt(s, i, s[i] \cdot n)) \wedge wp(S2,I)_{setAt(s, i, s[i] \cdot n)}^s \} \equiv $
+
+            $ $
+
+            $ \{ ((def(s) \wedge def(i)) \yLuego 0 \leq i \leq \longitud{s}) \wedge (s[i] \cdot n) \wedge wp(S2,I)_{setAt(s, i, s[i] \cdot n)}^s \} \equiv $
+
+            $ $
+
+            $ \{ 0 \leq i \leq \longitud{s} \wedge wp(S2,I)_{setAt(s, i, s[i] \cdot n)}^s \} \equiv $
+
+            $ $
+
+            \{ $ 0 \leq i \leq \longitud{s} \wedge -1 \leq i-1 \leq \longitud{setAt(s, i, s[i] \cdot n)} - 1 \wedge \longitud{setAt(s, i, s[i]*n)} = \longitud{s_0}\ \yLuego$
+            
+            $ \quad (\forall j: \ent)( i-1 < j < \longitud{setAt(s, i, s[i] \cdot n)} \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j] \cdot n)\ \wedge $
+            
+            $ \quad (\forall j: \ent)( 0 < j \leq i-1 \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j]) $ \} $\equiv$
+
+            $ $
+
+            \{ $ 0 \leq i \leq \longitud{s} \wedge \longitud{setAt(s, i, s[i] \cdot n)} = \longitud{s_0}\ \yLuego$
+            
+            $ \quad (\forall j: \ent)( i-1 < j < \longitud{setAt(s, i, s[i] \cdot n)} \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j] \cdot n)\ \wedge $
+            
+            $ \quad (\forall j: \ent)( 0 < j \leq i-1 \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j]) $ \}
+
+    \end{itemize}
+
+    \item \{ $I \wedge B$ \}
+
+        \begin{itemize}
+            \item \{ $I \wedge B$ \}
+
+                \{ $I \wedge B$ \} $\equiv$
+
+                $ $
+
+                $\{ -1 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\qquad              $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\qquad              $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \wedge i \geq 0 \} $ $\stackrel{(-1 \leq i \leq \longitud{s} - 1) \wedge (i \geq 0) \implica (0 \leq i \leq \longitud{s} - 1)}{\equiv}$
+
+                $ $
+
+                    $\{ 0 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\qquad              $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\qquad              $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j])\} $
+
+        \end{itemize}
+
+    \item QvQ $ \{ I \wedge B \} \implica wp(ciclo,I) $
+
+        $ \{ I \wedge B \} \implica wp(ciclo,I) \equiv $
+
+        $ $
+
+        $\Big\{ 0 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad      $ (\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\quad      $ (\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \Big\} \implica$
+
+        $ \Big\{ 0 \leq i \leq \longitud{s} \wedge \longitud{setAt(s, i, s[i] \cdot n)} = \longitud{s_0}\ \yLuego$
+
+\quad       $ (\forall j: \ent)( i-1 < j < \longitud{setAt(s, i, s[i] \cdot n)} \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j] \cdot n)\ \wedge $
+
+\quad       $ (\forall j: \ent)( 0 < j \leq i-1 \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j]) \Big\} $
+
+        $ $
+
+        \begin{itemize}
+            \item $\{ 0 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\} \implica $
+
+\quad           $ \{ 0 \leq i \leq \longitud{s} \wedge \longitud{setAt(s, i, s[i] \cdot n)} = \longitud{s_0} \}$ es tautología ya que el antecedente es mas fuerte
+
+            \item $\{ (\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \} \implica $
+
+\quad           $ \{ (\forall j: \ent)( 0 < j \leq i-1 \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j]) \}$ es tautología ya que el antecedente es mas fuerte
+
+            \item $\{ (\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n) \} \implica $
+
+\quad           $ \{ (\forall j: \ent)( i-1 < j < \longitud{setAt(s, i, s[i] \cdot n)} \implicaLuego setAt(s, i, s[i] \cdot n)[j] = s_0[j] \cdot n) \}$
+
+                $ $
+
+\quad               es tautología ya que cuando $j = i \implica\ $
+
+\quad               $ setAt(s, i, s[i] \cdot n)[j] = setAt(s, i, s[i] \cdot n)[i] \stackrel{Por\ defición\ de\ setAt()}{=} s[i] \cdot n = s[j] \cdot n = s_0[i] \cdot n $
+
+\quad               y cuando $j \neq i \implica setAt(s, i, s[i] \cdot n)[j] = s[j]$
+        \end{itemize}
+
+        Por lo tanto cuando se ejecuta el cuerpo del ciclo se preserva el invariante. $\square$
+
+\end{itemize}
+
+
+\subsection*{$(I \wedge \neg B) \implica Q_{c}$}
+
+    \begin{itemize}
+        \item $(I \wedge \neg B) \implica Q_{c}$
+
+        $ $
+
+        $(I \wedge \neg B) \implica Q_{c} \equiv$
+
+        $ $
+
+        $-1 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad       $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\quad       $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \wedge \neg (i \geq 0) \implica $
+
+\qquad          $\longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n \stackrel{\neg(i \geq 0) \equiv i < 0}{\equiv} $
+
+\newpage
+
+        $-1 \leq i \leq \longitud{s} - 1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad       $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\quad       $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \wedge i < 0 \implica $
+
+\qquad          $\longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n \stackrel{((i < 0)\ \wedge\ (-1 \leq i \leq \longitud{s} - 1)) \implica i = -1}{\equiv} $
+
+        $ $
+
+        $ i = -1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad       $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\quad       $(\forall j: \ent)( 0 < j \leq i \implicaLuego s[j] = s_0[j]) \implica $
+
+\qquad          $\longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n \stackrel{por\ vacuidad}{\equiv} $
+
+        $ $ 
+
+        $ i = -1 \wedge \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad       $(\forall j: \ent)( i < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \wedge$
+
+\quad       $ \True \implica $
+
+\qquad          $\longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n \stackrel{p\ \wedge\ \True \implica p}{\equiv} $
+
+        $ $
+
+        $ \longitud{s} = \longitud{s_0}\ \yLuego$
+
+\quad       $(\forall j: \ent)( -1 < j < \longitud{s} \implicaLuego s[j] = s_0[j] \cdot n)\ \implica $
+
+\qquad          $\longitud{s} = \longitud{s_0} \yLuego \paraTodo{k}{0}{\longitud{s}} \implicaLuego s[k] = s_0[k] \cdot n $
+
+        $ $
+
+        Que son la misma proposición con distinto nombre de variable (j y k) que se mueven dentro del mismo rango, por lo tanto es una tautología y al ejecutar el programa se cumple la postcondición. \square
+
+    \end{itemize}
 
 \end{document}
